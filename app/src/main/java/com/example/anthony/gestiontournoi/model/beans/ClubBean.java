@@ -23,6 +23,7 @@ public class ClubBean {
 
     private String name;
     private String picture;
+    private String clubUrl;
 
     //Relationelle
     @ToOne(joinProperty = "placeId")
@@ -240,11 +241,20 @@ public class ClubBean {
         return this.placeId;
     }
 
-    @Generated(hash = 159160002)
-    public ClubBean(Long id, String name, String picture, Long placeId) {
+    public String getClubUrl() {
+        return this.clubUrl;
+    }
+
+    public void setClubUrl(String clubUrl) {
+        this.clubUrl = clubUrl;
+    }
+
+    @Generated(hash = 356415342)
+    public ClubBean(Long id, String name, String picture, String clubUrl, Long placeId) {
         this.id = id;
         this.name = name;
         this.picture = picture;
+        this.clubUrl = clubUrl;
         this.placeId = placeId;
     }
 

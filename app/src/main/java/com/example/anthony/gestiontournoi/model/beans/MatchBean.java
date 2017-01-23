@@ -36,6 +36,12 @@ public class MatchBean {
     @NotNull
     private long team2Id;
 
+    //Relationnel
+    @ToOne(joinProperty = "teamTableId")
+    private TeamBean teamTable;
+    @NotNull
+    private long teamTableId;
+
     @ToOne(joinProperty = "fieldId")
     private FieldBean field;
     private Long fieldId;
