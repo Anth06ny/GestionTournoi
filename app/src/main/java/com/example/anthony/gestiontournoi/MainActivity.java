@@ -1,5 +1,7 @@
 package com.example.anthony.gestiontournoi;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -9,9 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.anthony.gestiontournoi.exercice.ConnectivityUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -20,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +48,41 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+    public class LoadAt extends AsyncTask<Void, Void, String> {
+
+        private String url;
+        private ProgressDialog progressDialog;
+
+        public LoadAt(String url) {
+            this.url = url;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(MainActivity.this, "", "Chargement...");
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                return ConnectivityUtils.sendGetOkHttpRequest(url);
+            }
+            catch (Exception e) {
+                return e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.w("onPostExecute",s);
+            progressDialog.cancel();
+        }
+
     }
 
     @Override
@@ -98,10 +141,21 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_send) {
 
+            // exercice Séverin okHttp
+            if (!ConnectivityUtils.isConnected(this)) {
+                Log.w("MainActivity","Pas de connectivité");
+            }
+            else {
+                String url = "http://77.141.114.39:7070/testws3/rest/MyService/returnTournaments";
+                new LoadAt(url).execute();
+            }
+            // fin exercice Séverin okHttp
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
