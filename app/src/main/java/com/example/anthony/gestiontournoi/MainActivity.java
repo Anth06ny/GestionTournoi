@@ -51,40 +51,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public class LoadAt extends AsyncTask<Void, Void, String> {
-
-        private String url;
-        private ProgressDialog progressDialog;
-
-        public LoadAt(String url) {
-            this.url = url;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = ProgressDialog.show(MainActivity.this, "", "Chargement...");
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            try {
-                return ConnectivityUtils.sendGetOkHttpRequest(url);
-            }
-            catch (Exception e) {
-                return e.getMessage();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.w("onPostExecute",s);
-            progressDialog.cancel();
-        }
-
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -139,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_share) {
 
         }
-        else if (id == R.id.nav_send) {
+        else if (id == R.id.nav_gtfw) {
 
             // exercice Séverin okHttp
             if (!ConnectivityUtils.isConnected(this)) {
@@ -147,7 +113,7 @@ public class MainActivity extends AppCompatActivity
             }
             else {
                 String url = "http://77.141.114.39:7070/testws3/rest/MyService/returnTournaments";
-                new LoadAt(url).execute();
+                new ConnectivityUtils.LoadAt(url).execute();
             }
             // fin exercice Séverin okHttp
 

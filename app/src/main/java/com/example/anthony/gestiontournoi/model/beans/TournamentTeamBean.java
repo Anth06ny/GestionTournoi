@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.ToOne;
         active = true,
         generateConstructors = true,
         generateGettersSetters = true,
-        nameInDb = "TOURNAMENT_PLACE"
+        nameInDb = "TOURNAMENT_TEAM"
 )
 public class TournamentTeamBean {
 
