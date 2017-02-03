@@ -15,6 +15,8 @@ import org.greenrobot.greendao.annotation.ToOne;
 )
 public class TournamentPlaceBean {
 
+    private boolean mainPlace;
+
     @ToOne(joinProperty = "tournamentId")
     private TournamentBean tournament;
     @NotNull
@@ -24,6 +26,8 @@ public class TournamentPlaceBean {
     private PlaceBean place;
     @NotNull
     private long placeId;
+
+
      /* ---------------------------------
     // Generate
     // -------------------------------- */

@@ -3,7 +3,6 @@ package com.example.anthony.gestiontournoi.model.beans;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 
@@ -16,14 +15,13 @@ import org.greenrobot.greendao.annotation.ToOne;
 )
 public class MatchBean {
 
-    @Id(autoincrement = true)
     private Long id;
 
     private long date;
     private String duration;
-    private String result;
     private int scoreTeam1;
     private int scoreTeam2;
+    private long timestamp;
 
     //Relationnel
     @ToOne(joinProperty = "team1Id")
@@ -96,22 +94,6 @@ public class MatchBean {
     }
 
     /**
-     * called by internal mechanisms, do not call yourself.
-     */
-    @Generated(hash = 1626021110)
-    public void setTournament(@NotNull TournamentBean tournament) {
-        if (tournament == null) {
-            throw new DaoException(
-                    "To-one property 'tournamentId' has not-null constraint; cannot set to-one to null");
-        }
-        synchronized (this) {
-            this.tournament = tournament;
-            tournamentId = tournament.getId();
-            tournament__resolvedKey = tournamentId;
-        }
-    }
-
-    /**
      * To-one relationship, resolved on first access.
      */
     @Generated(hash = 1893104069)
@@ -132,24 +114,24 @@ public class MatchBean {
         return tournament;
     }
 
-    @Generated(hash = 235429544)
-    private transient Long tournament__resolvedKey;
-
     /**
      * called by internal mechanisms, do not call yourself.
      */
-    @Generated(hash = 1858488143)
-    public void setMatchStatus(@NotNull MatchStatusEnumBean matchStatus) {
-        if (matchStatus == null) {
+    @Generated(hash = 1626021110)
+    public void setTournament(@NotNull TournamentBean tournament) {
+        if (tournament == null) {
             throw new DaoException(
-                    "To-one property 'matchstatusId' has not-null constraint; cannot set to-one to null");
+                    "To-one property 'tournamentId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
-            this.matchStatus = matchStatus;
-            matchstatusId = matchStatus.getId();
-            matchStatus__resolvedKey = matchstatusId;
+            this.tournament = tournament;
+            tournamentId = tournament.getId();
+            tournament__resolvedKey = tournamentId;
         }
     }
+
+    @Generated(hash = 235429544)
+    private transient Long tournament__resolvedKey;
 
     /**
      * To-one relationship, resolved on first access.
@@ -172,20 +154,24 @@ public class MatchBean {
         return matchStatus;
     }
 
-    @Generated(hash = 1689452998)
-    private transient Long matchStatus__resolvedKey;
-
     /**
      * called by internal mechanisms, do not call yourself.
      */
-    @Generated(hash = 863827323)
-    public void setField(FieldBean field) {
+    @Generated(hash = 1858488143)
+    public void setMatchStatus(@NotNull MatchStatusEnumBean matchStatus) {
+        if (matchStatus == null) {
+            throw new DaoException(
+                    "To-one property 'matchstatusId' has not-null constraint; cannot set to-one to null");
+        }
         synchronized (this) {
-            this.field = field;
-            fieldId = field == null ? null : field.getId();
-            field__resolvedKey = fieldId;
+            this.matchStatus = matchStatus;
+            matchstatusId = matchStatus.getId();
+            matchStatus__resolvedKey = matchstatusId;
         }
     }
+
+    @Generated(hash = 1689452998)
+    private transient Long matchStatus__resolvedKey;
 
     /**
      * To-one relationship, resolved on first access.
@@ -208,24 +194,20 @@ public class MatchBean {
         return field;
     }
 
-    @Generated(hash = 338712148)
-    private transient Long field__resolvedKey;
-
     /**
      * called by internal mechanisms, do not call yourself.
      */
-    @Generated(hash = 1449644733)
-    public void setTeam2(@NotNull TeamBean team2) {
-        if (team2 == null) {
-            throw new DaoException(
-                    "To-one property 'team2Id' has not-null constraint; cannot set to-one to null");
-        }
+    @Generated(hash = 863827323)
+    public void setField(FieldBean field) {
         synchronized (this) {
-            this.team2 = team2;
-            team2Id = team2.getId();
-            team2__resolvedKey = team2Id;
+            this.field = field;
+            fieldId = field == null ? null : field.getId();
+            field__resolvedKey = fieldId;
         }
     }
+
+    @Generated(hash = 338712148)
+    private transient Long field__resolvedKey;
 
     /**
      * To-one relationship, resolved on first access.
@@ -248,24 +230,24 @@ public class MatchBean {
         return team2;
     }
 
-    @Generated(hash = 1875642404)
-    private transient Long team2__resolvedKey;
-
     /**
      * called by internal mechanisms, do not call yourself.
      */
-    @Generated(hash = 473417715)
-    public void setTeam1(@NotNull TeamBean team1) {
-        if (team1 == null) {
+    @Generated(hash = 1449644733)
+    public void setTeam2(@NotNull TeamBean team2) {
+        if (team2 == null) {
             throw new DaoException(
-                    "To-one property 'team1Id' has not-null constraint; cannot set to-one to null");
+                    "To-one property 'team2Id' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
-            this.team1 = team1;
-            team1Id = team1.getId();
-            team1__resolvedKey = team1Id;
+            this.team2 = team2;
+            team2Id = team2.getId();
+            team2__resolvedKey = team2Id;
         }
     }
+
+    @Generated(hash = 1875642404)
+    private transient Long team2__resolvedKey;
 
     /**
      * To-one relationship, resolved on first access.
@@ -286,6 +268,22 @@ public class MatchBean {
             }
         }
         return team1;
+    }
+
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 473417715)
+    public void setTeam1(@NotNull TeamBean team1) {
+        if (team1 == null) {
+            throw new DaoException(
+                    "To-one property 'team1Id' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.team1 = team1;
+            team1Id = team1.getId();
+            team1__resolvedKey = team1Id;
+        }
     }
 
     @Generated(hash = 754364378)
@@ -312,17 +310,8 @@ public class MatchBean {
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    public void setScoreTeam1(int scoreTeam1) {
-        this.scoreTeam1 = scoreTeam1;
-    }
-
-    public String getResult() {
-        return this.result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
+    @Generated(hash = 815252257)
+    private transient Long teamTable__resolvedKey;
 
     public String getDuration() {
         return this.duration;
@@ -348,44 +337,44 @@ public class MatchBean {
         this.id = id;
     }
 
-    public void setTournamentId(long tournamentId) {
-        this.tournamentId = tournamentId;
-    }
-
-    public void setMatchstatusId(long matchstatusId) {
-        this.matchstatusId = matchstatusId;
-    }
-
-    public void setFieldId(Long fieldId) {
-        this.fieldId = fieldId;
-    }
-
-    public void setTeam2Id(long team2Id) {
-        this.team2Id = team2Id;
-    }
-
-    public void setTeam1Id(long team1Id) {
-        this.team1Id = team1Id;
-    }
-
     public long getTournamentId() {
         return this.tournamentId;
+    }
+
+    public void setTournamentId(long tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
     public long getMatchstatusId() {
         return this.matchstatusId;
     }
 
+    public void setMatchstatusId(long matchstatusId) {
+        this.matchstatusId = matchstatusId;
+    }
+
     public Long getFieldId() {
         return this.fieldId;
+    }
+
+    public void setFieldId(Long fieldId) {
+        this.fieldId = fieldId;
     }
 
     public long getTeam2Id() {
         return this.team2Id;
     }
 
+    public void setTeam2Id(long team2Id) {
+        this.team2Id = team2Id;
+    }
+
     public long getTeam1Id() {
         return this.team1Id;
+    }
+
+    public void setTeam1Id(long team1Id) {
+        this.team1Id = team1Id;
     }
 
     public int getScoreTeam2() {
@@ -400,17 +389,66 @@ public class MatchBean {
         return this.scoreTeam1;
     }
 
-    @Generated(hash = 650765788)
+    public void setScoreTeam1(int scoreTeam1) {
+        this.scoreTeam1 = scoreTeam1;
+    }
+
+    /**
+     * To-one relationship, resolved on first access.
+     */
+    @Generated(hash = 1098223717)
+    public TeamBean getTeamTable() {
+        long __key = this.teamTableId;
+        if (teamTable__resolvedKey == null || !teamTable__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            TeamBeanDao targetDao = daoSession.getTeamBeanDao();
+            TeamBean teamTableNew = targetDao.load(__key);
+            synchronized (this) {
+                teamTable = teamTableNew;
+                teamTable__resolvedKey = __key;
+            }
+        }
+        return teamTable;
+    }
+
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 1162390919)
+    public void setTeamTable(@NotNull TeamBean teamTable) {
+        if (teamTable == null) {
+            throw new DaoException(
+                    "To-one property 'teamTableId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.teamTable = teamTable;
+            teamTableId = teamTable.getId();
+            teamTable__resolvedKey = teamTableId;
+        }
+    }
+
+    public long getTeamTableId() {
+        return this.teamTableId;
+    }
+
+    public void setTeamTableId(long teamTableId) {
+        this.teamTableId = teamTableId;
+    }
+
+    @Generated(hash = 455238680)
     public MatchBean(Long id, long date, String duration, String result, int scoreTeam1, int scoreTeam2,
-                     long team1Id, long team2Id, Long fieldId, long matchstatusId, long tournamentId) {
+                     long team1Id, long team2Id, long teamTableId, Long fieldId, long matchstatusId, long tournamentId) {
         this.id = id;
         this.date = date;
         this.duration = duration;
-        this.result = result;
         this.scoreTeam1 = scoreTeam1;
         this.scoreTeam2 = scoreTeam2;
         this.team1Id = team1Id;
         this.team2Id = team2Id;
+        this.teamTableId = teamTableId;
         this.fieldId = fieldId;
         this.matchstatusId = matchstatusId;
         this.tournamentId = tournamentId;

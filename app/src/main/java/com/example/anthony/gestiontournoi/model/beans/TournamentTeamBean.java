@@ -24,6 +24,10 @@ public class TournamentTeamBean {
     private TournamentBean tournament;
     @NotNull
     private long tournamentId;
+
+    @ToOne(joinProperty = "contactId")
+    private ContactBean contact;
+    private long contactId;
      /* ---------------------------------
     // Generate
     // -------------------------------- */

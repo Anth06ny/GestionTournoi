@@ -27,12 +27,13 @@ public class UserBean {
     private String facebookId;
     private String googleId;
     private String registrationId;
+    private long timestamp;
 
     //Relationnelle Inverse table intermediaire
     @ToMany
     @JoinEntity(
             //Table intermediaire
-            entity = UserTeamBean.class,
+            entity = UserFollowedTeamBean.class,
             //Id representant cette table dans la table intermediaire
             sourceProperty = "userId",
             //Id representant la table voulu dans la table intermediraire
@@ -43,184 +44,207 @@ public class UserBean {
     @ToMany
     @JoinEntity(
             //Table intermediaire
-            entity = UserClubBean.class,
+            entity = UserFollowedClubBean.class,
             //Id representant cette table dans la table intermediaire
             sourceProperty = "userId",
             //Id representant la table voulu dans la table intermediraire
             targetProperty = "clubId"
     )
     private List<ClubBean> clubList;
+
+    @ToMany
+    @JoinEntity(
+            //Table intermediaire
+            entity = UserFollowedTournamentBean.class,
+            //Id representant cette table dans la table intermediaire
+            sourceProperty = "userId",
+            //Id representant la table voulu dans la table intermediraire
+            targetProperty = "tournamentId"
+    )
+    private List<TournamentBean> tournamentMarkList;
+
+
      /* ---------------------------------
     // Generate
     // -------------------------------- */
 
-/**
- * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
- * Entity must attached to an entity context.
- */
-@Generated(hash = 1942392019)
-public void refresh() {
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
         if (myDao == null) {
-                throw new DaoException("Entity is detached from DAO context");
+            throw new DaoException("Entity is detached from DAO context");
         }
         myDao.refresh(this);
-}
+    }
 
-/**
- * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
- * Entity must attached to an entity context.
- */
-@Generated(hash = 713229351)
-public void update() {
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
         if (myDao == null) {
-                throw new DaoException("Entity is detached from DAO context");
+            throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
-}
+    }
 
-/**
- * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
- * Entity must attached to an entity context.
- */
-@Generated(hash = 128553479)
-public void delete() {
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
         if (myDao == null) {
-                throw new DaoException("Entity is detached from DAO context");
+            throw new DaoException("Entity is detached from DAO context");
         }
         myDao.delete(this);
-}
+    }
 
-/** Resets a to-many relationship, making the next get call to query for a fresh result. */
-@Generated(hash = 1363018792)
-public synchronized void resetClubList() {
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
+    @Generated(hash = 1363018792)
+    public synchronized void resetClubList() {
         clubList = null;
-}
+    }
 
-/**
- * To-many relationship, resolved on first access (and after reset).
- * Changes to to-many relations are not persisted, make changes to the target entity.
- */
-@Generated(hash = 37726508)
-public List<ClubBean> getClubList() {
-    if (clubList == null) {
-        final DaoSession daoSession = this.daoSession;
-        if (daoSession == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        ClubBeanDao targetDao = daoSession.getClubBeanDao();
-        List<ClubBean> clubListNew = targetDao._queryUserBean_ClubList(id);
-        synchronized (this) {
-            if(clubList == null) {
-                clubList = clubListNew;
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 37726508)
+    public List<ClubBean> getClubList() {
+        if (clubList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            ClubBeanDao targetDao = daoSession.getClubBeanDao();
+            List<ClubBean> clubListNew = targetDao._queryUserBean_ClubList(id);
+            synchronized (this) {
+                if (clubList == null) {
+                    clubList = clubListNew;
+                }
             }
         }
+        return clubList;
     }
-    return clubList;
-}
 
-/** Resets a to-many relationship, making the next get call to query for a fresh result. */
-@Generated(hash = 924184687)
-public synchronized void resetTeamList() {
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
+    @Generated(hash = 924184687)
+    public synchronized void resetTeamList() {
         teamList = null;
-}
+    }
 
-/**
- * To-many relationship, resolved on first access (and after reset).
- * Changes to to-many relations are not persisted, make changes to the target entity.
- */
-@Generated(hash = 1758802736)
-public List<TeamBean> getTeamList() {
-    if (teamList == null) {
-        final DaoSession daoSession = this.daoSession;
-        if (daoSession == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        TeamBeanDao targetDao = daoSession.getTeamBeanDao();
-        List<TeamBean> teamListNew = targetDao._queryUserBean_TeamList(id);
-        synchronized (this) {
-            if(teamList == null) {
-                teamList = teamListNew;
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 1758802736)
+    public List<TeamBean> getTeamList() {
+        if (teamList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            TeamBeanDao targetDao = daoSession.getTeamBeanDao();
+            List<TeamBean> teamListNew = targetDao._queryUserBean_TeamList(id);
+            synchronized (this) {
+                if (teamList == null) {
+                    teamList = teamListNew;
+                }
             }
         }
+        return teamList;
     }
-    return teamList;
-}
 
-/** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 1491512534)
-public void __setDaoSession(DaoSession daoSession) {
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 1491512534)
+    public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getUserBeanDao() : null;
-}
+    }
 
-/** Used for active entity operations. */
-@Generated(hash = 83707551)
-private transient UserBeanDao myDao;
+    /**
+     * Used for active entity operations.
+     */
+    @Generated(hash = 83707551)
+    private transient UserBeanDao myDao;
 
-/** Used to resolve relations */
-@Generated(hash = 2040040024)
-private transient DaoSession daoSession;
+    /**
+     * Used to resolve relations
+     */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
 
-public String getRegistrationId() {
+    public String getRegistrationId() {
         return this.registrationId;
-}
+    }
 
-public void setRegistrationId(String registrationId) {
+    public void setRegistrationId(String registrationId) {
         this.registrationId = registrationId;
-}
+    }
 
-public String getGoogleId() {
+    public String getGoogleId() {
         return this.googleId;
-}
+    }
 
-public void setGoogleId(String googleId) {
+    public void setGoogleId(String googleId) {
         this.googleId = googleId;
-}
+    }
 
-public String getFacebookId() {
+    public String getFacebookId() {
         return this.facebookId;
-}
+    }
 
-public void setFacebookId(String facebookId) {
+    public void setFacebookId(String facebookId) {
         this.facebookId = facebookId;
-}
+    }
 
-public String getLastName() {
+    public String getLastName() {
         return this.lastName;
-}
+    }
 
-public void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
-}
+    }
 
-public String getFirstName() {
+    public String getFirstName() {
         return this.firstName;
-}
+    }
 
-public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-}
+    }
 
-public String getUltimatePseudo() {
+    public String getUltimatePseudo() {
         return this.ultimatePseudo;
-}
+    }
 
-public void setUltimatePseudo(String ultimatePseudo) {
+    public void setUltimatePseudo(String ultimatePseudo) {
         this.ultimatePseudo = ultimatePseudo;
-}
+    }
 
-public Long getId() {
+    public Long getId() {
         return this.id;
-}
+    }
 
-public void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-}
+    }
 
-@Generated(hash = 1958236134)
-public UserBean(Long id, String ultimatePseudo, String firstName,
-                String lastName, String facebookId, String googleId,
-                String registrationId) {
+    @Generated(hash = 1958236134)
+    public UserBean(Long id, String ultimatePseudo, String firstName,
+                    String lastName, String facebookId, String googleId,
+                    String registrationId) {
         this.id = id;
         this.ultimatePseudo = ultimatePseudo;
         this.firstName = firstName;
@@ -228,9 +252,9 @@ public UserBean(Long id, String ultimatePseudo, String firstName,
         this.facebookId = facebookId;
         this.googleId = googleId;
         this.registrationId = registrationId;
-}
+    }
 
-@Generated(hash = 1203313951)
-public UserBean() {
-}
+    @Generated(hash = 1203313951)
+    public UserBean() {
+    }
 }

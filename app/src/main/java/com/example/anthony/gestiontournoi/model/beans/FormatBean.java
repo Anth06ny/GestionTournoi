@@ -1,9 +1,8 @@
 package com.example.anthony.gestiontournoi.model.beans;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(
 
@@ -13,7 +12,6 @@ import org.greenrobot.greendao.DaoException;
         nameInDb = "FORMAT"
 )
 public class FormatBean {
-    @Id(autoincrement = true)
     private Long id;
 
     private String fieldTypes;

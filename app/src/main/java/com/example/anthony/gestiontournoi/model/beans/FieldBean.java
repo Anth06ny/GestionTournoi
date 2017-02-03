@@ -3,7 +3,6 @@ package com.example.anthony.gestiontournoi.model.beans;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
 
 @Entity(
@@ -15,7 +14,6 @@ import org.greenrobot.greendao.annotation.ToOne;
 )
 public class FieldBean {
 
-    @Id(autoincrement = true)
     private Long id;
 
     private String name;

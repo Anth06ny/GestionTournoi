@@ -3,7 +3,6 @@ package com.example.anthony.gestiontournoi.model.beans;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -18,17 +17,18 @@ import java.util.List;
 )
 public class ClubBean {
 
-    @Id(autoincrement = true)
     private Long id;
 
     private String name;
     private String picture;
     private String clubUrl;
+    private long timestamp;
 
     //Relationelle
     @ToOne(joinProperty = "placeId")
     private PlaceBean place;
     private Long placeId;
+
 
     //Relationnelle Inverse table intermediaire
     @ToMany
@@ -42,16 +42,7 @@ public class ClubBean {
     )
     private List<ContactBean> contactList;
 
-    @ToMany
-    @JoinEntity(
-            //Table intermediaire
-            entity = UserClubBean.class,
-            //Id representant cette table dans la table intermediaire
-            sourceProperty = "clubId",
-            //Id representant la table voulu dans la table intermediraire
-            targetProperty = "userId"
-    )
-    private List<UserBean> userList;
+
     /* ---------------------------------
     // Generate
     // -------------------------------- */
@@ -90,36 +81,6 @@ public class ClubBean {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.delete(this);
-    }
-
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
-    @Generated(hash = 1517531020)
-    public synchronized void resetUserList() {
-        userList = null;
-    }
-
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
-    @Generated(hash = 17056240)
-    public List<UserBean> getUserList() {
-        if (userList == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            UserBeanDao targetDao = daoSession.getUserBeanDao();
-            List<UserBean> userListNew = targetDao._queryClubBean_UserList(id);
-            synchronized (this) {
-                if (userList == null) {
-                    userList = userListNew;
-                }
-            }
-        }
-        return userList;
     }
 
     /**
