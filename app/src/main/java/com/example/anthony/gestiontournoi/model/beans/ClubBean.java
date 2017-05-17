@@ -3,6 +3,8 @@ package com.example.anthony.gestiontournoi.model.beans;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -17,8 +19,10 @@ import java.util.List;
 )
 public class ClubBean {
 
+    @Id
     private Long id;
 
+    @Index(unique = true)
     private String name;
     private String picture;
     private String clubUrl;
@@ -28,7 +32,6 @@ public class ClubBean {
     @ToOne(joinProperty = "placeId")
     private PlaceBean place;
     private Long placeId;
-
 
     //Relationnelle Inverse table intermediaire
     @ToMany
@@ -92,18 +95,6 @@ public class ClubBean {
     }
 
     /**
-     * called by internal mechanisms, do not call yourself.
-     */
-    @Generated(hash = 711419009)
-    public void setPlace(PlaceBean place) {
-        synchronized (this) {
-            this.place = place;
-            placeId = place == null ? null : place.getId();
-            place__resolvedKey = placeId;
-        }
-    }
-
-    /**
      * To-one relationship, resolved on first access.
      */
     @Generated(hash = 695328629)
@@ -124,6 +115,17 @@ public class ClubBean {
         return place;
     }
 
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 711419009)
+    public void setPlace(PlaceBean place) {
+        synchronized (this) {
+            this.place = place;
+            placeId = place == null ? null : place.getId();
+            place__resolvedKey = placeId;
+        }
+    }
     @Generated(hash = 2133679615)
     private transient Long place__resolvedKey;
 
@@ -172,10 +174,6 @@ public class ClubBean {
         this.id = id;
     }
 
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
-    }
-
     /**
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -202,6 +200,10 @@ public class ClubBean {
         return this.placeId;
     }
 
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
+    }
+
     public String getClubUrl() {
         return this.clubUrl;
     }
@@ -210,12 +212,22 @@ public class ClubBean {
         this.clubUrl = clubUrl;
     }
 
-    @Generated(hash = 356415342)
-    public ClubBean(Long id, String name, String picture, String clubUrl, Long placeId) {
+    public long getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Generated(hash = 1252557928)
+    public ClubBean(Long id, String name, String picture, String clubUrl, long timestamp,
+            Long placeId) {
         this.id = id;
         this.name = name;
         this.picture = picture;
         this.clubUrl = clubUrl;
+        this.timestamp = timestamp;
         this.placeId = placeId;
     }
 

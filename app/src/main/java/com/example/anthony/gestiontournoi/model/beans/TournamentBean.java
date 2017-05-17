@@ -3,6 +3,7 @@ package com.example.anthony.gestiontournoi.model.beans;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.OrderBy;
 import org.greenrobot.greendao.annotation.ToMany;
@@ -19,6 +20,7 @@ import java.util.List;
 )
 public class TournamentBean {
 
+    @Id
     private Long id;
 
     private String name;
@@ -269,6 +271,7 @@ public class TournamentBean {
             club__resolvedKey = clubId;
         }
     }
+
     @Generated(hash = 1772927184)
     private transient Long club__resolvedKey;
 
@@ -381,10 +384,18 @@ public class TournamentBean {
         this.urlInfo = urlInfo;
     }
 
-    @Generated(hash = 1783730572)
-    public TournamentBean(Long id, String name, Long startDate, Long endDate,
-                          String halfTime, String format, String picture, Long playerFee, Long teamFee,
-                          String urlInfo, Long clubId) {
+    public long getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Generated(hash = 1307699969)
+    public TournamentBean(Long id, String name, Long startDate, Long endDate, String halfTime,
+            String format, String picture, Long playerFee, Long teamFee, String urlInfo,
+            long timestamp, Long clubId) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -395,6 +406,7 @@ public class TournamentBean {
         this.playerFee = playerFee;
         this.teamFee = teamFee;
         this.urlInfo = urlInfo;
+        this.timestamp = timestamp;
         this.clubId = clubId;
     }
 

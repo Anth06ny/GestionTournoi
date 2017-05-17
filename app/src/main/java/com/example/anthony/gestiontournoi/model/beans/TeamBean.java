@@ -3,6 +3,7 @@ package com.example.anthony.gestiontournoi.model.beans;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToMany;
@@ -18,7 +19,7 @@ import java.util.List;
         nameInDb = "TEAM"
 )
 public class TeamBean {
-
+    @Id
     private Long id;
 
     private String name;
@@ -257,12 +258,20 @@ public class TeamBean {
         this.id = id;
     }
 
-    @Generated(hash = 707795695)
-    public TeamBean(Long id, String name, String picture, long contactId,
-                    long clubId) {
+    public long getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Generated(hash = 1411132330)
+    public TeamBean(Long id, String name, String picture, long timestamp, long contactId, long clubId) {
         this.id = id;
         this.name = name;
         this.picture = picture;
+        this.timestamp = timestamp;
         this.contactId = contactId;
         this.clubId = clubId;
     }

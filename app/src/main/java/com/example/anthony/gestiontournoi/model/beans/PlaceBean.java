@@ -1,8 +1,9 @@
 package com.example.anthony.gestiontournoi.model.beans;
 
-import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.DaoException;
 
 @Entity(
         active = true,
@@ -12,6 +13,7 @@ import org.greenrobot.greendao.annotation.Generated;
 )
 public class PlaceBean {
 
+    @Id
     private Long id;
 
     private String name;

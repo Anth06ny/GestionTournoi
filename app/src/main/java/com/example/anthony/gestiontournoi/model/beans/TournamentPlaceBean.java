@@ -189,8 +189,17 @@ public class TournamentPlaceBean {
         return this.tournamentId;
     }
 
-    @Generated(hash = 1030230259)
-    public TournamentPlaceBean(long tournamentId, long placeId) {
+    public boolean getMainPlace() {
+        return this.mainPlace;
+    }
+
+    public void setMainPlace(boolean mainPlace) {
+        this.mainPlace = mainPlace;
+    }
+
+    @Generated(hash = 1897528923)
+    public TournamentPlaceBean(boolean mainPlace, long tournamentId, long placeId) {
+        this.mainPlace = mainPlace;
         this.tournamentId = tournamentId;
         this.placeId = placeId;
     }

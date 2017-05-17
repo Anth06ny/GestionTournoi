@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "960736732799",
+    "project_id": "mutor-157611"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960736732799:android:a4dd31bb6197f428",
+        "android_client_info": {
+          "package_name": "com.example.anthony.gestiontournoi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960736732799-4lpogkp83ntc4aglrcr9haemglk90dcr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTihsHSZNkMesr6KMbpmO4Oi9c_nLbGPo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

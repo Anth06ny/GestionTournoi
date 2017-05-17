@@ -18,7 +18,7 @@ import java.util.List;
 )
 public class UserBean {
 
-    @Id(autoincrement = true)
+    @Id
     private Long id;
 
     private String ultimatePseudo;
@@ -241,10 +241,45 @@ public class UserBean {
         this.id = id;
     }
 
-    @Generated(hash = 1958236134)
-    public UserBean(Long id, String ultimatePseudo, String firstName,
-                    String lastName, String facebookId, String googleId,
-                    String registrationId) {
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    @Generated(hash = 999982765)
+    public synchronized void resetTournamentMarkList() {
+        tournamentMarkList = null;
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 920092832)
+    public List<TournamentBean> getTournamentMarkList() {
+        if (tournamentMarkList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            TournamentBeanDao targetDao = daoSession.getTournamentBeanDao();
+            List<TournamentBean> tournamentMarkListNew = targetDao._queryUserBean_TournamentMarkList(id);
+            synchronized (this) {
+                if(tournamentMarkList == null) {
+                    tournamentMarkList = tournamentMarkListNew;
+                }
+            }
+        }
+        return tournamentMarkList;
+    }
+
+    public long getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Generated(hash = 312455280)
+    public UserBean(Long id, String ultimatePseudo, String firstName, String lastName,
+            String facebookId, String googleId, String registrationId, long timestamp) {
         this.id = id;
         this.ultimatePseudo = ultimatePseudo;
         this.firstName = firstName;
@@ -252,6 +287,7 @@ public class UserBean {
         this.facebookId = facebookId;
         this.googleId = googleId;
         this.registrationId = registrationId;
+        this.timestamp = timestamp;
     }
 
     @Generated(hash = 1203313951)

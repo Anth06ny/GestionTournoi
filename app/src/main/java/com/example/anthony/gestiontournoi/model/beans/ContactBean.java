@@ -3,6 +3,7 @@ package com.example.anthony.gestiontournoi.model.beans;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 @Entity(
 
@@ -13,6 +14,7 @@ import org.greenrobot.greendao.annotation.Generated;
 )
 public class ContactBean {
 
+    @Id
     private Long id;
 
     private String firstname;
@@ -139,9 +141,17 @@ public class ContactBean {
         this.phoneNumber = phoneNumber;
     }
 
-    @Generated(hash = 1034925257)
+    public long getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Generated(hash = 1749392904)
     public ContactBean(Long id, String firstname, String lastname, String email,
-                       String facebookpage, String website, String phoneNumber) {
+            String facebookpage, String website, String phoneNumber, long timestamp) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -149,6 +159,7 @@ public class ContactBean {
         this.facebookpage = facebookpage;
         this.website = website;
         this.phoneNumber = phoneNumber;
+        this.timestamp = timestamp;
     }
 
     @Generated(hash = 1283900925)

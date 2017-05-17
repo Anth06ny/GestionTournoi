@@ -168,6 +168,8 @@ public class TournamentTeamBean {
      */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
+    @Generated(hash = 321829790)
+    private transient Long contact__resolvedKey;
 
     public void setTeamId(int teamId) {
         this.teamId = teamId;
@@ -189,10 +191,52 @@ public class TournamentTeamBean {
         return this.teamId;
     }
 
-    @Generated(hash = 411836118)
-    public TournamentTeamBean(long teamId, long tournamentId) {
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1968726297)
+    public void setContact(@NotNull ContactBean contact) {
+        if (contact == null) {
+            throw new DaoException(
+                    "To-one property 'contactId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.contact = contact;
+            contactId = contact.getId();
+            contact__resolvedKey = contactId;
+        }
+    }
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 231313235)
+    public ContactBean getContact() {
+        long __key = this.contactId;
+        if (contact__resolvedKey == null || !contact__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            ContactBeanDao targetDao = daoSession.getContactBeanDao();
+            ContactBean contactNew = targetDao.load(__key);
+            synchronized (this) {
+                contact = contactNew;
+                contact__resolvedKey = __key;
+            }
+        }
+        return contact;
+    }
+
+    public long getContactId() {
+        return this.contactId;
+    }
+
+    public void setContactId(long contactId) {
+        this.contactId = contactId;
+    }
+
+    @Generated(hash = 1560834132)
+    public TournamentTeamBean(long teamId, long tournamentId, long contactId) {
         this.teamId = teamId;
         this.tournamentId = tournamentId;
+        this.contactId = contactId;
     }
 
     @Generated(hash = 883459894)
