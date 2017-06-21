@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.1.0'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
 }
 
@@ -16,7 +16,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.example.anthony.gestiontournoi"
+        applicationId "com.anthony.gestiontournoi"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
@@ -35,7 +35,7 @@ android {
 
 //Version de la base
 greendao {
-    schemaVersion 1
+    schemaVersion 2
 }
 
 dependencies {
@@ -64,7 +64,7 @@ dependencies {
     //compile 'com.jakewharton:butterknife:8.+'
     compile 'com.jakewharton:butterknife:8.+'
 
-    //Test
+    //Test   chrome://inspect/#devices
     compile 'com.facebook.stetho:stetho:1.4.2'
     compile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
 

@@ -8,7 +8,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:960736732799:android:a4dd31bb6197f428",
         "android_client_info": {
-          "package_name": "com.example.anthony.gestiontournoi"
+          "package_name": "com.anthony.gestiontournoi"
         }
       },
       "oauth_client": [
