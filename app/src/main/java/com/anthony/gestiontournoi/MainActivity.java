@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.anthony.gestiontournoi.control.RVTeamActivity;
+import com.anthony.gestiontournoi.control.RVTournamentActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 
 import studios.codelight.smartloginlibrary.SmartCustomLoginListener;
@@ -71,12 +73,6 @@ public class MainActivity extends AppCompatActivity
         ClubBean clubBean;
 
 
-
-
-
-
-
-
     }
 
     @Override
@@ -104,25 +100,28 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Intent intent;
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.my_profile) {
             // Handle the camera action
-        }
-        else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.follow_tournament) {
 
-        }
-        else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.follow_team) {
 
-        }
-        else if (id == R.id.nav_manage) {
+        } else if (id == R.id.tournaments) {
+            intent = new Intent(this, RVTournamentActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.teams) {
+            intent = new Intent(this, RVTeamActivity.class);
+            startActivity(intent);
+            finish();
 
-        }
-        else if (id == R.id.nav_share) {
+        } else if (id == R.id.about_me) {
 
-        }
-        else if (id == R.id.nav_send) {
+        } else if (id == R.id.logout) {
 
         }
 
@@ -142,30 +141,25 @@ public class MainActivity extends AppCompatActivity
                 user = data.getParcelableExtra(SmartLoginConfig.USER);
                 //use this user object as per your requirement
                 Log.w("LOG_LOGIN", user.toString());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(getClass().getSimpleName(), e.getMessage());
             }
-        }
-        else if (resultCode == SmartLoginConfig.GOOGLE_LOGIN_REQUEST) {
+        } else if (resultCode == SmartLoginConfig.GOOGLE_LOGIN_REQUEST) {
             SmartGoogleUser user;
             try {
                 Toast.makeText(this, "google login", Toast.LENGTH_SHORT).show();
                 user = data.getParcelableExtra(SmartLoginConfig.USER);
                 //use this user object as per your requirement
                 Log.w("LOG_LOGIN", user.toString());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(getClass().getSimpleName(), e.getMessage());
             }
-        }
-        else if (resultCode == SmartLoginConfig.CUSTOM_LOGIN_REQUEST) {
+        } else if (resultCode == SmartLoginConfig.CUSTOM_LOGIN_REQUEST) {
             Toast.makeText(this, "custom login", Toast.LENGTH_SHORT).show();
             SmartUser user = data.getParcelableExtra(SmartLoginConfig.USER);
             Log.w("LOG_LOGIN", user.toString());
             //use this user object as per your requirement
-        }
-        else if (resultCode == RESULT_CANCELED) {
+        } else if (resultCode == RESULT_CANCELED) {
             //Login Failed
             Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
         }
@@ -176,8 +170,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -188,14 +181,11 @@ public class MainActivity extends AppCompatActivity
         String toto = "toto";
 
 
-
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == GET_ACCOUNT_LOCATION_REQ_CODE) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED) {
                 signIn(true);
-            }
-            else {
+            } else {
                 signIn(false);
             }
         }
@@ -233,8 +223,7 @@ public class MainActivity extends AppCompatActivity
         if (R.id.bt_login == view.getId()) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED) {
                 signIn(true);
-            }
-            else {
+            } else {
                 Toast.makeText(this, R.string.permission_get_account_message, Toast.LENGTH_SHORT).show();
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.GET_ACCOUNTS}, GET_ACCOUNT_LOCATION_REQ_CODE);
             }

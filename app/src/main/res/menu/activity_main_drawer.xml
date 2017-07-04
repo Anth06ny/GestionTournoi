@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/grp1"
+        android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/my_profile"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
+            android:title="My Profile" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/follow_tournament"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
+            android:title="Followed Tournament" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/follow_team"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
+            android:title="Followed Team" />
+
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
-        </menu>
-    </item>
+
+    <group
+        android:id="@+id/grp2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/tournaments"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Tournament" />
+        <item
+            android:id="@+id/teams"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Teams" />
+    </group>
+
+    <group
+        android:id="@+id/grp3"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/about_me"
+            android:icon="@drawable/ic_menu_share"
+            android:title="About me" />
+    </group>
+
+    <group
+        android:id="@+id/grp4"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Logout" />
+    </group>
 
 </menu>
