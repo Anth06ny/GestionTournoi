@@ -8,9 +8,7 @@ import com.facebook.stetho.Stetho;
 
 import org.greenrobot.greendao.database.Database;
 
-/**
- * Created by Anthony on 19/01/2017.
- */
+
 public class MyApplication extends Application {
 
     private static DaoSession daoSession;

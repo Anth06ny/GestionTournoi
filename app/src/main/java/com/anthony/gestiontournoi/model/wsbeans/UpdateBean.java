@@ -7,9 +7,7 @@ import com.anthony.gestiontournoi.model.beans.TournamentBean;
 
 import java.util.ArrayList;
 
-/**
- * Created by Anthony on 26/01/2017.
- */
+
 public class UpdateBean {
 
     //Liste des tournois modifiés
@@ -17,6 +15,7 @@ public class UpdateBean {
 
     //Ainsi que ClubContact, Place et les contacts des clubs . Club supprimés
     private ArrayList<ClubBean> updateClub;
+
     //Ainsi que le contact des équipes   , équipes supprimées
     private ArrayList<TeamBean> updateTeam;
 
