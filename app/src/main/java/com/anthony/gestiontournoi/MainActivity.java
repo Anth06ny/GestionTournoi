@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Intent intent;
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -111,10 +110,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.follow_team) {
 
         } else if (id == R.id.tournaments) {
-            intent = new Intent(this, RVTournamentActivity.class);
+            Intent intent = new Intent(this, RVTournamentActivity.class);
             startActivity(intent);
+
         } else if (id == R.id.teams) {
-            intent = new Intent(this, RVTeamActivity.class);
+            Intent intent = new Intent(this, RVTeamActivity.class);
             startActivity(intent);
         } else if (id == R.id.about_me) {
 
