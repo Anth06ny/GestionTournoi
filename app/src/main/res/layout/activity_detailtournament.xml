@@ -88,7 +88,7 @@
                             android:id="@+id/img_place"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_place_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                             android:id="@+id/img_format"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_human_male_female_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -172,7 +172,7 @@
                             android:id="@+id/img_field"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_filter_hdr_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
                             android:id="@+id/img_fee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_euro_symbol_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -256,7 +256,7 @@
                             android:id="@+id/img_website"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_web_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -318,7 +318,7 @@
                             android:id="@+id/img_length"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_timer_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -360,7 +360,7 @@
                             android:id="@+id/img_cap"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_timer_off_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -402,7 +402,7 @@
                             android:id="@+id/img_halftime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_timelapse_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -463,7 +463,7 @@
                             android:id="@+id/img_tel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_local_phone_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -505,7 +505,7 @@
                             android:id="@+id/img_mail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/cast_ic_mini_controller_play" />
+                            app:srcCompat="@drawable/ic_mail_black_48dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -547,6 +547,7 @@
                 android:paddingRight="10dp">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/CVTeam"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:backgroundTint="@color/colorAccent">
@@ -558,7 +559,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/imageTeam"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             app:srcCompat="@drawable/ic_audiotrack_light" />
@@ -581,6 +582,7 @@
                     android:orientation="vertical"></LinearLayout>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/CVMatch"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:backgroundTint="@color/colorAccent">
@@ -592,10 +594,10 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/imageMatch"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            app:srcCompat="@drawable/ic_audiotrack_light" />
+                            app:srcCompat="@drawable/ic_subject_black_48dp" />
 
                         <TextView
                             android:id="@+id/tv_matches_btn"
@@ -615,6 +617,7 @@
                     android:orientation="vertical"></LinearLayout>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/CVPlace"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:backgroundTint="@color/colorAccent">
@@ -626,10 +629,10 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/imagePlace"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            app:srcCompat="@drawable/ic_audiotrack_light" />
+                            app:srcCompat="@drawable/ic_place_black_48dp" />
 
                         <TextView
                             android:id="@+id/tv_places_btn"
