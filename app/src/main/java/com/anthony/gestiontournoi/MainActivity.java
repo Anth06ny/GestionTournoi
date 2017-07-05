@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.anthony.gestiontournoi.control.RVTeamActivity;
-import com.anthony.gestiontournoi.control.RVTournamentActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 
 import studios.codelight.smartloginlibrary.SmartCustomLoginListener;
@@ -100,7 +99,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Intent intent;
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -111,13 +109,17 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.follow_team) {
 
         } else if (id == R.id.tournaments) {
-            intent = new Intent(this, RVTournamentActivity.class);
+            //---------------------------
+            // TEST
+            //---------------------------
+            Intent intent = new Intent(this, DetailTournamentActivity.class);
             startActivity(intent);
-            finish();
+
+//            Intent intent = new Intent(this, RVTournamentActivity.class);
+//            startActivity(intent);
         } else if (id == R.id.teams) {
-            intent = new Intent(this, RVTeamActivity.class);
+            Intent intent = new Intent(this, RVTeamActivity.class);
             startActivity(intent);
-            finish();
 
         } else if (id == R.id.about_me) {
 

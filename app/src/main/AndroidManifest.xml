@@ -41,7 +41,9 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".control.RVTournamentActivity" />
-        <activity android:name=".control.RVTeamActivity"></activity>
+        <activity android:name=".control.RVTeamActivity"/>
+        <activity android:name=".DetailTournamentActivity"/>
+
     </application>
 
 </manifest>
