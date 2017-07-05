@@ -113,12 +113,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.tournaments) {
             intent = new Intent(this, RVTournamentActivity.class);
             startActivity(intent);
-            finish();
         } else if (id == R.id.teams) {
             intent = new Intent(this, RVTeamActivity.class);
             startActivity(intent);
-            finish();
-
         } else if (id == R.id.about_me) {
 
         } else if (id == R.id.logout) {
