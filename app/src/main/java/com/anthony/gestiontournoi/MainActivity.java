@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.anthony.gestiontournoi.control.RVTeamActivity;
 import com.anthony.gestiontournoi.control.RVTournamentActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 
@@ -112,9 +111,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.tournaments) {
             Intent intent = new Intent(this, RVTournamentActivity.class);
             startActivity(intent);
-
         } else if (id == R.id.teams) {
-            Intent intent = new Intent(this, RVTeamActivity.class);
+            Intent intent = new Intent(this, DetailTournamentActivity.class);
             startActivity(intent);
         } else if (id == R.id.about_me) {
 
