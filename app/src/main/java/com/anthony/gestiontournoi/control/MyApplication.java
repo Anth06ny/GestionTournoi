@@ -19,6 +19,10 @@ public class MyApplication extends Application {
         return instance;
     }
 
+    public static DaoSession getDaoSession() {
+        return daoSession;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

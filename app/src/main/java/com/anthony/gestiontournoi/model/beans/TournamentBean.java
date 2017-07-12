@@ -43,6 +43,7 @@ public class TournamentBean {
     @ToMany(referencedJoinProperty = "tournamentId")
     @OrderBy("date ASC")
     private List<MatchBean> matchList;
+    private List<Long> matchs;
 
     //Relationnelle Inverse table intermediaire
     @ToMany
@@ -55,6 +56,7 @@ public class TournamentBean {
             targetProperty = "teamId"
     )
     private List<TeamBean> teamList;
+    private List<Long> team;
 
     @ToMany
     @JoinEntity(
@@ -66,6 +68,7 @@ public class TournamentBean {
             targetProperty = "placeId"
     )
     private List<PlaceBean> placeList;
+    private List<Long> place;
 
     //Relationnelle Inverse table intermediaire
     @ToMany
@@ -78,6 +81,7 @@ public class TournamentBean {
             targetProperty = "contactId"
     )
     private List<ContactBean> contactList;
+    private List<Long> contact;
      /* ---------------------------------
     // Generate
     // -------------------------------- */
@@ -381,6 +385,37 @@ public class TournamentBean {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+    public List<Long> getMatchs() {
+        return matchs;
+    }
+
+    public void setMatchs(List<Long> matchs) {
+        this.matchs = matchs;
+    }
+
+    public List<Long> getTeam() {
+        return team;
+    }
+
+    public void setTeam(List<Long> team) {
+        this.team = team;
+    }
+
+    public List<Long> getPlace() {
+        return place;
+    }
+
+    public void setPlace(List<Long> place) {
+        this.place = place;
+    }
+
+    public List<Long> getContact() {
+        return contact;
+    }
+
+    public void setContact(List<Long> contact) {
+        this.contact = contact;
     }
 
     /** called by internal mechanisms, do not call yourself. */
