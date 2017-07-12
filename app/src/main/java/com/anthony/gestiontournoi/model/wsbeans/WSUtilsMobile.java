@@ -1,7 +1,9 @@
 package com.anthony.gestiontournoi.model.wsbeans;
 
+import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.model.beans.TournamentBeanDao;
 
 import java.util.ArrayList;
 
@@ -34,5 +36,17 @@ public class WSUtilsMobile {
     // RETOURNE TOUTES LES TEAMS DE LA DATABASE MOBILE
     public static ArrayList<TeamBean> getAllTeam(){
         return null;
+    }
+
+
+    public static void deleteTournamentById(ArrayList<Long> arrayListId)
+    {
+        TournamentBeanDao tournamentBeanDao = MyApplication.getDaoSession().getTournamentBeanDao();
+
+        for(int i=0; i<arrayListId.size();i++){
+
+            tournamentBeanDao.load(arrayListId.get(i)).delete();
+        }
+
     }
 }

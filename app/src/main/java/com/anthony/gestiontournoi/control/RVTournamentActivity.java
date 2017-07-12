@@ -33,5 +33,8 @@ public class RVTournamentActivity extends AppCompatActivity {
         rv_tournament.setLayoutManager(new LinearLayoutManager(this));
         rv_tournament.setItemAnimator(new DefaultItemAnimator());
 
+
+
+
     }
 }
