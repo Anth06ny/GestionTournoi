@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         sizeTournaments  = tournamentBeanArrayList.size();
         Toast.makeText(this, ""+sizeTournaments, Toast.LENGTH_SHORT).show();
-        tournamentItem.setTitle("Tounament : " + sizeTournaments);
+        tournamentItem.setTitle("Tournament : " + sizeTournaments);
     }
 
 
@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         tournamentItem = (MenuItem) findViewById(R.id.tournaments);
         image = (ImageView) findViewById(R.id.iv);
 
-        Glide.with(this).load("http://192.168.56.1:8000/chat.jpg").into(image);
+        Glide.with(this).load("http://192.168.60.137:8000/chat.jpg").into(image);
 
         bus = new Bus();
 //        Intent intent = new Intent(this, ServiceTournament.class);

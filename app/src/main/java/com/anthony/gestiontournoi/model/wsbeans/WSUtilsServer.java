@@ -10,13 +10,11 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-/**
- * Created by Nicolas Th on 05/07/2017.
- */
+
 
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
-    private static final String URL = "http://192.168.56.1:8000/";
+    private static final String URL = "http://192.168.60.137:8000/";
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
 
 

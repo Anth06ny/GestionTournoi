@@ -465,9 +465,7 @@ public class TournamentBean {
         this.delete = delete;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
+    /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 644297522)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
