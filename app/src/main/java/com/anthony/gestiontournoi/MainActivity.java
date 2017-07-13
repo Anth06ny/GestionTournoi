@@ -23,9 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.anthony.gestiontournoi.control.RVTournamentActivity;
-import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
-import com.anthony.gestiontournoi.view.ServiceTournament;
 import com.bumptech.glide.Glide;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -103,11 +101,9 @@ public class MainActivity extends AppCompatActivity
 
         Glide.with(this).load("http://192.168.56.1:8000/chat.jpg").into(image);
 
-        ClubBean clubBean;
-
         bus = new Bus();
-        Intent intent = new Intent(this, ServiceTournament.class);
-        startService(intent);
+//        Intent intent = new Intent(this, ServiceTournament.class);
+//        startService(intent);
     }
 
 
