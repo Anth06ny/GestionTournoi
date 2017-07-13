@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     private static final int GET_ACCOUNT_LOCATION_REQ_CODE = 1;
     private Button bt_login;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
 
         bt_login = (Button) findViewById(R.id.bt_login);
         bt_login.setOnClickListener(this);
