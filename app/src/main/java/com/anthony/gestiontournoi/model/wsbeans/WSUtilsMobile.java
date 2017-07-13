@@ -30,7 +30,8 @@ public class WSUtilsMobile {
 
     // RETOURNE TOUS LES TOURNAMENTS DE LA DATABASE MOBILE
     public static ArrayList<TournamentBean> getAllTournament(){
-        return null;
+        ArrayList<TournamentBean> tournamentBeanArrayList = (ArrayList<TournamentBean>) MyApplication.getDaoSession().getTournamentBeanDao().loadAll();
+        return tournamentBeanArrayList;
     }
 
     // RETOURNE TOUTES LES TEAMS DE LA DATABASE MOBILE
