@@ -19,10 +19,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.anthony.gestiontournoi.control.RVTournamentActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
+import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.view.ServiceTournament;
+import com.bumptech.glide.Glide;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+
+import java.util.ArrayList;
 
 import studios.codelight.smartloginlibrary.SmartCustomLoginListener;
 import studios.codelight.smartloginlibrary.SmartLoginBuilder;
@@ -39,6 +47,23 @@ public class MainActivity extends AppCompatActivity
 
     private static final int GET_ACCOUNT_LOCATION_REQ_CODE = 1;
     private Button bt_login;
+    private static Bus bus;
+    private int sizeTournaments;
+    private MenuItem tournamentItem;
+    private ImageView image;
+
+
+    public static Bus getBus() {
+        return bus;
+    }
+
+    @Subscribe
+    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList){
+
+        sizeTournaments  = tournamentBeanArrayList.size();
+        Toast.makeText(this, ""+sizeTournaments, Toast.LENGTH_SHORT).show();
+        tournamentItem.setTitle("Tounament : " + sizeTournaments);
+    }
 
 
 
@@ -73,10 +98,23 @@ public class MainActivity extends AppCompatActivity
 
         bt_login = (Button) findViewById(R.id.bt_login);
         bt_login.setOnClickListener(this);
+        tournamentItem = (MenuItem) findViewById(R.id.tournaments);
+        image = (ImageView) findViewById(R.id.iv);
+
+        Glide.with(this).load("http://192.168.56.1:8000/chat.jpg").into(image);
 
         ClubBean clubBean;
 
+        bus = new Bus();
+        Intent intent = new Intent(this, ServiceTournament.class);
+        startService(intent);
+    }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bus.register(this);
     }
 
     @Override
