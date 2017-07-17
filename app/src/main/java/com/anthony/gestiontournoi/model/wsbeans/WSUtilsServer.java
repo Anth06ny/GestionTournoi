@@ -46,6 +46,6 @@ public class WSUtilsServer {
         }
 
 //        // METHODE DELETE_TOURNAMENT
-        
+
     }
 }
