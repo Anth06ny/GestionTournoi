@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
-//    private static final String URL = "http://192.168.56.1:8000/"; // NICO
-    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+    private static final String URL = "http://192.168.56.1:8000/"; // NICO
+//    private static final String URL = "http://192.168.60.137:8000/"; // MALO
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
     private static final String URL_UPDATE_BEAN_MATCHS = URL + "updateBeanMatchs/";
     private static final String URL_UPDATE_BEAN_TEAM = URL + "updateBeanTeam/";
@@ -35,8 +35,10 @@ public class WSUtilsServer {
 
         for (int i = 0; i < listTournaments.size(); i++) {
             TournamentBean tournamentBean = listTournaments.get(i);
+            Log.w("tag", "ID : " + tournamentBean.getId() + " delete : " + tournamentBean.isDelete());
             if (tournamentBean.isDelete()) {
                 // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
+
                 MyApplication.getDaoSession().getTournamentBeanDao().delete(tournamentBean);
             } else {
                 // ON CHECK SI IL EXISTE EN BDD MOBILE

@@ -32,7 +32,6 @@ public class UpdateBeanAT extends AsyncTask {
             case TOURNAMENT:
                 Log.w("tag", "AT tournament start");
                 try {
-
                     WSUtilsServer.updateBeanTournament(timestamp);
                 } catch (Exception e) {
                     e.printStackTrace();

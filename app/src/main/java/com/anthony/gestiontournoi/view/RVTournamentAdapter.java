@@ -1,6 +1,11 @@
 package com.anthony.gestiontournoi.view;
 
 
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +16,16 @@ import android.widget.TextView;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapter.ViewHolder> {
+    private Calendar calendarStart = new GregorianCalendar();
+    private Calendar calendarEnd = new GregorianCalendar();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private String defautPlace = "Pas de lieu associé";
 
     private ArrayList<TournamentBean> tournamentBeanArrayList;
 
@@ -46,11 +57,22 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
     }
 
     @Override
-    public void onBindViewHolder(RVTournamentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         TournamentBean tournamentBean = tournamentBeanArrayList.get(position);
+        calendarStart.setTimeInMillis(tournamentBean.getStartDate());
+        calendarEnd.setTimeInMillis(tournamentBean.getEndDate());
+//        Drawable drawable = holder.logo_tournament.getContext().getDrawable(R.drawable.ic_menu_gallery);
+        Glide.with(holder.logo_tournament.getContext()).load(tournamentBean.getPicture()).into(holder.logo_tournament);
+
         holder.title_tournament.setText(tournamentBean.getName());
-        holder.date_tournament.setText(tournamentBean.getStartDate() + " " + tournamentBean.getEndDate());
-        holder.place_tournament.setText(tournamentBean.getPlaceList() + "");
+        holder.date_tournament.setText(sdf.format(calendarStart) + " au " + sdf.format(calendarEnd));
+        if (tournamentBean.getPlaceList().size() != 0) {
+            holder.place_tournament.setText(tournamentBean.getPlaceList().get(0).getName());
+        } else {
+            holder.place_tournament.setText(defautPlace);
+        }
+
+
         // follow ?
         // logo?
 

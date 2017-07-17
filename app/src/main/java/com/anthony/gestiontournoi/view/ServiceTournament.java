@@ -20,8 +20,8 @@ public class ServiceTournament extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this, "Start service : ID " + startId, Toast.LENGTH_SHORT).show();
-        timestamp = 100;
-        Log.w("tag", "Start service : ID " + startId);
+        timestamp = 25;
+        Log.w("tag", "Start service : ID " + startId + "timestamp mobile : " + timestamp);
         updateBeanAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestamp);
         updateBeanAT.execute();
         return super.onStartCommand(intent, flags, startId);
