@@ -39,9 +39,9 @@ public class TournamentBean {
     private boolean delete;
 
     //Relationelle
-    @ToOne(joinProperty = "clubId")
-    private ClubBean club;
-    private Long clubId;
+    @ToOne(joinProperty = "club")
+    private ClubBean clubBean;
+    private Long club;
 
     //Relationelle Inverse
     @ToMany(referencedJoinProperty = "tournamentId")
@@ -95,6 +95,39 @@ public class TournamentBean {
     @Transient
     private List<Long> contact;
 
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @Generated(hash = 741298605)
+    private transient TournamentBeanDao myDao;
+
+    @Generated(hash = 1323987349)
+    public TournamentBean(Long id, String name, Long startDate, Long endDate,
+            String halfTime, String format, String picture, Long playerFee,
+            Long teamFee, String urlInfo, long timestamp, Long club) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.halfTime = halfTime;
+        this.format = format;
+        this.picture = picture;
+        this.playerFee = playerFee;
+        this.teamFee = teamFee;
+        this.urlInfo = urlInfo;
+        this.timestamp = timestamp;
+        this.club = club;
+    }
+
+    @Generated(hash = 882910022)
+    public TournamentBean() {
+    }
+
+    @Generated(hash = 585466602)
+    private transient Long clubBean__resolvedKey;
+
     public List<Long> getMatchs() {
         return matchs;
     }
@@ -129,40 +162,6 @@ public class TournamentBean {
      /* ---------------------------------
     // Generate
     // -------------------------------- */
-
-    /**
-     * Used to resolve relations
-     */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
-
-    /**
-     * Used for active entity operations.
-     */
-    @Generated(hash = 741298605)
-    private transient TournamentBeanDao myDao;
-
-    @Generated(hash = 1307699969)
-    public TournamentBean(Long id, String name, Long startDate, Long endDate,
-                          String halfTime, String format, String picture, Long playerFee,
-                          Long teamFee, String urlInfo, long timestamp, Long clubId) {
-        this.id = id;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.halfTime = halfTime;
-        this.format = format;
-        this.picture = picture;
-        this.playerFee = playerFee;
-        this.teamFee = teamFee;
-        this.urlInfo = urlInfo;
-        this.timestamp = timestamp;
-        this.clubId = clubId;
-    }
-
-    @Generated(hash = 882910022)
-    public TournamentBean() {
-    }
 
     public Long getId() {
         return this.id;
@@ -252,47 +251,40 @@ public class TournamentBean {
         this.timestamp = timestamp;
     }
 
-    public Long getClubId() {
-        return this.clubId;
+    public Long getClub() {
+        return this.club;
     }
 
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
+    public void setClub(Long club) {
+        this.club = club;
     }
 
-    @Generated(hash = 1772927184)
-    private transient Long club__resolvedKey;
-
-    /**
-     * To-one relationship, resolved on first access.
-     */
-    @Generated(hash = 1356688269)
-    public ClubBean getClub() {
-        Long __key = this.clubId;
-        if (club__resolvedKey == null || !club__resolvedKey.equals(__key)) {
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1458757382)
+    public ClubBean getClubBean() {
+        Long __key = this.club;
+        if (clubBean__resolvedKey == null || !clubBean__resolvedKey.equals(__key)) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             ClubBeanDao targetDao = daoSession.getClubBeanDao();
-            ClubBean clubNew = targetDao.load(__key);
+            ClubBean clubBeanNew = targetDao.load(__key);
             synchronized (this) {
-                club = clubNew;
-                club__resolvedKey = __key;
+                clubBean = clubBeanNew;
+                clubBean__resolvedKey = __key;
             }
         }
-        return club;
+        return clubBean;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
-    @Generated(hash = 1758955476)
-    public void setClub(ClubBean club) {
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1550101609)
+    public void setClubBean(ClubBean clubBean) {
         synchronized (this) {
-            this.club = club;
-            clubId = club == null ? null : club.getId();
-            club__resolvedKey = clubId;
+            this.clubBean = clubBean;
+            club = clubBean == null ? null : clubBean.getId();
+            clubBean__resolvedKey = club;
         }
     }
 
@@ -319,9 +311,7 @@ public class TournamentBean {
         return matchList;
     }
 
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     @Generated(hash = 1442721827)
     public synchronized void resetMatchList() {
         matchList = null;
@@ -350,9 +340,7 @@ public class TournamentBean {
         return teamList;
     }
 
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     @Generated(hash = 924184687)
     public synchronized void resetTeamList() {
         teamList = null;
@@ -381,9 +369,7 @@ public class TournamentBean {
         return placeList;
     }
 
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     @Generated(hash = 1423199708)
     public synchronized void resetPlaceList() {
         placeList = null;
@@ -412,9 +398,7 @@ public class TournamentBean {
         return contactList;
     }
 
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     @Generated(hash = 1466168391)
     public synchronized void resetContactList() {
         contactList = null;
@@ -464,9 +448,7 @@ public class TournamentBean {
         this.delete = delete;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
+    /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 644297522)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;

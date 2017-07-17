@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.anthony.gestiontournoi.control.RVTournamentActivity;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.view.ServiceTournament;
 import com.bumptech.glide.Glide;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     private int sizeTournaments;
     private MenuItem tournamentItem;
     private ImageView image;
+    private ArrayList<TournamentBean> tournamentBeanArrayList;
 
 
     public static Bus getBus() {
@@ -56,12 +58,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Subscribe
-    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList){
-
-        sizeTournaments  = tournamentBeanArrayList.size();
-        Toast.makeText(this, ""+sizeTournaments, Toast.LENGTH_SHORT).show();
-        tournamentItem.setTitle("Tounament : " + sizeTournaments);
+    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
+        this.tournamentBeanArrayList = tournamentBeanArrayList;
+        sizeTournaments = tournamentBeanArrayList.size();
+        Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
+        if (tournamentItem != null) {
+            tournamentItem.setTitle("Tournament : " + sizeTournaments);
+        }
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,14 +97,14 @@ public class MainActivity extends AppCompatActivity
 
         bt_login = (Button) findViewById(R.id.bt_login);
         bt_login.setOnClickListener(this);
-        tournamentItem = (MenuItem) findViewById(R.id.tournaments);
+        tournamentItem = navigationView.getMenu().findItem(R.id.tournaments);
         image = (ImageView) findViewById(R.id.iv);
 
         Glide.with(this).load("http://192.168.56.1:8000/chat.jpg").into(image);
 
         bus = new Bus();
-//        Intent intent = new Intent(this, ServiceTournament.class);
-//        startService(intent);
+        Intent intent = new Intent(this, ServiceTournament.class);
+        startService(intent);
     }
 
 

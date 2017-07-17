@@ -16,23 +16,17 @@ import java.util.ArrayList;
 
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
-    private static final String URL = "http://192.168.56.1:8000/";
+    private static final String URL = "http://192.168.56.1:8000/"; // NICO
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
 
 
     public static void updateBeanTournament(long timestamp) throws Exception {
-//        // LISTE DES ID DES TOURNAMENT SUR LA BD MOBILE
-//        List<TournamentBean> listTournamentBean = MyApplication.getDaoSession().getTournamentBeanDao().loadAll();
-//        ArrayList<Long> listId = new ArrayList<>();
-//        for (int k = 0; k < listTournamentBean.size(); k++){
-//            listId.add(listTournamentBean.get(k).getId());
-//        }
-//        String listId_json = GSON.toJson(listId);
-//
+
         String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_TOURNAMENT + timestamp);
         Log.w("tag", "" + json);
 
         ArrayList<TournamentBean> listTournaments = GSON.fromJson(json, new TypeToken<ArrayList<TournamentBean>>(){}.getType());
+        Log.w("tag", "" + listTournaments.size());
 
         for (int i = 0; i < listTournaments.size(); i++) {
             TournamentBean tournamentBean = listTournaments.get(i);
@@ -52,26 +46,6 @@ public class WSUtilsServer {
         }
 
 //        // METHODE DELETE_TOURNAMENT
-//
-//        // ON RECUPERE LA LISTE DE TOURNAMENT
-//        List<TournamentBean> listTournament = resultTournament.getTournaments();
-//        for (int i = 0; i < listTournament.size(); i++) {
-//
-//            // ON RECUPERE LA LISTE D'ID
-//            List<Long> contactId = (List<Long>) listTournament.get(i).getContact();
-//            for (int j = 0; j < contactId.size(); i++) {
-//
-//                // ON CREE L'ASSOCIATION TOURNAMENT_CONTACT_BEAN
-//                TournamentContactBean tournamentContactBean = new TournamentContactBean();
-//                tournamentContactBean.setContactId(contactId.get(j));
-//                tournamentContactBean.setTournamentId(listTournament.get(i).getId());
-//
-//                // PERSITER LE TOURNAMENT_CONTACT_BEAN
-//                MyApplication.getDaoSession().getTournamentContactBeanDao().insert(tournamentContactBean);
-//            }
-//
-//            // ON PERSISTE LE TOURNAMENT_BEAN
-//            MyApplication.getDaoSession().getTournamentBeanDao().insert(listTournament.get(i));
-//        }
+        
     }
 }
