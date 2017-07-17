@@ -3,6 +3,7 @@ package com.anthony.gestiontournoi;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -39,7 +40,8 @@ import studios.codelight.smartloginlibrary.users.SmartGoogleUser;
 import studios.codelight.smartloginlibrary.users.SmartUser;
 
 // googleId : 113207748106039394539
-//facebookId : 10210685228421137
+// facebookId : 10210685228421137
+// malo : 192.168.60.137:8000
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SmartCustomLoginListener, View.OnClickListener {
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity
     private ImageView image;
     private ArrayList<TournamentBean> tournamentBeanArrayList;
 
-
     public static Bus getBus() {
         return bus;
     }
@@ -61,13 +62,12 @@ public class MainActivity extends AppCompatActivity
     public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
         this.tournamentBeanArrayList = tournamentBeanArrayList;
         sizeTournaments = tournamentBeanArrayList.size();
+
         Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
         if (tournamentItem != null) {
             tournamentItem.setTitle("Tournament : " + sizeTournaments);
         }
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,24 +89,26 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            drawer.setDrawerListener(toggle);
+        }
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         bt_login = (Button) findViewById(R.id.bt_login);
         bt_login.setOnClickListener(this);
         tournamentItem = navigationView.getMenu().findItem(R.id.tournaments);
         image = (ImageView) findViewById(R.id.iv);
 
-        Glide.with(this).load("http://192.168.56.1:8000/chat.jpg").into(image);
+        Glide.with(this).load("http://192.168.60.137:8000/chat.jpg").into(image);
 
         bus = new Bus();
         Intent intent = new Intent(this, ServiceTournament.class);
         startService(intent);
     }
-
 
     @Override
     protected void onStart() {
@@ -161,7 +163,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
         return true;
     }
 
@@ -203,10 +207,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 

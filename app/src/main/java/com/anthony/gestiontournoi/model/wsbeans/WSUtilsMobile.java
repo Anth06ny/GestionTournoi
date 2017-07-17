@@ -14,37 +14,38 @@ import java.util.ArrayList;
 public class WSUtilsMobile {
 
     // MET A JOUR LES TABLES DE LA DATABASE MOBILE DEPUIS LE DB DISTANTE
-    public static void updateBean(){
+    public static void updateBean() {
 
     }
 
     // MET A JOUR LA TABLE TOURNAMENT DE LA DATABASE MOBILE DEPUIS LE DB DISTANTE
-    public static void updateTournament(){
+    public static void updateTournament() {
 
     }
 
     // MET A JOUR LA TABLE TEAM DE LA DATABASE MOBILE DEPUIS LE DB DISTANTE
-    public static void updateTeam(){
+    public static void updateTeam() {
 
     }
 
     // RETOURNE TOUS LES TOURNAMENTS DE LA DATABASE MOBILE
+
     public static ArrayList<TournamentBean> getAllTournament(){
         ArrayList<TournamentBean> tournamentBeanArrayList = (ArrayList<TournamentBean>) MyApplication.getDaoSession().getTournamentBeanDao().loadAll();
         return tournamentBeanArrayList;
     }
 
     // RETOURNE TOUTES LES TEAMS DE LA DATABASE MOBILE
-    public static ArrayList<TeamBean> getAllTeam(){
+    public static ArrayList<TeamBean> getAllTeam() {
         return null;
     }
 
 
-    public static void deleteTournamentById(ArrayList<Long> arrayListId)
-    {
+    public static void deleteTournamentById(ArrayList<Long> arrayListId) {
+
         TournamentBeanDao tournamentBeanDao = MyApplication.getDaoSession().getTournamentBeanDao();
 
-        for(int i=0; i<arrayListId.size();i++){
+        for (int i = 0; i < arrayListId.size(); i++) {
 
             tournamentBeanDao.load(arrayListId.get(i)).delete();
         }

@@ -1,3 +1,4 @@
+
 package com.anthony.gestiontournoi.model.beans;
 
 import org.greenrobot.greendao.DaoException;

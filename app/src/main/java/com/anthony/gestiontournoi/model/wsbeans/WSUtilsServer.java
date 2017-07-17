@@ -10,13 +10,11 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-/**
- * Created by Nicolas Th on 05/07/2017.
- */
 
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
     private static final String URL = "http://192.168.56.1:8000/"; // NICO
+//    private static final String URL = "http://192.168.60.137:8000/"; // MALO
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
 
 
@@ -25,17 +23,18 @@ public class WSUtilsServer {
         String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_TOURNAMENT + timestamp);
         Log.w("tag", "" + json);
 
-        ArrayList<TournamentBean> listTournaments = GSON.fromJson(json, new TypeToken<ArrayList<TournamentBean>>(){}.getType());
+        ArrayList<TournamentBean> listTournaments = GSON.fromJson(json, new TypeToken<ArrayList<TournamentBean>>() {
+        }.getType());
         Log.w("tag", "" + listTournaments.size());
 
         for (int i = 0; i < listTournaments.size(); i++) {
             TournamentBean tournamentBean = listTournaments.get(i);
-            if (tournamentBean.isDelete()){
+            if (tournamentBean.isDelete()) {
                 // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
                 MyApplication.getDaoSession().getTournamentBeanDao().delete(tournamentBean);
             } else {
                 // ON CHECK SI IL EXISTE EN BDD MOBILE
-                if (MyApplication.getDaoSession().getTournamentBeanDao().load(tournamentBean.getId()) == null){
+                if (MyApplication.getDaoSession().getTournamentBeanDao().load(tournamentBean.getId()) == null) {
                     // ON AJOUT SI EXISTE PAS
                     MyApplication.getDaoSession().getTournamentBeanDao().insert(tournamentBean);
                 } else {
