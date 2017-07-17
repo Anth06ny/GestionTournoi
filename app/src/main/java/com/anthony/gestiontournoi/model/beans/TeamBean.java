@@ -8,6 +8,7 @@ import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public class TeamBean {
     private String name;
     private String picture;
     private long timestamp;
+
+    @Transient
+    private boolean delete;
 
     //Relationelle
     @ToOne(joinProperty = "contactId")
@@ -276,5 +280,13 @@ public class TeamBean {
 
     @Generated(hash = 1659287080)
     public TeamBean() {
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
     }
 }

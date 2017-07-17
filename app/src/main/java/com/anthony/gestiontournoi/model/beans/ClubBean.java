@@ -8,6 +8,7 @@ import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.util.List;
 
@@ -27,6 +28,9 @@ public class ClubBean {
     private String picture;
     private String clubUrl;
     private long timestamp;
+
+    @Transient
+    private boolean delete;
 
     //Relationelle
     @ToOne(joinProperty = "placeId")
@@ -230,5 +234,13 @@ public class ClubBean {
 
     @Generated(hash = 1084389034)
     public ClubBean() {
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
     }
 }
