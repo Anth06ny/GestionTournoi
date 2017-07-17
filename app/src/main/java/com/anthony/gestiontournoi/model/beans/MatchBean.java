@@ -456,13 +456,6 @@ public class MatchBean {
         this.id = id;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1894975208)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getMatchBeanDao() : null;
-    }
-
     @Generated(hash = 696439430)
     public MatchBean(Long id, long date, String duration, int scoreTeam1, int scoreTeam2, long timestamp,
             long team1Id, long team2Id, long teamTableId, Long fieldId, long matchstatusId, long tournamentId) {
@@ -486,5 +479,12 @@ public class MatchBean {
 
     public void setDelete(boolean delete) {
         this.delete = delete;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1894975208)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getMatchBeanDao() : null;
     }
 }

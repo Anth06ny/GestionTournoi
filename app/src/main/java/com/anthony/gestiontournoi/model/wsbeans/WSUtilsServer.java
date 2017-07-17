@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
-    private static final String URL = "http://192.168.56.1:8000/"; // NICO
-//    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+//    private static final String URL = "http://192.168.56.1:8000/"; // NICO
+    private static final String URL = "http://192.168.60.137:8000/"; // MALO
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
     private static final String URL_UPDATE_BEAN_MATCHS = URL + "updateBeanMatchs/";
     private static final String URL_UPDATE_BEAN_TEAM = URL + "updateBeanTeam/";

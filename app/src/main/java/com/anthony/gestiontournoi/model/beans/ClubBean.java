@@ -214,13 +214,6 @@ public class ClubBean {
         this.timestamp = timestamp;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1188674187)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getClubBeanDao() : null;
-    }
-
     @Generated(hash = 1252557928)
     public ClubBean(Long id, String name, String picture, String clubUrl, long timestamp,
                     Long placeId) {
@@ -242,5 +235,12 @@ public class ClubBean {
 
     public void setDelete(boolean delete) {
         this.delete = delete;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1188674187)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getClubBeanDao() : null;
     }
 }

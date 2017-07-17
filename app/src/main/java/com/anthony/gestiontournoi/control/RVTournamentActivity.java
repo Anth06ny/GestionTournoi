@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.anthony.gestiontournoi.view.RVTournamentAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class RVTournamentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rvtournament);
 
-        tournamentBeanArrayList = new ArrayList<>();
+        tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
         rvTournamentAdapter = new RVTournamentAdapter(tournamentBeanArrayList);
 
         rv_tournament = (RecyclerView) findViewById(R.id.rv_tournament);
@@ -32,8 +33,6 @@ public class RVTournamentActivity extends AppCompatActivity {
 
         rv_tournament.setLayoutManager(new LinearLayoutManager(this));
         rv_tournament.setItemAnimator(new DefaultItemAnimator());
-
-
 
 
     }
