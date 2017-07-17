@@ -38,7 +38,8 @@ import studios.codelight.smartloginlibrary.users.SmartGoogleUser;
 import studios.codelight.smartloginlibrary.users.SmartUser;
 
 // googleId : 113207748106039394539
-//facebookId : 10210685228421137
+// facebookId : 10210685228421137
+// malo : 192.168.60.137:8000
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SmartCustomLoginListener, View.OnClickListener {
@@ -56,13 +57,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Subscribe
-    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList){
+    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
 
-        sizeTournaments  = tournamentBeanArrayList.size();
-        Toast.makeText(this, ""+sizeTournaments, Toast.LENGTH_SHORT).show();
+        sizeTournaments = tournamentBeanArrayList.size();
+        Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
         tournamentItem.setTitle("Tournament : " + sizeTournaments);
     }
-
 
 
     @Override
@@ -89,11 +89,8 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
 
         bt_login = (Button) findViewById(R.id.bt_login);
