@@ -11,9 +11,7 @@ import com.anthony.gestiontournoi.model.wsbeans.WSUtilsServer;
 
 import java.util.ArrayList;
 
-/**
- * Created by Nicolas Th on 12/07/2017.
- */
+
 
 public class UpdateBeanAT extends AsyncTask {
     private BeanType beanType;
@@ -52,7 +50,7 @@ public class UpdateBeanAT extends AsyncTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
         ArrayList<TournamentBean> tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
-        Log.w("tag", "Size Touanments BDD Mobile : " + tournamentBeanArrayList.size());
+        Log.w("tag", "Size Tournaments BDD Mobile : " + tournamentBeanArrayList.size());
         MainActivity.getBus().post(tournamentBeanArrayList);
     }
 }

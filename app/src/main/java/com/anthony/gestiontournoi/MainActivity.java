@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final int GET_ACCOUNT_LOCATION_REQ_CODE = 1;
     private Button bt_login;
+    //    private static final String URL = "http://192.168.56.1:8000/"; // NICO
+    private static final String URL = "http://192.168.60.137:8000/"; // MALO
     private static Bus bus;
     private int sizeTournaments;
     private MenuItem tournamentItem;
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         tournamentItem = navigationView.getMenu().findItem(R.id.tournaments);
         image = (ImageView) findViewById(R.id.iv);
 
-        Glide.with(this).load("http://192.168.60.137:8000/chat.jpg").into(image);
+        Glide.with(this).load(URL + "chat.jpg").into(image);
 
         bus = new Bus();
         Intent intent = new Intent(this, ServiceTournament.class);
