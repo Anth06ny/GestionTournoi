@@ -261,13 +261,6 @@ public class TeamBean {
         this.timestamp = timestamp;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1877237120)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getTeamBeanDao() : null;
-    }
-
     @Generated(hash = 1411132330)
     public TeamBean(Long id, String name, String picture, long timestamp, long contactId, long clubId) {
         this.id = id;
@@ -288,5 +281,12 @@ public class TeamBean {
 
     public void setDelete(boolean delete) {
         this.delete = delete;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1877237120)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getTeamBeanDao() : null;
     }
 }
