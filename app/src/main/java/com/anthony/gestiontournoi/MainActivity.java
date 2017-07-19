@@ -23,7 +23,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.RVTournamentActivity;
+import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.view.ServiceTournament;
 import com.bumptech.glide.Glide;
@@ -47,9 +49,10 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SmartCustomLoginListener, View.OnClickListener {
 
     private static final int GET_ACCOUNT_LOCATION_REQ_CODE = 1;
+    public static final Long ID_TIMESTAMP = 1L;
     private Button bt_login;
-    //    private static final String URL = "http://192.168.56.1:8000/"; // NICO
-    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+    private static final String URL = "http://192.168.56.1:8000/"; // NICO
+    //    private static final String URL = "http://192.168.60.137:8000/"; // MALO
     private static Bus bus;
     private int sizeTournaments;
     private MenuItem tournamentItem;
@@ -75,6 +78,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+Log.w("tag", "TIMESTAMP BDD MOBILE  DEMARRAGE : " + MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP).getTournamentTimestamp());
+        ////////////////////////////////
+        if (MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP) == null){
+            Log.w("tag", "CREATE NEW TIMESTAMPBEAN");
+            TimestampBean timestampBean = new TimestampBean();
+            MyApplication.getDaoSession().getTimestampBeanDao().insert(timestampBean);
+        }
+        ////////////////////////////////
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

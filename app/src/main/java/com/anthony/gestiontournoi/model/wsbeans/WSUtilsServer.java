@@ -2,11 +2,13 @@ package com.anthony.gestiontournoi.model.wsbeans;
 
 import android.util.Log;
 
+import com.anthony.gestiontournoi.MainActivity;
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.OkHttpUtils;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
+import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
     private static final String URL = "http://192.168.56.1:8000/"; // NICO
-//    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+    //    private static final String URL = "http://192.168.60.137:8000/"; // MALO
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
     private static final String URL_UPDATE_BEAN_MATCHS = URL + "updateBeanMatchs/";
     private static final String URL_UPDATE_BEAN_TEAM = URL + "updateBeanTeam/";
@@ -33,12 +35,21 @@ public class WSUtilsServer {
         }.getType());
         Log.w("tag", "" + listTournaments.size());
 
+        // ON DECLARE LA VARIABLE QUI STOCK LE PLUS GRAND TIMESTAMP
+        long maxTimestamp = 0;
+
         for (int i = 0; i < listTournaments.size(); i++) {
             TournamentBean tournamentBean = listTournaments.get(i);
             Log.w("tag", "ID : " + tournamentBean.getId() + " delete : " + tournamentBean.isDelete());
+
+            // ON RECUPERE LE PLUS GRAND TIMESTAMP
+            Log.w("tag", "timestamp bean tournament " + tournamentBean.getId() + " : " + tournamentBean.getTimeStamp());
+            if (maxTimestamp < tournamentBean.getTimeStamp()) {
+                maxTimestamp = tournamentBean.getTimeStamp();
+            }
+
             if (tournamentBean.isDelete()) {
                 // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
-
                 MyApplication.getDaoSession().getTournamentBeanDao().delete(tournamentBean);
             } else {
                 // ON CHECK SI IL EXISTE EN BDD MOBILE
@@ -51,11 +62,18 @@ public class WSUtilsServer {
                 }
             }
         }
+
+        // ON MET A JOUR LE TIMESTAMP DU MOBILE
+        if (!listTournaments.isEmpty()){
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setTournamentTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
+        }
     }
 
     public static void updateBeanMatchs(long timestamp) throws Exception {
 
-            String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_MATCHS + timestamp);
+        String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_MATCHS + timestamp);
         Log.w("tag", "" + json);
 
         ArrayList<MatchBean> listMatchs = GSON.fromJson(json, new TypeToken<ArrayList<MatchBean>>() {

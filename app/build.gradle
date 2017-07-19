@@ -35,7 +35,7 @@ android {
 
 //Version de la base
 greendao {
-    schemaVersion 3
+    schemaVersion 5
 }
 
 dependencies {

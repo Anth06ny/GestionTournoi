@@ -6,6 +6,8 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.anthony.gestiontournoi.MainActivity;
+import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.BeanType;
 import com.anthony.gestiontournoi.model.UpdateBeanAT;
 
@@ -14,15 +16,13 @@ import com.anthony.gestiontournoi.model.UpdateBeanAT;
  */
 
 public class ServiceTournament extends Service {
-    private UpdateBeanAT updateBeanAT;
-    private long timestamp;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this, "Start service : ID " + startId, Toast.LENGTH_SHORT).show();
-        timestamp = 25;
+        long timestamp = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
         Log.w("tag", "Start service : ID " + startId + "timestamp mobile : " + timestamp);
-        updateBeanAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestamp);
+        UpdateBeanAT updateBeanAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestamp);
         updateBeanAT.execute();
         return super.onStartCommand(intent, flags, startId);
     }

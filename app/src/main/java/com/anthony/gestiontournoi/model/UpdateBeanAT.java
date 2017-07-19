@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.anthony.gestiontournoi.MainActivity;
-import com.anthony.gestiontournoi.UpdateTournamentInterface;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsServer;
@@ -16,8 +15,6 @@ import java.util.ArrayList;
 public class UpdateBeanAT extends AsyncTask {
     private BeanType beanType;
     private long timestamp;
-    private UpdateTournamentInterface updateTournamentInterface;
-    ;
 
     public UpdateBeanAT(BeanType beanType, long timestamp) {
         Log.w("tag", "Create AT");

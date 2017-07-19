@@ -1,6 +1,7 @@
 package com.anthony.gestiontournoi.view;
 
 
+import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
@@ -26,6 +27,7 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
     private Calendar calendarEnd = new GregorianCalendar();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String defautPlace = "Pas de lieu associé";
+    private Context context;
 
     private ArrayList<TournamentBean> tournamentBeanArrayList;
 
@@ -41,12 +43,12 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             title_tournament = (TextView) itemView.findViewById(R.id.TV_title_tournament);
             date_tournament = (TextView) itemView.findViewById(R.id.TV_date_tournament);
             place_tournament = (TextView) itemView.findViewById(R.id.TV_place_tournament);
             logo_tournament = (ImageView) itemView.findViewById(R.id.img_logo_tournament);
             follow_tournament = (ImageButton) itemView.findViewById(R.id.img_follow_tournament);
-
         }
     }
 
@@ -58,11 +60,17 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        context = holder.logo_tournament.getContext();
+
         TournamentBean tournamentBean = tournamentBeanArrayList.get(position);
         calendarStart.setTimeInMillis(tournamentBean.getStartDate());
         calendarEnd.setTimeInMillis(tournamentBean.getEndDate());
 //        Drawable drawable = holder.logo_tournament.getContext().getDrawable(R.drawable.ic_menu_gallery);
-        Glide.with(holder.logo_tournament.getContext()).load(tournamentBean.getPicture()).into(holder.logo_tournament);
+        if (!tournamentBean.getPicture().isEmpty()) {
+            Glide.with(context).load(tournamentBean.getPicture()).into(holder.logo_tournament);
+        } else {
+            holder.logo_tournament.setImageResource(R.drawable.ic_menu_gallery);
+        }
 
         holder.title_tournament.setText(tournamentBean.getName());
         holder.date_tournament.setText(sdf.format(calendarStart) + " au " + sdf.format(calendarEnd));
@@ -71,6 +79,8 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
         } else {
             holder.place_tournament.setText(defautPlace);
         }
+
+        Glide.with(context).load(R.drawable.ic_heart_outline_white_48dp).into(holder.follow_tournament);
 
 
         // follow ?
