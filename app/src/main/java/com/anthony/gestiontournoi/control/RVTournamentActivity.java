@@ -1,10 +1,17 @@
 package com.anthony.gestiontournoi.control;
 
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
@@ -13,21 +20,31 @@ import com.anthony.gestiontournoi.view.RVTournamentAdapter;
 
 import java.util.ArrayList;
 
-public class RVTournamentActivity extends AppCompatActivity {
+public class RVTournamentActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView rv_tournament;
+    private Button btn_add;
+    private AlertDialog.Builder builder;
     private ArrayList<TournamentBean> tournamentBeanArrayList;
     private RVTournamentAdapter rvTournamentAdapter;
 
 
+    private void findView() {
+        rv_tournament = (RecyclerView) findViewById(R.id.rv_tournament);
+        btn_add = (Button) findViewById(R.id.btn_add);
+
+        btn_add.setOnClickListener(this);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rvtournament);
+        findView();
 
         tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
         rvTournamentAdapter = new RVTournamentAdapter(tournamentBeanArrayList);
-
-        rv_tournament = (RecyclerView) findViewById(R.id.rv_tournament);
 
         rv_tournament.setAdapter(rvTournamentAdapter);
 
@@ -36,4 +53,20 @@ public class RVTournamentActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    public void onClick(View v) {
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ajouter un tournoi").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).setView(layoutInflater.inflate(R.layout.alert_add_tournament, null));
+        builder.show();
+    }
 }
+
+
