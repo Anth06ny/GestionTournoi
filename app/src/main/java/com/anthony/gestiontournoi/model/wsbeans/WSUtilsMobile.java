@@ -7,9 +7,7 @@ import com.anthony.gestiontournoi.model.beans.TournamentBeanDao;
 
 import java.util.ArrayList;
 
-/**
- * Created by Nicolas Th on 05/07/2017.
- */
+
 
 public class WSUtilsMobile {
 
