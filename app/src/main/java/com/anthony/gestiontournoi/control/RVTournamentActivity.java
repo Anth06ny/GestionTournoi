@@ -1,5 +1,6 @@
 package com.anthony.gestiontournoi.control;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
@@ -19,6 +22,8 @@ import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.anthony.gestiontournoi.view.RVTournamentAdapter;
 
 import java.util.ArrayList;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class RVTournamentActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView rv_tournament;
@@ -65,8 +70,18 @@ public class RVTournamentActivity extends AppCompatActivity implements View.OnCl
 
             }
         }).setView(layoutInflater.inflate(R.layout.alert_add_tournament, null));
+        RadioGroup rg_club = (RadioGroup) findViewById(R.id.rg_club);
+        RadioButton radioButton = new RadioButton(this);
+        radioButton.setText("Club 1");
+        radioButton.setId(1);
+        RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+        rg_club.addView(radioButton, params);
         builder.show();
     }
+
+
+
+
 }
 
 

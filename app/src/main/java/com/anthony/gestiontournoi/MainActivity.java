@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-Log.w("tag", "TIMESTAMP BDD MOBILE  DEMARRAGE : " + MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP).getTournamentTimestamp());
+        //Log.w("tag", "TIMESTAMP BDD MOBILE  DEMARRAGE : " + MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP).getTournamentTimestamp());
         ////////////////////////////////
         if (MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP) == null){
             Log.w("tag", "CREATE NEW TIMESTAMPBEAN");
