@@ -1,17 +1,18 @@
 package com.anthony.gestiontournoi.control.activities;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.anthony.gestiontournoi.R;
-import com.anthony.gestiontournoi.view.adapter.RVTournamentTeamAdapter;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
+import com.anthony.gestiontournoi.view.adapter.RVTournamentTeamAdapter;
 
 import java.util.List;
 
@@ -31,13 +32,14 @@ public class RVTournamentTeamActivity extends AppCompatActivity {
         findView();
 
         // On récupère l'id du tournoi
-        Intent intent = getIntent();
-        long tournament_id = intent.getLongExtra("id", 0);
+        long tournament_id = getIntent().getExtras().getLong("id");
 
         // On récupère le tournoi en question
-        TournamentBean tournament = null;
+        TournamentBean tournament = WSUtilsMobile.getTournament(tournament_id);
         // On récupère les teams du tournoi
         teamBeanArrayList = tournament.getTeamList();
+        Log.w("TAG", teamBeanArrayList.size() + "");
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             rvTournamentTeamAdapter = new RVTournamentTeamAdapter(teamBeanArrayList);

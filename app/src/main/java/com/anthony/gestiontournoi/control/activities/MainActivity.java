@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity
             tournamentItem.setTitle("Tournament : " + sizeTournaments);
         }
     }
-
+/*
     @Subscribe
     public void refreshNbTeamMenu(ArrayList<TeamBean> teamBeanArrayList) {
         this.teamBeanArrayList = teamBeanArrayList;
@@ -331,4 +331,5 @@ public class MainActivity extends AppCompatActivity
             tournamentItem.setTitle("Tournament : " + sizeTournaments);
         }
     }
+*/
 }
