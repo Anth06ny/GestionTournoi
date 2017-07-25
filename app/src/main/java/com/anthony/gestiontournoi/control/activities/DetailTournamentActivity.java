@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi;
+package com.anthony.gestiontournoi.control.activities;
 
 
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.support.v7.widget.CardView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
+import com.bumptech.glide.Glide;
 
 public class DetailTournamentActivity extends AppCompatActivity {
 
@@ -70,6 +75,22 @@ public class DetailTournamentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailtournament);
         findViews();
+
+        long tournament_id = getIntent().getExtras().getLong("id");
+
+        TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournament_id);
+        tvTitleOnetournament.setText(tournamentBean.getName());
+        tvDateOnetournament.setText(tournamentBean.getStartDate() + " " + tournamentBean.getEndDate());
+        //tvPlace.setText(tournamentBean.getPlaceList().get(0) + "");
+        tvField.setText(tournamentBean.getFieldType());
+        tvFee.setText(tournamentBean.getTeamFee() + " / " + tournamentBean.getPlayerFee());
+        tvWebsite.setText(tournamentBean.getSiteWeb());
+        tvLength.setText(tournamentBean.getDuration());
+        tvCap.setText(tournamentBean.getCap());
+        tvHalftime.setText(tournamentBean.getHalfTime());
+
+        Glide.with(this).load(tournamentBean.getPicture()).into(imgLogoOnetournament);
+
     }
 
 

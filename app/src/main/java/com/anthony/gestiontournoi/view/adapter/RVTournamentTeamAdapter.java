@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi;
+package com.anthony.gestiontournoi.view.adapter;
 
 
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.bumptech.glide.Glide;
 

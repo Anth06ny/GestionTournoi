@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.anthony.gestiontournoi.RVTournamentTeamActivity">
+    tools:context="com.anthony.gestiontournoi.control.activities.RVTournamentTeamActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_tournament_team"

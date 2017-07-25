@@ -1,12 +1,14 @@
-package com.anthony.gestiontournoi.view;
+package com.anthony.gestiontournoi.view.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.control.activities.DetailTournamentActivity;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.bumptech.glide.Glide;
 
@@ -40,6 +43,7 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
         public TextView title_tournament, date_tournament, place_tournament;
         public ImageView logo_tournament;
         public ImageButton follow_tournament;
+        public CardView CVTournament;
 
 
         public ViewHolder(View itemView) {
@@ -50,6 +54,8 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
             place_tournament = (TextView) itemView.findViewById(R.id.TV_place_tournament);
             logo_tournament = (ImageView) itemView.findViewById(R.id.img_logo_tournament);
             follow_tournament = (ImageButton) itemView.findViewById(R.id.img_follow_tournament);
+            CVTournament = (CardView) itemView.findViewById(R.id.CVTournament);
+
         }
     }
 
@@ -63,7 +69,7 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         context = holder.logo_tournament.getContext();
 
-        TournamentBean tournamentBean = tournamentBeanArrayList.get(position);
+        final TournamentBean tournamentBean = tournamentBeanArrayList.get(position);
         calendarStart.setTimeInMillis(tournamentBean.getStartDate());
         calendarEnd.setTimeInMillis(tournamentBean.getEndDate());
 //        Drawable drawable = holder.logo_tournament.getContext().getDrawable(R.drawable.ic_menu_gallery);
@@ -82,9 +88,17 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
             holder.place_tournament.setText(defautPlace);
         }
 
-        Glide.with(context).load(R.drawable.ic_heart_outline_white_48dp).into(holder.follow_tournament);
+        Glide.with(context).load(R.drawable.ic_heart_outline_black_48dp).into(holder.follow_tournament);
 //        Glide.with(context).load(tournamentBean.getPicture()).into(holder.follow_tournament);
 
+        holder.CVTournament.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailTournamentActivity.class);
+                intent.putExtra("id", tournamentBean.getId());
+                context.startActivity(intent);
+            }
+        });
 
         // follow ?
         // logo?

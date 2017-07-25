@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi.model;
+package com.anthony.gestiontournoi.model.wsbeans;
 
 import android.util.Log;
 

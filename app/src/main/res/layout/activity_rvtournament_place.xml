@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.anthony.gestiontournoi.RVTournamentPlaceActivity">
+    tools:context="com.anthony.gestiontournoi.control.activities.RVTournamentPlaceActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_tournament_place"

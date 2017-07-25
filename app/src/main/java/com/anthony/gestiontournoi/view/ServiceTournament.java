@@ -6,8 +6,8 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.anthony.gestiontournoi.MainActivity;
 import com.anthony.gestiontournoi.control.MyApplication;
+import com.anthony.gestiontournoi.control.activities.MainActivity;
 import com.anthony.gestiontournoi.model.BeanType;
 import com.anthony.gestiontournoi.model.UpdateBeanAT;
 
