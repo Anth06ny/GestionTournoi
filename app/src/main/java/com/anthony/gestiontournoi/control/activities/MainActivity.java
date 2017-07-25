@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi;
+package com.anthony.gestiontournoi.control.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -23,11 +23,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.control.MyApplication;
-import com.anthony.gestiontournoi.control.RVTournamentActivity;
+import com.anthony.gestiontournoi.model.ServiceTournament;
+import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
-import com.anthony.gestiontournoi.view.ServiceTournament;
 import com.bumptech.glide.Glide;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -57,35 +58,31 @@ public class MainActivity extends AppCompatActivity
     private int sizeTournaments;
     private MenuItem tournamentItem;
     private ImageView image;
+
     private ArrayList<TournamentBean> tournamentBeanArrayList;
+    private ArrayList<TeamBean> teamBeanArrayList;
 
     public static Bus getBus() {
         return bus;
     }
 
-    @Subscribe
-    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
-        this.tournamentBeanArrayList = tournamentBeanArrayList;
-        sizeTournaments = tournamentBeanArrayList.size();
 
-        Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
-        if (tournamentItem != null) {
-            tournamentItem.setTitle("Tournament : " + sizeTournaments);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Log.w("tag", "TIMESTAMP BDD MOBILE  DEMARRAGE : " + MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP).getTournamentTimestamp());
-        ////////////////////////////////
+
+        Log.w("tag", "TIMESTAMP BDD MOBILE  DEMARRAGE : " + MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP).getTournamentTimestamp());
+        //////////////////////////////////////
+        // INITIALISATION DU TIMESTAMP MOBILE
+        //////////////////////////////////////
         if (MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP) == null){
             Log.w("tag", "CREATE NEW TIMESTAMPBEAN");
             TimestampBean timestampBean = new TimestampBean();
             MyApplication.getDaoSession().getTimestampBeanDao().insert(timestampBean);
         }
-        ////////////////////////////////
+        ///////////////////////////////////////
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -110,17 +107,21 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        // FIND VIEW
         bt_login = (Button) findViewById(R.id.bt_login);
         bt_login.setOnClickListener(this);
         tournamentItem = navigationView.getMenu().findItem(R.id.tournaments);
         image = (ImageView) findViewById(R.id.iv);
 
+        // PETIT CHAT
         Glide.with(this).load(URL + "chat.jpg").into(image);
 
+        // INITIALISATION DU BUS
         bus = new Bus();
+
+        // START SERVICE UPDATE_TOURNAMENT
         Intent intent = new Intent(this, ServiceTournament.class);
-        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_DATA);
+        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
         startService(intent);
     }
 
@@ -298,5 +299,30 @@ public class MainActivity extends AppCompatActivity
                 .isGoogleLoginEnabled(withGoogle)
                 .build();
         startActivityForResult(intent, SmartLoginConfig.LOGIN_REQUEST);
+    }
+
+    //---------------------------
+    //     SUBSCRIBE
+    //---------------------------
+    @Subscribe
+    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
+        this.tournamentBeanArrayList = tournamentBeanArrayList;
+        sizeTournaments = tournamentBeanArrayList.size();
+
+        Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
+        if (tournamentItem != null) {
+            tournamentItem.setTitle("Tournament : " + sizeTournaments);
+        }
+    }
+
+    @Subscribe
+    public void refreshNbTeamMenu(ArrayList<TeamBean> teamBeanArrayList) {
+        this.teamBeanArrayList = teamBeanArrayList;
+        sizeTournaments = tournamentBeanArrayList.size();
+
+        Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
+        if (tournamentItem != null) {
+            tournamentItem.setTitle("Tournament : " + sizeTournaments);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi;
+package com.anthony.gestiontournoi.control.activities;
 
 
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.widget.CardView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.anthony.gestiontournoi.R;
 
 public class DetailTournamentActivity extends AppCompatActivity {
 

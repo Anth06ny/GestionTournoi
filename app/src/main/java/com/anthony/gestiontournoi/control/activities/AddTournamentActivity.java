@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi.control;
+package com.anthony.gestiontournoi.control.activities;
 
 import android.app.DatePickerDialog;
 import android.icu.text.SimpleDateFormat;

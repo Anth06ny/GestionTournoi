@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi.view;
+package com.anthony.gestiontournoi.view.adapter;
 
 
 import android.content.Context;
@@ -82,7 +82,7 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
             holder.place_tournament.setText(defautPlace);
         }
 
-        Glide.with(context).load(R.drawable.ic_heart_outline_white_48dp).into(holder.follow_tournament);
+        Glide.with(context).load(R.drawable.ic_heart_outline_black_48dp).into(holder.follow_tournament);
 //        Glide.with(context).load(tournamentBean.getPicture()).into(holder.follow_tournament);
 
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.anthony.gestiontournoi.control.RVTournamentActivity">
+    tools:context="com.anthony.gestiontournoi.control.activities.RVTournamentActivity">
 
     <Button
         android:id="@+id/btn_add"

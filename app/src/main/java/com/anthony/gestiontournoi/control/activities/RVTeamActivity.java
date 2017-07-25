@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi.control;
+package com.anthony.gestiontournoi.control.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
-import com.anthony.gestiontournoi.view.RVTeamAdapter;
+import com.anthony.gestiontournoi.view.adapter.RVTeamAdapter;
 
 import java.util.ArrayList;
 

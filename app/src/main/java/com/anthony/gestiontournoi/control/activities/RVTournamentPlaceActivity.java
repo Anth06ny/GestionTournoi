@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi;
+package com.anthony.gestiontournoi.control.activities;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.view.adapter.RVTournamentPlaceAdapter;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi.view;
+package com.anthony.gestiontournoi.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -2,9 +2,8 @@ package com.anthony.gestiontournoi.model.wsbeans;
 
 import android.util.Log;
 
-import com.anthony.gestiontournoi.MainActivity;
+import com.anthony.gestiontournoi.control.activities.MainActivity;
 import com.anthony.gestiontournoi.control.MyApplication;
-import com.anthony.gestiontournoi.model.OkHttpUtils;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;

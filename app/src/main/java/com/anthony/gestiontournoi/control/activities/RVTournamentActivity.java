@@ -1,4 +1,4 @@
-package com.anthony.gestiontournoi.control;
+package com.anthony.gestiontournoi.control.activities;
 
 import android.content.Intent;
 import android.os.Build;
@@ -15,7 +15,7 @@ import android.widget.Button;
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
-import com.anthony.gestiontournoi.view.RVTournamentAdapter;
+import com.anthony.gestiontournoi.view.adapter.RVTournamentAdapter;
 
 import java.util.ArrayList;
 
