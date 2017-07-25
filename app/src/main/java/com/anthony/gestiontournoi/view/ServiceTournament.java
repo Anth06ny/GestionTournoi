@@ -17,21 +17,23 @@ import com.anthony.gestiontournoi.model.UpdateBeanAT;
 
 public class ServiceTournament extends Service {
 
+    public static final String SERVICE_TYPE = "ServiceType";
+
     public enum ServiceAction {
         LOAD_DATA
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        int actionID = intent.getExtras().getInt("toto", -1);
+        ServiceAction actionID = (ServiceAction) intent.getExtras().get(SERVICE_TYPE);
 
-        Intent intent1 = new Intent(this, ServiceTournament.class);
-        intent1.putExtra("toto", ServiceAction.LOAD_DATA);
+//        Intent intent1 = new Intent(this, ServiceTournament.class);
+//        intent1.putExtra("toto", ServiceAction.LOAD_DATA);
 
-        if (actionID>= 0 && actionID < ServiceAction.values().length) {
-            ServiceAction sa = ServiceAction.values()[actionID];
+        if (actionID != null) {
 
-            switch (sa){
+
+            switch (actionID){
                 case LOAD_DATA:
                     break;
             }

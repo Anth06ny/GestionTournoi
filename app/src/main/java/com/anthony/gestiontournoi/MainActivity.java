@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity
 
         bus = new Bus();
         Intent intent = new Intent(this, ServiceTournament.class);
+        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_DATA);
         startService(intent);
     }
 
