@@ -11,9 +11,7 @@ import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.BeanType;
 import com.anthony.gestiontournoi.model.UpdateBeanAT;
 
-/**
- * Created by Nicolas Th on 12/07/2017.
- */
+
 
 public class ServiceTournament extends Service {
 
