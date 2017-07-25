@@ -17,13 +17,33 @@ import com.anthony.gestiontournoi.model.UpdateBeanAT;
 
 public class ServiceTournament extends Service {
 
+    public enum ServiceAction {
+        LOAD_DATA
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "Start service : ID " + startId, Toast.LENGTH_SHORT).show();
-        long timestamp = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
-        Log.w("tag", "Start service : ID " + startId + "timestamp mobile : " + timestamp);
-        UpdateBeanAT updateBeanAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestamp);
-        updateBeanAT.execute();
+        int actionID = intent.getExtras().getInt("toto", -1);
+
+        Intent intent1 = new Intent(this, ServiceTournament.class);
+        intent1.putExtra("toto", ServiceAction.LOAD_DATA);
+
+        if (actionID>= 0 && actionID < ServiceAction.values().length) {
+            ServiceAction sa = ServiceAction.values()[actionID];
+
+            switch (sa){
+                case LOAD_DATA:
+                    break;
+            }
+
+
+            Toast.makeText(this, "Start service : ID " + startId, Toast.LENGTH_SHORT).show();
+            long timestamp = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
+            Log.w("tag", "Start service : ID " + startId + "timestamp mobile : " + timestamp);
+            UpdateBeanAT updateBeanAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestamp);
+            updateBeanAT.execute();
+        }
+
         return super.onStartCommand(intent, flags, startId);
     }
 

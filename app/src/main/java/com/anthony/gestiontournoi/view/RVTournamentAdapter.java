@@ -8,6 +8,7 @@ import android.icu.util.GregorianCalendar;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
         calendarEnd.setTimeInMillis(tournamentBean.getEndDate());
 //        Drawable drawable = holder.logo_tournament.getContext().getDrawable(R.drawable.ic_menu_gallery);
         if (!tournamentBean.getPicture().isEmpty()) {
+            Log.w("tag", "url img : " + tournamentBean.getPicture());
             Glide.with(context).load(tournamentBean.getPicture()).into(holder.logo_tournament);
         } else {
             holder.logo_tournament.setImageResource(R.drawable.ic_menu_gallery);
@@ -81,6 +83,7 @@ public class RVTournamentAdapter extends RecyclerView.Adapter<RVTournamentAdapte
         }
 
         Glide.with(context).load(R.drawable.ic_heart_outline_white_48dp).into(holder.follow_tournament);
+//        Glide.with(context).load(tournamentBean.getPicture()).into(holder.follow_tournament);
 
 
         // follow ?

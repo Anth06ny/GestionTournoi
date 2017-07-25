@@ -1,38 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    tools:context="com.anthony.gestiontournoi.control.AddTournamentActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/length"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lenght"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/et_length"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,7 +28,8 @@
                     android:layout_height="wrap_content"
                     android:text="Titre"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp"/>
 
                 <EditText
                     android:id="@+id/et_title"
@@ -66,7 +50,8 @@
                     android:layout_height="wrap_content"
                     android:text="Halftime"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_halftime"
@@ -87,7 +72,8 @@
                     android:layout_height="wrap_content"
                     android:text="Cap"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_cap"
@@ -108,7 +94,8 @@
                     android:layout_height="wrap_content"
                     android:text="Gender"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_gender"
@@ -129,7 +116,8 @@
                     android:layout_height="wrap_content"
                     android:text="Number of player"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_nbPlayer"
@@ -150,7 +138,8 @@
                     android:layout_height="wrap_content"
                     android:text="Player Fee"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_playerFee"
@@ -171,7 +160,8 @@
                     android:layout_height="wrap_content"
                     android:text="Team Fee"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_teamFee"
@@ -192,7 +182,8 @@
                     android:layout_height="wrap_content"
                     android:text="Picture"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_picture"
@@ -213,7 +204,8 @@
                     android:layout_height="wrap_content"
                     android:text="Field Type"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_fieldType"
@@ -234,7 +226,8 @@
                     android:layout_height="wrap_content"
                     android:text="Duration"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_duration"
@@ -255,7 +248,8 @@
                     android:layout_height="wrap_content"
                     android:text="Site Web"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
 
                 <EditText
                     android:id="@+id/et_website"
@@ -263,6 +257,110 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/club"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Club id"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
+
+                <EditText
+                    android:id="@+id/et_club"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start date"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
+
+                <EditText
+                    android:id="@+id/et_startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="date" />
+
+                <ImageButton
+                    android:id="@+id/ib_startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_menu_today" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="End date"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp" />
+
+                <EditText
+                    android:id="@+id/et_endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="date" />
+
+                <ImageButton
+                    android:id="@+id/ib_endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_menu_today" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/bt_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add" />
             </LinearLayout>
 
         </LinearLayout>

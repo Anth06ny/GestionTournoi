@@ -28,16 +28,20 @@ public class TournamentBean {
     private String name;
     private Long startDate;
     private Long endDate;
+    private String duration;
     private String halfTime;
-    private String format;
+    private String cap;
     private String picture;
     private Long playerFee;
     private Long teamFee;
-    private String urlInfo;
+    private String fieldType;
+    private int numberOfPlayer;
+    private String gender;
+    private String siteWeb;
     private long timeStamp;
 
     @Transient
-    private boolean delete;
+    private boolean isDelete;
 
     //Relationelle
     @ToOne(joinProperty = "club")
@@ -103,128 +107,142 @@ private transient DaoSession daoSession;
 /** Used for active entity operations. */
 @Generated(hash = 741298605)
 private transient TournamentBeanDao myDao;
-
-@Generated(hash = 113199884)
+@Generated(hash = 109235118)
 public TournamentBean(Long id, String name, Long startDate, Long endDate,
-        String halfTime, String format, String picture, Long playerFee,
-        Long teamFee, String urlInfo, long timeStamp, Long club) {
+        String duration, String halfTime, String cap, String picture,
+        Long playerFee, Long teamFee, String fieldType, int numberOfPlayer,
+        String gender, String siteWeb, long timeStamp, Long club) {
     this.id = id;
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.duration = duration;
     this.halfTime = halfTime;
-    this.format = format;
+    this.cap = cap;
     this.picture = picture;
     this.playerFee = playerFee;
     this.teamFee = teamFee;
-    this.urlInfo = urlInfo;
+    this.fieldType = fieldType;
+    this.numberOfPlayer = numberOfPlayer;
+    this.gender = gender;
+    this.siteWeb = siteWeb;
     this.timeStamp = timeStamp;
     this.club = club;
 }
-
 @Generated(hash = 882910022)
 public TournamentBean() {
 }
-
-public Long getId() {
-    return this.id;
-}
-
-public void setId(Long id) {
-    this.id = id;
-}
-
-public String getName() {
-    return this.name;
-}
-
-public void setName(String name) {
-    this.name = name;
-}
-
-public Long getStartDate() {
-    return this.startDate;
-}
-
-public void setStartDate(Long startDate) {
-    this.startDate = startDate;
-}
-
-public Long getEndDate() {
-    return this.endDate;
-}
-
-public void setEndDate(Long endDate) {
-    this.endDate = endDate;
-}
-
-public String getHalfTime() {
-    return this.halfTime;
-}
-
-public void setHalfTime(String halfTime) {
-    this.halfTime = halfTime;
-}
-
-public String getFormat() {
-    return this.format;
-}
-
-public void setFormat(String format) {
-    this.format = format;
-}
-
-public String getPicture() {
-    return this.picture;
-}
-
-public void setPicture(String picture) {
-    this.picture = picture;
-}
-
-public Long getPlayerFee() {
-    return this.playerFee;
-}
-
-public void setPlayerFee(Long playerFee) {
-    this.playerFee = playerFee;
-}
-
-public Long getTeamFee() {
-    return this.teamFee;
-}
-
-public void setTeamFee(Long teamFee) {
-    this.teamFee = teamFee;
-}
-
-public String getUrlInfo() {
-    return this.urlInfo;
-}
-
-public void setUrlInfo(String urlInfo) {
-    this.urlInfo = urlInfo;
-}
-
-public long getTimeStamp() {
-    return this.timeStamp;
-}
-
-public void setTimeStamp(long timeStamp) {
-    this.timeStamp = timeStamp;
-}
-
-public Long getClub() {
-    return this.club;
-}
-
-public void setClub(Long club) {
-    this.club = club;
-}
-
 @Generated(hash = 585466602)
 private transient Long clubBean__resolvedKey;
 
+    @Override
+    public String toString() {
+        String string = this.getName()+" "+ this.getTimeStamp() + " " + this.getStartDate();
+        return string;
+    }
+
+    //---------------------------
+    //  GENERATED
+    //---------------------------
+    public boolean isDelete() {
+        return isDelete;
+    }
+public Long getId() {
+    return this.id;
+}
+public void setId(Long id) {
+    this.id = id;
+}
+public String getName() {
+    return this.name;
+}
+public void setName(String name) {
+    this.name = name;
+}
+public Long getStartDate() {
+    return this.startDate;
+}
+public void setStartDate(Long startDate) {
+    this.startDate = startDate;
+}
+public Long getEndDate() {
+    return this.endDate;
+}
+public void setEndDate(Long endDate) {
+    this.endDate = endDate;
+}
+public String getDuration() {
+    return this.duration;
+}
+public void setDuration(String duration) {
+    this.duration = duration;
+}
+public String getHalfTime() {
+    return this.halfTime;
+}
+public void setHalfTime(String halfTime) {
+    this.halfTime = halfTime;
+}
+public String getCap() {
+    return this.cap;
+}
+public void setCap(String cap) {
+    this.cap = cap;
+}
+public String getPicture() {
+    return this.picture;
+}
+public void setPicture(String picture) {
+    this.picture = picture;
+}
+public Long getPlayerFee() {
+    return this.playerFee;
+}
+public void setPlayerFee(Long playerFee) {
+    this.playerFee = playerFee;
+}
+public Long getTeamFee() {
+    return this.teamFee;
+}
+public void setTeamFee(Long teamFee) {
+    this.teamFee = teamFee;
+}
+public String getFieldType() {
+    return this.fieldType;
+}
+public void setFieldType(String fieldType) {
+    this.fieldType = fieldType;
+}
+public int getNumberOfPlayer() {
+    return this.numberOfPlayer;
+}
+public void setNumberOfPlayer(int numberOfPlayer) {
+    this.numberOfPlayer = numberOfPlayer;
+}
+public String getGender() {
+    return this.gender;
+}
+public void setGender(String gender) {
+    this.gender = gender;
+}
+public String getSiteWeb() {
+    return this.siteWeb;
+}
+public void setSiteWeb(String siteWeb) {
+    this.siteWeb = siteWeb;
+}
+public long getTimeStamp() {
+    return this.timeStamp;
+}
+public void setTimeStamp(long timeStamp) {
+    this.timeStamp = timeStamp;
+}
+public Long getClub() {
+    return this.club;
+}
+public void setClub(Long club) {
+    this.club = club;
+}
 /** To-one relationship, resolved on first access. */
 @Generated(hash = 1458757382)
 public ClubBean getClubBean() {
@@ -243,7 +261,6 @@ public ClubBean getClubBean() {
     }
     return clubBean;
 }
-
 /** called by internal mechanisms, do not call yourself. */
 @Generated(hash = 1550101609)
 public void setClubBean(ClubBean clubBean) {
@@ -253,7 +270,6 @@ public void setClubBean(ClubBean clubBean) {
         clubBean__resolvedKey = club;
     }
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -276,13 +292,11 @@ public List<MatchBean> getMatchList() {
     }
     return matchList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1442721827)
 public synchronized void resetMatchList() {
     matchList = null;
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -305,13 +319,11 @@ public List<TeamBean> getTeamList() {
     }
     return teamList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 924184687)
 public synchronized void resetTeamList() {
     teamList = null;
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -334,13 +346,11 @@ public List<PlaceBean> getPlaceList() {
     }
     return placeList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1423199708)
 public synchronized void resetPlaceList() {
     placeList = null;
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -363,13 +373,11 @@ public List<ContactBean> getContactList() {
     }
     return contactList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1466168391)
 public synchronized void resetContactList() {
     contactList = null;
 }
-
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
  * Entity must attached to an entity context.
@@ -381,7 +389,6 @@ public void delete() {
     }
     myDao.delete(this);
 }
-
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
  * Entity must attached to an entity context.
@@ -393,7 +400,6 @@ public void refresh() {
     }
     myDao.refresh(this);
 }
-
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
  * Entity must attached to an entity context.
@@ -405,19 +411,11 @@ public void update() {
     }
     myDao.update(this);
 }
+/** called by internal mechanisms, do not call yourself. */
+@Generated(hash = 644297522)
+public void __setDaoSession(DaoSession daoSession) {
+    this.daoSession = daoSession;
+    myDao = daoSession != null ? daoSession.getTournamentBeanDao() : null;
+}
 
-public boolean isDelete() {
-        return delete;
-    }
-
-    public void setDelete(boolean delete) {
-        this.delete = delete;
-    }
-
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 644297522)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getTournamentBeanDao() : null;
-    }
 }
