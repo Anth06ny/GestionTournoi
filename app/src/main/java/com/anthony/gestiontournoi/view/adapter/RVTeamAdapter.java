@@ -54,8 +54,10 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
     public void onBindViewHolder(RVTeamAdapter.ViewHolder holder, int position) {
         TeamBean teamBean = teamBeanArrayList.get(position);
         holder.name_team.setText(teamBean.getName());
-        if (teamBean.getClub() != null){
-            holder.place_team.setText(teamBean.getClub().getPlace().getName());
+        if (teamBean.getClub() != null) {
+            if (teamBean.getClub().getPlace() != null) {
+                holder.place_team.setText(teamBean.getClub().getPlace().getName());
+            }
         } else {
             holder.place_team.setText(defautPlace);
         }
