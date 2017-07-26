@@ -67,7 +67,9 @@ public class WSUtilsServer {
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
         if (!listTournaments.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setTournamentTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
     }
 
@@ -115,7 +117,9 @@ public class WSUtilsServer {
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
 
         if (!listMatchs.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setMatchTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
 
         }
     }
@@ -157,7 +161,9 @@ public class WSUtilsServer {
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
         if (!listTeams.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setTeamTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
     }
 
@@ -200,14 +206,10 @@ public class WSUtilsServer {
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
         if (!listClubs.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setClubTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
-    }
-
-    public static void updateMobileTimeStamp(long maxTimestamp) {
-        TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
-        timestampBean.setTournamentTimestamp(maxTimestamp);
-        MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
     }
 
 

@@ -51,6 +51,11 @@ public class WSUtilsMobile {
         return tournamentBean;
     }
 
+    public static TeamBean getTeam(long id) {
+        TeamBean teamBean = MyApplication.getDaoSession().getTeamBeanDao().load(id);
+        return teamBean;
+    }
+
 
     public static void deleteTournamentById(ArrayList<Long> arrayListId) {
 

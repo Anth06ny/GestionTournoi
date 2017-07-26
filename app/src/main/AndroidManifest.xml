@@ -48,7 +48,8 @@
         <activity android:name=".control.activities.AddTournamentActivity" />
         <activity android:name=".control.activities.RVTournamentMatchActivity" />
         <activity android:name=".control.activities.RVTournamentPlaceActivity" />
-        <activity android:name=".control.activities.RVTournamentTeamActivity"></activity>
+        <activity android:name=".control.activities.RVTournamentTeamActivity" />
+        <activity android:name=".control.activities.DetailTeamActivity"></activity>
     </application>
 
 </manifest>
