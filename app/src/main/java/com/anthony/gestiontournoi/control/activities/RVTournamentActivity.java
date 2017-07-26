@@ -13,9 +13,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.anthony.gestiontournoi.view.adapter.RVTournamentAdapter;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ public class RVTournamentActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rvtournament);
         findView();
+        MyApplication.getBus().register(this);
 
         tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
         rvTournamentAdapter = new RVTournamentAdapter(tournamentBeanArrayList);
@@ -49,8 +52,6 @@ public class RVTournamentActivity extends AppCompatActivity implements View.OnCl
 
         rv_tournament.setLayoutManager(new LinearLayoutManager(this));
         rv_tournament.setItemAnimator(new DefaultItemAnimator());
-
-
     }
 
 
@@ -58,6 +59,13 @@ public class RVTournamentActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         Intent intent = new Intent(this, AddTournamentActivity.class);
         startActivity(intent);
+    }
+
+    @Subscribe
+    public void refreshRecyclerView(ArrayList<TournamentBean> tournamentBeanArrayList){
+        this.tournamentBeanArrayList.clear();
+        this.tournamentBeanArrayList.addAll(tournamentBeanArrayList);
+        rvTournamentAdapter.notifyDataSetChanged();
     }
 }
 

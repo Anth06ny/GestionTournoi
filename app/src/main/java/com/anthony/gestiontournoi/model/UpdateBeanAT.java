@@ -3,7 +3,7 @@ package com.anthony.gestiontournoi.model;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.anthony.gestiontournoi.control.activities.MainActivity;
+import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
@@ -63,17 +63,17 @@ public class UpdateBeanAT extends AsyncTask {
             case TOURNAMENT:
                 ArrayList<TournamentBean> tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
                 Log.w("tag", "Size Tournaments BDD Mobile : " + tournamentBeanArrayList.size());
-                MainActivity.getBus().post(tournamentBeanArrayList);
+                MyApplication.getBus().post(tournamentBeanArrayList);
                 break;
             case TEAM:
                 ArrayList<TeamBean> teamBeanArrayList = WSUtilsMobile.getAllTeam();
                 Log.w("tag", "Size Teams BDD Mobile : " + teamBeanArrayList.size());
-                MainActivity.getBus().post(teamBeanArrayList);
+                MyApplication.getBus().post(teamBeanArrayList);
                 break;
             case MATCHS:
                 ArrayList<MatchBean> matchBeanArrayList = WSUtilsMobile.getAllMatch();
                 Log.w("tag", "Size Matchs BDD Mobile : " + matchBeanArrayList.size());
-                MainActivity.getBus().post(matchBeanArrayList);
+                MyApplication.getBus().post(matchBeanArrayList);
                 break;
         }
 
