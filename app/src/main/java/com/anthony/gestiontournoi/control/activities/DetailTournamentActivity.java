@@ -1,16 +1,21 @@
 package com.anthony.gestiontournoi.control.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
+import com.bumptech.glide.Glide;
 
-public class DetailTournamentActivity extends AppCompatActivity {
+public class DetailTournamentActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView imgLogoOnetournament;
     private TextView tvTitleOnetournament;
@@ -34,6 +39,7 @@ public class DetailTournamentActivity extends AppCompatActivity {
     private CardView CVTeam;
     private CardView CVMatch;
     private CardView CVPlace;
+    private long tournament_id;
 
     /**
      * Find the Views in the layout<br />
@@ -64,6 +70,11 @@ public class DetailTournamentActivity extends AppCompatActivity {
         CVTeam = (CardView) findViewById(R.id.CVTeam);
         CVMatch = (CardView) findViewById(R.id.CVMatch);
         CVPlace = (CardView) findViewById(R.id.CVPlace);
+
+        CVTeam.setOnClickListener(this);
+        CVMatch.setOnClickListener(this);
+        CVPlace.setOnClickListener(this);
+
     }
 
 
@@ -72,7 +83,44 @@ public class DetailTournamentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailtournament);
         findViews();
+
+        tournament_id = getIntent().getExtras().getLong("id");
+
+        TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournament_id);
+        tvTitleOnetournament.setText(tournamentBean.getName());
+        tvDateOnetournament.setText("Du " + tournamentBean.getStartDate() + " au " + tournamentBean.getEndDate());
+        //tvPlace.setText(tournamentBean.getPlaceList().get(0) + "");
+        tvField.setText(tournamentBean.getFieldType());
+        tvFee.setText(tournamentBean.getTeamFee() + " / " + tournamentBean.getPlayerFee());
+        tvWebsite.setText(tournamentBean.getSiteWeb());
+        tvLength.setText(tournamentBean.getDuration());
+        tvCap.setText(tournamentBean.getCap());
+        tvHalftime.setText(tournamentBean.getHalfTime());
+
+        if (!tournamentBean.getPicture().isEmpty()) {
+            Glide.with(this).load(tournamentBean.getPicture()).into(imgLogoOnetournament);
+        } else {
+            Glide.with(this).load(R.drawable.ic_info_black_48dp).into(imgLogoOnetournament);
+        }
+
+
     }
 
 
+    @Override
+    public void onClick(View view) {
+        if (view == CVTeam) {
+            Intent intent = new Intent(this, RVTournamentTeamActivity.class);
+            intent.putExtra("id", tournament_id);
+            startActivity(intent);
+        } else if (view == CVMatch) {
+            Intent intent = new Intent(this, RVTournamentMatchActivity.class);
+            intent.putExtra("id", tournament_id);
+            startActivity(intent);
+        } else if (view == CVPlace) {
+            Intent intent = new Intent(this, RVTournamentPlaceActivity.class);
+            intent.putExtra("id", tournament_id);
+            startActivity(intent);
+        }
+    }
 }

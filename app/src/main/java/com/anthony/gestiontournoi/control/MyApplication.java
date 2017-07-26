@@ -34,10 +34,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        bus = new Bus();
         instance = this;
         Stetho.initializeWithDefaults(this);
         setupDatabase();
-        bus = new Bus();
 
         // START SERVICE UPDATE_TOURNAMENT
         Intent intentTournament = new Intent(this, ServiceTournament.class);
@@ -48,12 +48,23 @@ public class MyApplication extends Application {
         Intent intentTeam = new Intent(this, ServiceTournament.class);
         intentTeam.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TEAM);
         startService(intentTeam);
+
+        // START SERVICE UPDATE_CLUB
+        Intent intentClub = new Intent(this, ServiceTournament.class);
+        intentClub.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_CLUB);
+        startService(intentClub);
+
+        // START SERVICE UPDATE_PLACE
+        Intent intenPlace = new Intent(this, ServiceTournament.class);
+        intenPlace.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_PLACE);
+        startService(intenPlace);
 //
 //        // START SERVICE UPDATE_MATCH
 //        Intent intentMatch = new Intent(this, ServiceTournament.class);
 //        intentMatch.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_MATCH);
 //        startService(intentMatch);
     }
+
 
     private void setupDatabase() {
 

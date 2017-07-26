@@ -4,7 +4,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.anthony.gestiontournoi.control.MyApplication;
+import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
+import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
@@ -19,7 +21,6 @@ public class UpdateBeanAT extends AsyncTask {
     private long timestamp;
 
     public UpdateBeanAT(BeanType beanType, long timestamp) {
-        Log.w("tag", "Create AT");
         this.beanType = beanType;
         this.timestamp = timestamp;
     }
@@ -52,6 +53,23 @@ public class UpdateBeanAT extends AsyncTask {
                     e.printStackTrace();
                 }
                 break;
+            case CLUB:
+                Log.w("tag", "AT club start");
+                try {
+                    WSUtilsServer.updateBeanClub(timestamp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case PLACE:
+                Log.w("tag", "AT place start");
+                try {
+                    WSUtilsServer.updateBeanPlace(timestamp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
         }
         return null;
     }
@@ -74,6 +92,16 @@ public class UpdateBeanAT extends AsyncTask {
                 ArrayList<MatchBean> matchBeanArrayList = WSUtilsMobile.getAllMatch();
                 Log.w("tag", "Size Matchs BDD Mobile : " + matchBeanArrayList.size());
                 MyApplication.getBus().post(matchBeanArrayList);
+                break;
+            case CLUB:
+                ArrayList<ClubBean> clubBeanArrayList = WSUtilsMobile.getAllClub();
+                Log.w("tag", "Size Club BDD Mobile : " + clubBeanArrayList.size());
+                MyApplication.getBus().post(clubBeanArrayList);
+                break;
+            case PLACE:
+                ArrayList<PlaceBean> placeBeanArrayList = WSUtilsMobile.getAllPlace();
+                Log.w("tag", "Size Place BDD Mobile : " + placeBeanArrayList.size());
+                MyApplication.getBus().post(placeBeanArrayList);
                 break;
         }
 

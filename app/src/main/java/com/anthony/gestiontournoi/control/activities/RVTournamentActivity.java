@@ -71,6 +71,7 @@ public class RVTournamentActivity extends AppCompatActivity implements View.OnCl
         startActivity(intent);
     }
 
+
     @Subscribe
     public void refreshRecyclerView(ArrayList<TournamentBean> tournamentBeanArrayList){
         this.tournamentBeanArrayList.clear();

@@ -1,13 +1,14 @@
 package com.anthony.gestiontournoi.model.wsbeans;
 
 import com.anthony.gestiontournoi.control.MyApplication;
+import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
+import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBeanDao;
 
 import java.util.ArrayList;
-
 
 
 public class WSUtilsMobile {
@@ -27,9 +28,9 @@ public class WSUtilsMobile {
 
     }
 
+    /******************** GET ALL ********************/
     // RETOURNE TOUS LES TOURNAMENTS DE LA DATABASE MOBILE
-
-    public static ArrayList<TournamentBean> getAllTournament(){
+    public static ArrayList<TournamentBean> getAllTournament() {
         ArrayList<TournamentBean> tournamentBeanArrayList = (ArrayList<TournamentBean>) MyApplication.getDaoSession().getTournamentBeanDao().loadAll();
         return tournamentBeanArrayList;
     }
@@ -40,10 +41,28 @@ public class WSUtilsMobile {
         return teamBeanArrayList;
     }
 
-    // RETOURNE TOUTES LES TEAMS DE LA DATABASE MOBILE
+    // RETOURNE TOUTES LES MATCHS DE LA DATABASE MOBILE
     public static ArrayList<MatchBean> getAllMatch() {
         ArrayList<MatchBean> matchBeanArrayList = (ArrayList<MatchBean>) MyApplication.getDaoSession().getMatchBeanDao().loadAll();
         return matchBeanArrayList;
+    }
+
+    // RETOURNE TOUTES LES CLUBS DE LA DATABASE MOBILE
+    public static ArrayList<ClubBean> getAllClub() {
+        ArrayList<ClubBean> clubBeanArrayList = (ArrayList<ClubBean>) MyApplication.getDaoSession().getClubBeanDao().loadAll();
+        return clubBeanArrayList;
+    }
+    // RETOURNE TOUTES LES PLACES DE LA DATABASE MOBILE
+    public static ArrayList<PlaceBean> getAllPlace() {
+        ArrayList<PlaceBean> placeBeanArrayList = (ArrayList<PlaceBean>) MyApplication.getDaoSession().getPlaceBeanDao().loadAll();
+        return placeBeanArrayList;
+    }
+
+
+    /******************** GET ONE ********************/
+    public static TournamentBean getTournament(long id) {
+        TournamentBean tournamentBean = MyApplication.getDaoSession().getTournamentBeanDao().load(id);
+        return tournamentBean;
     }
 
 

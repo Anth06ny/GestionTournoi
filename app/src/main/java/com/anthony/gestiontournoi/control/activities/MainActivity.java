@@ -40,6 +40,8 @@ import studios.codelight.smartloginlibrary.users.SmartFacebookUser;
 import studios.codelight.smartloginlibrary.users.SmartGoogleUser;
 import studios.codelight.smartloginlibrary.users.SmartUser;
 
+import static com.anthony.gestiontournoi.R.menu.main;
+
 // googleId : 113207748106039394539
 // facebookId : 10210685228421137
 // malo : 192.168.60.137:8000
@@ -50,8 +52,10 @@ public class MainActivity extends AppCompatActivity
     private static final int GET_ACCOUNT_LOCATION_REQ_CODE = 1;
     public static final Long ID_TIMESTAMP = 1L;
     private Button bt_login;
-    private static final String URL = "http://192.168.42.31:8000/"; // NICO
-    //    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+
+    //private static final String URL = "http://192.168.56.1:8000/"; // NICO
+    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+
     private int sizeTournaments;
     private int sizeTeams;
     private MenuItem tournamentItem;
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         //////////////////////////////////////
         // INITIALISATION DU TIMESTAMP MOBILE
         //////////////////////////////////////
-        if (MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP) == null){
+        if (MyApplication.getDaoSession().getTimestampBeanDao().load(ID_TIMESTAMP) == null) {
             Log.w("tag", "CREATE NEW TIMESTAMPBEAN");
             TimestampBean timestampBean = new TimestampBean();
             MyApplication.getDaoSession().getTimestampBeanDao().insert(timestampBean);
@@ -113,6 +117,13 @@ public class MainActivity extends AppCompatActivity
 
         // PETIT CHAT
         Glide.with(this).load(URL + "chat.jpg").into(image);
+
+
+//        // START SERVICE UPDATE_TOURNAMENT
+//        Intent intent = new Intent(this, ServiceTournament.class);
+//        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
+//        startService(intent);
+
     }
 
     @Override
@@ -130,7 +141,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(main, menu);
         return true;
     }
 
@@ -326,4 +337,5 @@ public class MainActivity extends AppCompatActivity
             teamItem.setTitle("Team : " + sizeTeams);
         }
     }
+
 }
