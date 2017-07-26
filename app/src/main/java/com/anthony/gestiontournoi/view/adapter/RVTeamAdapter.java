@@ -1,6 +1,10 @@
 package com.anthony.gestiontournoi.view.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.control.activities.DetailTeamActivity;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 
 import java.util.ArrayList;
@@ -21,6 +26,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
 
     private ArrayList<TeamBean> teamBeanArrayList;
     private String defautPlace = "Pas de lieu associé";
+    private Context context;
 
 
     public RVTeamAdapter(ArrayList<TeamBean> teamBeanArrayList) {
@@ -32,6 +38,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
         private TextView name_team, place_team, number_team;
         private ImageView logo_team;
         private ImageButton follow_team;
+        private CardView CVTeams;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -40,6 +47,9 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
             number_team = (TextView) itemView.findViewById(R.id.TV_number_team);
             logo_team = (ImageView) itemView.findViewById(R.id.img_logo_team);
             follow_team = (ImageButton) itemView.findViewById(R.id.img_follow_team);
+            //CVTeams = (CardView) itemView.findViewById(R.id.CVTeams);
+
+
         }
     }
 
@@ -52,12 +62,14 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(RVTeamAdapter.ViewHolder holder, int position) {
-        TeamBean teamBean = teamBeanArrayList.get(position);
+        context = holder.CVTeams.getContext();
+        final TeamBean teamBean = teamBeanArrayList.get(position);
         holder.name_team.setText(teamBean.getName());
         if (teamBean.getClub() != null) {
             if (teamBean.getClub().getPlace() != null) {
                 holder.place_team.setText(teamBean.getClub().getPlace().getName());
             }
+
         } else {
             holder.place_team.setText(defautPlace);
         }
@@ -65,6 +77,16 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
         // holder.number_team.setText(teamBean.get); ???
         // follow ?
         // logo?
+
+        holder.CVTeams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.w("TAGTEAMID", " " + teamBean.getId());
+                Intent intent = new Intent(context, DetailTeamActivity.class);
+                intent.putExtra("id", teamBean.getId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 

@@ -2,6 +2,7 @@ package com.anthony.gestiontournoi.model.wsbeans;
 
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
+import com.anthony.gestiontournoi.model.beans.ContactBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
@@ -52,6 +53,7 @@ public class WSUtilsMobile {
         ArrayList<ClubBean> clubBeanArrayList = (ArrayList<ClubBean>) MyApplication.getDaoSession().getClubBeanDao().loadAll();
         return clubBeanArrayList;
     }
+
     // RETOURNE TOUTES LES PLACES DE LA DATABASE MOBILE
     public static ArrayList<PlaceBean> getAllPlace() {
         ArrayList<PlaceBean> placeBeanArrayList = (ArrayList<PlaceBean>) MyApplication.getDaoSession().getPlaceBeanDao().loadAll();
@@ -63,6 +65,21 @@ public class WSUtilsMobile {
     public static TournamentBean getTournament(long id) {
         TournamentBean tournamentBean = MyApplication.getDaoSession().getTournamentBeanDao().load(id);
         return tournamentBean;
+    }
+
+    public static TeamBean getTeam(long id) {
+        TeamBean teamBean = MyApplication.getDaoSession().getTeamBeanDao().load(id);
+        return teamBean;
+    }
+
+    public static ContactBean getContact(long id) {
+        ContactBean contactBean = MyApplication.getDaoSession().getContactBeanDao().load(id);
+        return contactBean;
+    }
+
+    public static ClubBean getClub(long id) {
+        ClubBean clubBean = MyApplication.getDaoSession().getClubBeanDao().load(id);
+        return clubBean;
     }
 
 

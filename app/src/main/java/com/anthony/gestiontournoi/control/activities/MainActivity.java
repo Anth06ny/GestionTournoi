@@ -118,12 +118,6 @@ public class MainActivity extends AppCompatActivity
         // PETIT CHAT
         Glide.with(this).load(URL + "chat.jpg").into(image);
 
-
-//        // START SERVICE UPDATE_TOURNAMENT
-//        Intent intent = new Intent(this, ServiceTournament.class);
-//        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
-//        startService(intent);
-
     }
 
     @Override

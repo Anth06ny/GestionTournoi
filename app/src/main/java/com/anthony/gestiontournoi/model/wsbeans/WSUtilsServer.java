@@ -20,8 +20,8 @@ public class WSUtilsServer {
     private static final Gson GSON = new Gson();
 
 //    private static final String URL = "http://192.168.1.14:8000/"; // NICO MAISON
-    private static final String URL = "http://192.168.42.31:8000/"; // NICO
-//    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+//   private static final String URL = "http://192.168.42.31:8000/"; // NICO
+    private static final String URL = "http://192.168.60.137:8000/"; // MALO
 
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
     private static final String URL_UPDATE_BEAN_MATCHS = URL + "updateBeanMatchs/";
@@ -69,7 +69,9 @@ public class WSUtilsServer {
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
         if (!listTournaments.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setTournamentTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
     }
 
@@ -117,7 +119,9 @@ public class WSUtilsServer {
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
 
         if (!listMatchs.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setMatchTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
 
         }
     }
@@ -159,7 +163,9 @@ public class WSUtilsServer {
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
         if (!listTeams.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setTeamTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
     }
 
@@ -202,9 +208,12 @@ public class WSUtilsServer {
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
         if (!listClubs.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
+            TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+            timestampBean.setClubTimestamp(maxTimestamp);
+            MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
     }
+
 
     public static void updateBeanPlace(long timestamp) throws Exception {
 
@@ -254,6 +263,7 @@ public class WSUtilsServer {
         timestampBean.setTournamentTimestamp(maxTimestamp);
         MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
     }
+
 
 
 }
