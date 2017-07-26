@@ -25,12 +25,10 @@ import android.widget.Toast;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.control.MyApplication;
-import com.anthony.gestiontournoi.model.ServiceTournament;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.bumptech.glide.Glide;
-import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -56,17 +54,12 @@ public class MainActivity extends AppCompatActivity
     private Button bt_login;
     //private static final String URL = "http://192.168.56.1:8000/"; // NICO
     private static final String URL = "http://192.168.60.137:8000/"; // MALO
-    private static Bus bus;
     private int sizeTournaments;
     private MenuItem tournamentItem;
     private ImageView image;
 
     private ArrayList<TournamentBean> tournamentBeanArrayList;
     private ArrayList<TeamBean> teamBeanArrayList;
-
-    public static Bus getBus() {
-        return bus;
-    }
 
 
     @Override
@@ -116,25 +109,22 @@ public class MainActivity extends AppCompatActivity
         // PETIT CHAT
         Glide.with(this).load(URL + "chat.jpg").into(image);
 
-        // INITIALISATION DU BUS
-        bus = new Bus();
-
-        // START SERVICE UPDATE_TOURNAMENT
-        Intent intent = new Intent(this, ServiceTournament.class);
-        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
-        startService(intent);
+//        // START SERVICE UPDATE_TOURNAMENT
+//        Intent intent = new Intent(this, ServiceTournament.class);
+//        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
+//        startService(intent);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        bus.register(this);
+        MyApplication.getBus().register(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        bus.unregister(this);
+        MyApplication.getBus().unregister(this);
     }
 
     @Override

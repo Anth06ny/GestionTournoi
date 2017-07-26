@@ -1,10 +1,13 @@
 package com.anthony.gestiontournoi.control;
 
 import android.app.Application;
+import android.content.Intent;
 
+import com.anthony.gestiontournoi.model.ServiceTournament;
 import com.anthony.gestiontournoi.model.beans.DaoMaster;
 import com.anthony.gestiontournoi.model.beans.DaoSession;
 import com.facebook.stetho.Stetho;
+import com.squareup.otto.Bus;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -14,6 +17,12 @@ public class MyApplication extends Application {
     private static DaoSession daoSession;
 
     private static MyApplication instance;
+
+    public static Bus getBus() {
+        return bus;
+    }
+
+    private static Bus bus;
 
     public static MyApplication getInstance() {
         return instance;
@@ -26,10 +35,16 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        bus = new Bus();
         instance = this;
         Stetho.initializeWithDefaults(this);
         setupDatabase();
+        // START SERVICE UPDATE_TOURNAMENT
+        Intent intent = new Intent(this, ServiceTournament.class);
+        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
+        startService(intent);
     }
+
 
     private void setupDatabase() {
 
