@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, RVTournamentActivity.class);
             startActivity(intent);
         } else if (id == R.id.teams) {
-            Intent intent = new Intent(this, DetailTournamentActivity.class);
+            Intent intent = new Intent(this, RVTeamActivity.class);
             startActivity(intent);
         } else if (id == R.id.about_me) {
 

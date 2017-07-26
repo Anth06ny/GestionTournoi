@@ -78,42 +78,41 @@ public class WSUtilsServer {
         String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_TEAM + timestamp);
         Log.w("tag", "Json team : " + json);
 
-        ArrayList<TeamBean> listTournaments = GSON.fromJson(json, new TypeToken<ArrayList<TournamentBean>>() {
+        ArrayList<TeamBean> listTeams = GSON.fromJson(json, new TypeToken<ArrayList<TeamBean>>() {
         }.getType());
-        Log.w("tag", "" + listTournaments.size());
+        Log.w("tag", "listTeams size : " + listTeams.size());
 
         // ON DECLARE LA VARIABLE QUI STOCK LE PLUS GRAND TIMESTAMP
         long maxTimestamp = 0;
 
-        for (int i = 0; i < listTournaments.size(); i++) {
-            TournamentBean tournamentBean = listTournaments.get(i);
-            Log.w("tag", "ID : " + tournamentBean.getId() + " delete : " + tournamentBean.isDelete());
+        for (int i = 0; i < listTeams.size(); i++) {
+            TeamBean teamBean = listTeams.get(i);
+            Log.w("tag", "ID team : " + teamBean.getId() + " delete : " + teamBean.isDelete());
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
-            Log.w("tag", "timestamp bean tournament " + tournamentBean.getId() + " : " + tournamentBean.getTimeStamp());
-            if (maxTimestamp < tournamentBean.getTimeStamp()) {
-                maxTimestamp = tournamentBean.getTimeStamp();
+            if (maxTimestamp < teamBean.getTimeStamp()) {
+                maxTimestamp = teamBean.getTimeStamp();
             }
 
-            if (tournamentBean.isDelete()) {
+            if (teamBean.isDelete()) {
                 // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
-                MyApplication.getDaoSession().getTournamentBeanDao().delete(tournamentBean);
+                MyApplication.getDaoSession().getTeamBeanDao().delete(teamBean);
             } else {
                 // ON CHECK SI IL EXISTE EN BDD MOBILE
-                if (MyApplication.getDaoSession().getTournamentBeanDao().load(tournamentBean.getId()) == null) {
+                if (MyApplication.getDaoSession().getTeamBeanDao().load(teamBean.getId()) == null) {
                     // ON AJOUT SI EXISTE PAS
-                    MyApplication.getDaoSession().getTournamentBeanDao().insert(tournamentBean);
+                    MyApplication.getDaoSession().getTeamBeanDao().insert(teamBean);
                 } else {
                     // ON MET A JOUR
-                    MyApplication.getDaoSession().getTournamentBeanDao().update(tournamentBean);
+                    MyApplication.getDaoSession().getTeamBeanDao().update(teamBean);
                 }
             }
         }
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
-        if (!listTournaments.isEmpty()) {
+        if (!listTeams.isEmpty()) {
             TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
-            timestampBean.setTournamentTimestamp(maxTimestamp);
+            timestampBean.setTeamTimestamp(maxTimestamp);
             MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
     }

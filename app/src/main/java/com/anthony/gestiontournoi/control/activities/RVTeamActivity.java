@@ -7,8 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
+import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.anthony.gestiontournoi.view.adapter.RVTeamAdapter;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,7 @@ public class RVTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rvteam);
 
-        teamBeanArrayList = new ArrayList<>();
+        teamBeanArrayList = WSUtilsMobile.getAllTeam();
         rvTeamAdapter = new RVTeamAdapter(teamBeanArrayList);
 
         rv_team = (RecyclerView) findViewById(R.id.rv_team);
@@ -31,5 +34,24 @@ public class RVTeamActivity extends AppCompatActivity {
 
         rv_team.setLayoutManager(new LinearLayoutManager(this));
         rv_team.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MyApplication.getBus().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MyApplication.getBus().unregister(this);
+    }
+
+    @Subscribe
+    public void refreshRecyclerView(ArrayList<TeamBean> teamBeanArrayList){
+        this.teamBeanArrayList.clear();
+        this.teamBeanArrayList.addAll(teamBeanArrayList);
+        rvTeamAdapter.notifyDataSetChanged();
     }
 }

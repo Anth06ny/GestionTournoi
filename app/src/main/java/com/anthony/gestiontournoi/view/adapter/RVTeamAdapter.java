@@ -20,6 +20,8 @@ import java.util.ArrayList;
 public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder> {
 
     private ArrayList<TeamBean> teamBeanArrayList;
+    private String defautPlace = "Pas de lieu associé";
+
 
     public RVTeamAdapter(ArrayList<TeamBean> teamBeanArrayList) {
         this.teamBeanArrayList = teamBeanArrayList;
@@ -52,7 +54,12 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
     public void onBindViewHolder(RVTeamAdapter.ViewHolder holder, int position) {
         TeamBean teamBean = teamBeanArrayList.get(position);
         holder.name_team.setText(teamBean.getName());
-        holder.place_team.setText((CharSequence) teamBean.getClub().getPlace());
+        if (teamBean.getClub() != null){
+            holder.place_team.setText(teamBean.getClub().getPlace().getName());
+        } else {
+            holder.place_team.setText(defautPlace);
+        }
+
         // holder.number_team.setText(teamBean.get); ???
         // follow ?
         // logo?

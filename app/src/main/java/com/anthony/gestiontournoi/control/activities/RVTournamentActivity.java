@@ -43,7 +43,6 @@ public class RVTournamentActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rvtournament);
         findView();
-        MyApplication.getBus().register(this);
 
         tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
         rvTournamentAdapter = new RVTournamentAdapter(tournamentBeanArrayList);
@@ -54,6 +53,17 @@ public class RVTournamentActivity extends AppCompatActivity implements View.OnCl
         rv_tournament.setItemAnimator(new DefaultItemAnimator());
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MyApplication.getBus().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MyApplication.getBus().unregister(this);
+    }
 
     @Override
     public void onClick(View v) {
