@@ -6,6 +6,7 @@ import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
+import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.google.gson.Gson;
@@ -75,12 +76,15 @@ public class WSUtilsServer {
         String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_MATCHS + timestamp);
         Log.w("tag", "Json matchs : " + json);
 
+
         ArrayList<MatchBean> listMatchs = GSON.fromJson(json, new TypeToken<ArrayList<MatchBean>>() {
         }.getType());
         Log.w("tag", "Matchs " + listMatchs.size());
 
+
         // ON DECLARE LA VARIABLE QUI STOCK LE PLUS GRAND TIMESTAMP
         long maxTimestamp = 0;
+
 
         for (int i = 0; i < listMatchs.size(); i++) {
             MatchBean matchBean = listMatchs.get(i);
@@ -103,18 +107,58 @@ public class WSUtilsServer {
                 } else {
                     // ON MET A JOUR
                     MyApplication.getDaoSession().getMatchBeanDao().update(matchBean);
+
                 }
             }
         }
 
         // ON MET A JOUR LE TIMESTAMP DU MOBILE
+
         if (!listMatchs.isEmpty()) {
             updateMobileTimeStamp(maxTimestamp);
+
         }
     }
 
     public static void updateBeanTeam(long timestamp) throws Exception {
+        String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_TEAM + timestamp);
+        Log.w("tag", "Json team : " + json);
 
+        ArrayList<TeamBean> listTeams = GSON.fromJson(json, new TypeToken<ArrayList<TeamBean>>() {
+        }.getType());
+        Log.w("tag", "listTeams size : " + listTeams.size());
+
+        // ON DECLARE LA VARIABLE QUI STOCK LE PLUS GRAND TIMESTAMP
+        long maxTimestamp = 0;
+
+        for (int i = 0; i < listTeams.size(); i++) {
+            TeamBean teamBean = listTeams.get(i);
+            Log.w("tag", "ID team : " + teamBean.getId() + " delete : " + teamBean.isDelete());
+
+            // ON RECUPERE LE PLUS GRAND TIMESTAMP
+            if (maxTimestamp < teamBean.getTimeStamp()) {
+                maxTimestamp = teamBean.getTimeStamp();
+            }
+
+            if (teamBean.isDelete()) {
+                // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
+                MyApplication.getDaoSession().getTeamBeanDao().delete(teamBean);
+            } else {
+                // ON CHECK SI IL EXISTE EN BDD MOBILE
+                if (MyApplication.getDaoSession().getTeamBeanDao().load(teamBean.getId()) == null) {
+                    // ON AJOUT SI EXISTE PAS
+                    MyApplication.getDaoSession().getTeamBeanDao().insert(teamBean);
+                } else {
+                    // ON MET A JOUR
+                    MyApplication.getDaoSession().getTeamBeanDao().update(teamBean);
+                }
+            }
+        }
+
+        // ON MET A JOUR LE TIMESTAMP DU MOBILE
+        if (!listTeams.isEmpty()) {
+            updateMobileTimeStamp(maxTimestamp);
+        }
     }
 
     public static void updateBeanClub(long timestamp) throws Exception {
