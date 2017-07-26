@@ -1,9 +1,10 @@
 package com.anthony.gestiontournoi.model.beans;
 
-import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.DaoException;
 
 @Entity(
 
@@ -23,10 +24,122 @@ public class ContactBean {
     private String facebookpage;
     private String website;
     private String phoneNumber;
-    private long timestamp;
+    private long timeStamp;
+    @Transient
+    private boolean isDelete;
      /* ---------------------------------
     // Generate
     // -------------------------------- */
+
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @Generated(hash = 1178828343)
+    private transient ContactBeanDao myDao;
+
+    @Generated(hash = 1359049021)
+    public ContactBean(Long id, String firstname, String lastname, String email,
+            String facebookpage, String website, String phoneNumber,
+            long timeStamp) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.facebookpage = facebookpage;
+        this.website = website;
+        this.phoneNumber = phoneNumber;
+        this.timeStamp = timeStamp;
+    }
+
+    @Generated(hash = 1283900925)
+    public ContactBean() {
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstname() {
+        return this.firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return this.lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFacebookpage() {
+        return this.facebookpage;
+    }
+
+    public void setFacebookpage(String facebookpage) {
+        this.facebookpage = facebookpage;
+    }
+
+    public String getWebsite() {
+        return this.website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public long getTimeStamp() {
+        return this.timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
 
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
@@ -52,115 +165,10 @@ public class ContactBean {
         myDao.update(this);
     }
 
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 128553479)
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.delete(this);
-    }
-
-    /**
-     * Used for active entity operations.
-     */
-    @Generated(hash = 1178828343)
-    private transient ContactBeanDao myDao;
-
-    /**
-     * Used to resolve relations
-     */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
-
-    public String getWebsite() {
-        return this.website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public String getFacebookpage() {
-        return this.facebookpage;
-    }
-
-    public void setFacebookpage(String facebookpage) {
-        this.facebookpage = facebookpage;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getLastname() {
-        return this.lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getFirstname() {
-        return this.firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public long getTimestamp() {
-        return this.timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 184130640)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getContactBeanDao() : null;
-    }
-
-    @Generated(hash = 1749392904)
-    public ContactBean(Long id, String firstname, String lastname, String email,
-            String facebookpage, String website, String phoneNumber, long timestamp) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.facebookpage = facebookpage;
-        this.website = website;
-        this.phoneNumber = phoneNumber;
-        this.timestamp = timestamp;
-    }
-
-    @Generated(hash = 1283900925)
-    public ContactBean() {
     }
 }

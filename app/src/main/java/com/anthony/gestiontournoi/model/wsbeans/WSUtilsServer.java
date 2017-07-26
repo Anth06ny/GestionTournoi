@@ -87,9 +87,9 @@ public class WSUtilsServer {
             Log.w("tag", "ID : " + matchBean.getId() + " delete : " + matchBean.isDelete());
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
-            Log.w("tag", "timestamp bean match " + matchBean.getId() + " : " + matchBean.getTimestamp());
-            if (maxTimestamp < matchBean.getTimestamp()) {
-                maxTimestamp = matchBean.getTimestamp();
+            Log.w("tag", "timestamp bean match " + matchBean.getId() + " : " + matchBean.getTimeStamp());
+            if (maxTimestamp < matchBean.getTimeStamp()) {
+                maxTimestamp = matchBean.getTimeStamp();
             }
 
             if (matchBean.isDelete()) {
@@ -134,9 +134,9 @@ public class WSUtilsServer {
             Log.w("tag", "ID : " + clubBean.getId() + " delete : " + clubBean.isDelete());
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
-            Log.w("tag", "timestamp bean club " + clubBean.getId() + " : " + clubBean.getTimestamp());
-            if (maxTimestamp < clubBean.getTimestamp()) {
-                maxTimestamp = clubBean.getTimestamp();
+            Log.w("tag", "timestamp bean club " + clubBean.getId() + " : " + clubBean.getTimeStamp());
+            if (maxTimestamp < clubBean.getTimeStamp()) {
+                maxTimestamp = clubBean.getTimeStamp();
             }
 
             if (clubBean.isDelete()) {
