@@ -18,10 +18,6 @@ public class MyApplication extends Application {
 
     private static MyApplication instance;
 
-    public static Bus getBus() {
-        return bus;
-    }
-
     private static Bus bus;
 
     public static MyApplication getInstance() {
@@ -32,6 +28,9 @@ public class MyApplication extends Application {
         return daoSession;
     }
 
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -39,10 +38,21 @@ public class MyApplication extends Application {
         instance = this;
         Stetho.initializeWithDefaults(this);
         setupDatabase();
+
         // START SERVICE UPDATE_TOURNAMENT
-        Intent intent = new Intent(this, ServiceTournament.class);
-        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
-        startService(intent);
+        Intent intentTournament = new Intent(this, ServiceTournament.class);
+        intentTournament.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
+        startService(intentTournament);
+
+        // START SERVICE UPDATE_TEAM
+        Intent intentTeam = new Intent(this, ServiceTournament.class);
+        intentTeam.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TEAM);
+        startService(intentTeam);
+//
+//        // START SERVICE UPDATE_MATCH
+//        Intent intentMatch = new Intent(this, ServiceTournament.class);
+//        intentMatch.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_MATCH);
+//        startService(intentMatch);
     }
 
 
@@ -53,5 +63,10 @@ public class MyApplication extends Application {
         daoSession = new DaoMaster(db).newSession();
     }
 
-
+    //---------------------------
+    //      GETTER / SETTER
+    //---------------------------
+    public static Bus getBus() {
+        return bus;
+    }
 }

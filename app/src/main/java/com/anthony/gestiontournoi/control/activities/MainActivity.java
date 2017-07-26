@@ -52,15 +52,19 @@ public class MainActivity extends AppCompatActivity
     private static final int GET_ACCOUNT_LOCATION_REQ_CODE = 1;
     public static final Long ID_TIMESTAMP = 1L;
     private Button bt_login;
+
     //private static final String URL = "http://192.168.56.1:8000/"; // NICO
     private static final String URL = "http://192.168.60.137:8000/"; // MALO
+
     private int sizeTournaments;
+    private int sizeTeams;
     private MenuItem tournamentItem;
+    private MenuItem teamItem;
+
     private ImageView image;
 
     private ArrayList<TournamentBean> tournamentBeanArrayList;
     private ArrayList<TeamBean> teamBeanArrayList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,15 +108,22 @@ public class MainActivity extends AppCompatActivity
         bt_login = (Button) findViewById(R.id.bt_login);
         bt_login.setOnClickListener(this);
         tournamentItem = navigationView.getMenu().findItem(R.id.tournaments);
+        teamItem = navigationView.getMenu().findItem(R.id.teams);
         image = (ImageView) findViewById(R.id.iv);
+
+        // INIT DES LISTES
+        teamBeanArrayList = new ArrayList<>();
+        tournamentBeanArrayList = new ArrayList<>();
 
         // PETIT CHAT
         Glide.with(this).load(URL + "chat.jpg").into(image);
+
 
 //        // START SERVICE UPDATE_TOURNAMENT
 //        Intent intent = new Intent(this, ServiceTournament.class);
 //        intent.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
 //        startService(intent);
+
     }
 
     @Override
@@ -302,10 +313,13 @@ public class MainActivity extends AppCompatActivity
     //---------------------------
     @Subscribe
     public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
-        this.tournamentBeanArrayList = tournamentBeanArrayList;
-        sizeTournaments = tournamentBeanArrayList.size();
+        this.tournamentBeanArrayList.clear();
+        this.tournamentBeanArrayList.addAll(tournamentBeanArrayList);
 
-        Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
+        sizeTournaments = this.tournamentBeanArrayList.size();
+
+        Log.w("tag", "tournaments size bus transmit : " + sizeTournaments);
+        Log.w("tag", "tournaments size after bus receive : " + tournamentBeanArrayList.size());
         if (tournamentItem != null) {
             tournamentItem.setTitle("Tournament : " + sizeTournaments);
         }
@@ -313,12 +327,14 @@ public class MainActivity extends AppCompatActivity
 /*
     @Subscribe
     public void refreshNbTeamMenu(ArrayList<TeamBean> teamBeanArrayList) {
-        this.teamBeanArrayList = teamBeanArrayList;
-        sizeTournaments = tournamentBeanArrayList.size();
+        this.teamBeanArrayList.clear();
+        this.teamBeanArrayList.addAll(teamBeanArrayList);
+        sizeTeams = this.teamBeanArrayList.size();
 
-        Toast.makeText(this, "" + sizeTournaments, Toast.LENGTH_SHORT).show();
-        if (tournamentItem != null) {
-            tournamentItem.setTitle("Tournament : " + sizeTournaments);
+        Log.w("tag", "teams size bus transmit : " + sizeTeams);
+        Log.w("tag", "teams size after bus receive : " + teamBeanArrayList.size());
+        if (teamItem != null) {
+            teamItem.setTitle("Team : " + sizeTeams);
         }
     }
 */

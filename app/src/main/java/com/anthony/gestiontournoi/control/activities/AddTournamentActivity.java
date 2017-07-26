@@ -124,7 +124,7 @@ public class AddTournamentActivity extends AppCompatActivity implements View.OnC
 
             TournamentBean tournamentBean = new TournamentBean();
 
-            tournamentBean.setClub(id);
+            tournamentBean.setClubId(id);
 
             tournamentBean.setName(etTitle.getText().toString());
 
