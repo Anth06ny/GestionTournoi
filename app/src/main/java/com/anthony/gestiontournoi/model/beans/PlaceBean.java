@@ -21,6 +21,7 @@ public class PlaceBean {
     private String address;
     private double latitude;
     private double longitude;
+    private long timeStamp;
     @Transient
     private boolean isDelete;
      /* ---------------------------------
@@ -36,14 +37,15 @@ public class PlaceBean {
     private transient PlaceBeanDao myDao;
 
 
-    @Generated(hash = 2000587341)
-    public PlaceBean(Long id, String name, String address, double latitude,
-            double longitude) {
+    @Generated(hash = 16433847)
+    public PlaceBean(Long id, String name, String address, double latitude, double longitude,
+            long timeStamp) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.timeStamp = timeStamp;
     }
 
     @Generated(hash = 1530304682)
@@ -133,6 +135,14 @@ public class PlaceBean {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public long getTimeStamp() {
+        return this.timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     /** called by internal mechanisms, do not call yourself. */

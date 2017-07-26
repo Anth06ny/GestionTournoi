@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.control.MyApplication;
+import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.anthony.gestiontournoi.view.adapter.RVTeamAdapter;
@@ -49,9 +50,14 @@ public class RVTeamActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void refreshRecyclerView(ArrayList<TeamBean> teamBeanArrayList){
+    public void refreshTeamList(ArrayList<TeamBean> teamBeanArrayList){
         this.teamBeanArrayList.clear();
         this.teamBeanArrayList.addAll(teamBeanArrayList);
+        rvTeamAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe
+    public void refreshRecyclerView(ArrayList<PlaceBean> placeBeanArrayList){
         rvTeamAdapter.notifyDataSetChanged();
     }
 }

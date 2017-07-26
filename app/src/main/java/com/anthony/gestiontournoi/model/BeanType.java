@@ -8,4 +8,6 @@ public enum BeanType {
     TOURNAMENT,
     MATCHS,
     TEAM,
+    CLUB,
+    PLACE,
 }

@@ -3,12 +3,12 @@ package com.anthony.gestiontournoi.control.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
+import com.bumptech.glide.Glide;
 
 public class DetailTeamActivity extends AppCompatActivity {
     private long team_id;
@@ -16,14 +16,10 @@ public class DetailTeamActivity extends AppCompatActivity {
     private TextView tvTitleOneteam;
     private ImageView imgLogoOneclub;
     private TextView tvTitleOneclub;
-    private LinearLayout linearTel;
     private ImageView imgTel;
-    private TextView tvTelHint;
     private TextView tvTel;
     private ImageView imgEditTel;
-    private LinearLayout linearMail;
     private ImageView imgMail;
-    private TextView tvMailHint;
     private TextView tvMail;
     private ImageView imgEditMail;
 
@@ -38,14 +34,10 @@ public class DetailTeamActivity extends AppCompatActivity {
         tvTitleOneteam = (TextView) findViewById(R.id.tv_title_oneteam);
         imgLogoOneclub = (ImageView) findViewById(R.id.img_logo_oneclub);
         tvTitleOneclub = (TextView) findViewById(R.id.tv_title_oneclub);
-        linearTel = (LinearLayout) findViewById(R.id.linear_tel);
         imgTel = (ImageView) findViewById(R.id.img_tel);
-        tvTelHint = (TextView) findViewById(R.id.tv_tel_hint);
         tvTel = (TextView) findViewById(R.id.tv_tel);
         imgEditTel = (ImageView) findViewById(R.id.img_edit_tel);
-        linearMail = (LinearLayout) findViewById(R.id.linear_mail);
         imgMail = (ImageView) findViewById(R.id.img_mail);
-        tvMailHint = (TextView) findViewById(R.id.tv_mail_hint);
         tvMail = (TextView) findViewById(R.id.tv_mail);
         imgEditMail = (ImageView) findViewById(R.id.img_edit_mail);
     }
@@ -57,7 +49,41 @@ public class DetailTeamActivity extends AppCompatActivity {
         findViews();
 
         team_id = getIntent().getExtras().getLong("id");
-
         TeamBean teamBean = WSUtilsMobile.getTeam(team_id);
+
+        tvTitleOneteam.setText(teamBean.getName());
+
+        if (teamBean.getPicture() != null) {
+            Glide.with(this).load(teamBean.getPicture()).into(imgLogoOneteam);
+        } else {
+            Glide.with(this).load(R.drawable.ic_menu_gallery).into(imgLogoOneteam);
+        }
+
+
+        long contact_id = teamBean.getContactId();
+/*
+        ContactBean contactBean = WSUtilsMobile.getContact(contact_id);
+        if (contactBean.getPhoneNumber() != null) {
+            tvTel.setText(contactBean.getPhoneNumber());
+        } else {
+            tvTel.setText("Pas de numéro associé");
+        }
+        if (contactBean.getEmail() != null) {
+            tvMail.setText(contactBean.getEmail());
+        } else {
+            tvMail.setText("Pas d'email associé");
+        }
+*/
+
+        long club_id = teamBean.getClubId();
+/*
+        ClubBean clubBean = WSUtilsMobile.getClub(club_id);
+        tvTitleOneclub.setText(clubBean.getName());
+        if(clubBean.getPicture() != null){
+            Glide.with(this).load(clubBean.getPicture()).into(imgLogoOneclub);
+        } else {
+            Glide.with(this).load(R.drawable.ic_menu_gallery).into(imgLogoOneclub);
+        }
+*/
     }
 }

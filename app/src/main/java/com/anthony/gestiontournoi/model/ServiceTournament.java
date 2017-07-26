@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
@@ -20,7 +19,9 @@ public class ServiceTournament extends Service {
     public enum ServiceAction {
         LOAD_TOURNAMENT,
         LOAD_MATCH,
-        LOAD_TEAM
+        LOAD_TEAM,
+        LOAD_CLUB,
+        LOAD_PLACE,
     }
 
     @Override
@@ -32,7 +33,6 @@ public class ServiceTournament extends Service {
             switch (action){
                 case LOAD_TOURNAMENT:
                     long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
-                    Log.w("tag", "Start service : ID " + startId + " | timestamp mobile tournament : " + timestampTournament);
                     UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);
                     updateBeanTournamentAT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
@@ -40,16 +40,26 @@ public class ServiceTournament extends Service {
 
                 case LOAD_MATCH:
                     long timestampMatch = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
-                    Log.w("tag", "Start service : ID " + startId + " | timestamp mobile match : " + timestampMatch);
                     UpdateBeanAT updateBeanMatchAT = new UpdateBeanAT(BeanType.MATCHS, timestampMatch);
                     updateBeanMatchAT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     break;
 
                 case LOAD_TEAM:
                     long timestampTeam = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTeamTimestamp();
-                    Log.w("tag", "Start service : ID " + startId + " | timestamp mobile team : " + timestampTeam);
                     UpdateBeanAT updateBeanTeamAT = new UpdateBeanAT(BeanType.TEAM, timestampTeam);
                     updateBeanTeamAT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    break;
+
+                case LOAD_CLUB:
+                    long timestampClub = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getClubTimestamp();
+                    UpdateBeanAT updateBeanClubAT = new UpdateBeanAT(BeanType.CLUB, timestampClub);
+                    updateBeanClubAT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    break;
+
+                case LOAD_PLACE:
+                    long timestampPlace = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getPlaceTimestamp();
+                    UpdateBeanAT updateBeanPlaceAT = new UpdateBeanAT(BeanType.PLACE, timestampPlace);
+                    updateBeanPlaceAT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     break;
             }
         }

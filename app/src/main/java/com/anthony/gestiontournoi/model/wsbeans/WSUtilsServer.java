@@ -6,6 +6,7 @@ import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
+import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
@@ -18,14 +19,15 @@ import java.util.ArrayList;
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
 
-    //private static final String URL = "http://192.168.1.14:8000/"; // NICO MAISON
-    //private static final String URL = "http://192.168.42.31:8000/"; // NICO
+//    private static final String URL = "http://192.168.1.14:8000/"; // NICO MAISON
+//   private static final String URL = "http://192.168.42.31:8000/"; // NICO
     private static final String URL = "http://192.168.60.137:8000/"; // MALO
 
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
     private static final String URL_UPDATE_BEAN_MATCHS = URL + "updateBeanMatchs/";
     private static final String URL_UPDATE_BEAN_TEAM = URL + "updateBeanTeam/";
     private static final String URL_UPDATE_BEAN_CLUB = URL + "updateBeanClub/";
+    private static final String URL_UPDATE_BEAN_PLACE = URL + "updateBeanPlace/";
 
 
     public static void updateBeanTournament(long timestamp) throws Exception {
@@ -211,6 +213,57 @@ public class WSUtilsServer {
             MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
         }
     }
+
+
+    public static void updateBeanPlace(long timestamp) throws Exception {
+
+        String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_PLACE + timestamp);
+        Log.w("tag", "Json place : " + json);
+
+        ArrayList<PlaceBean> listPlaces = GSON.fromJson(json, new TypeToken<ArrayList<PlaceBean>>() {
+        }.getType());
+        Log.w("tag", "Places : " + listPlaces.size());
+
+        // ON DECLARE LA VARIABLE QUI STOCK LE PLUS GRAND TIMESTAMP
+        long maxTimestamp = 0;
+
+        for (int i = 0; i < listPlaces.size(); i++) {
+            PlaceBean placeBean = listPlaces.get(i);
+            Log.w("tag", "ID : " + placeBean.getId() + " delete : " + placeBean.isDelete());
+
+            // ON RECUPERE LE PLUS GRAND TIMESTAMP
+            Log.w("tag", "timestamp bean place " + placeBean.getId() + " : " + placeBean.getTimeStamp());
+            if (maxTimestamp < placeBean.getTimeStamp()) {
+                maxTimestamp = placeBean.getTimeStamp();
+            }
+
+            if (placeBean.isDelete()) {
+                // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
+                MyApplication.getDaoSession().getPlaceBeanDao().delete(placeBean);
+            } else {
+                // ON CHECK SI IL EXISTE EN BDD MOBILE
+                if (MyApplication.getDaoSession().getPlaceBeanDao().load(placeBean.getId()) == null) {
+                    // ON AJOUT SI EXISTE PAS
+                    MyApplication.getDaoSession().getPlaceBeanDao().insert(placeBean);
+                } else {
+                    // ON MET A JOUR
+                    MyApplication.getDaoSession().getPlaceBeanDao().update(placeBean);
+                }
+            }
+        }
+
+        // ON MET A JOUR LE TIMESTAMP DU MOBILE
+        if (!listPlaces.isEmpty()) {
+            updateMobileTimeStamp(maxTimestamp);
+        }
+    }
+
+    public static void updateMobileTimeStamp(long maxTimestamp) {
+        TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
+        timestampBean.setTournamentTimestamp(maxTimestamp);
+        MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
+    }
+
 
 
 }

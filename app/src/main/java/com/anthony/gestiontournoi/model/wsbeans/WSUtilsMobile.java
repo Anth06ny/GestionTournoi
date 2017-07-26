@@ -1,7 +1,10 @@
 package com.anthony.gestiontournoi.model.wsbeans;
 
 import com.anthony.gestiontournoi.control.MyApplication;
+import com.anthony.gestiontournoi.model.beans.ClubBean;
+import com.anthony.gestiontournoi.model.beans.ContactBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
+import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBeanDao;
@@ -39,11 +42,24 @@ public class WSUtilsMobile {
         return teamBeanArrayList;
     }
 
-    // RETOURNE TOUTES LES TEAMS DE LA DATABASE MOBILE
+    // RETOURNE TOUTES LES MATCHS DE LA DATABASE MOBILE
     public static ArrayList<MatchBean> getAllMatch() {
         ArrayList<MatchBean> matchBeanArrayList = (ArrayList<MatchBean>) MyApplication.getDaoSession().getMatchBeanDao().loadAll();
         return matchBeanArrayList;
     }
+
+    // RETOURNE TOUTES LES CLUBS DE LA DATABASE MOBILE
+    public static ArrayList<ClubBean> getAllClub() {
+        ArrayList<ClubBean> clubBeanArrayList = (ArrayList<ClubBean>) MyApplication.getDaoSession().getClubBeanDao().loadAll();
+        return clubBeanArrayList;
+    }
+
+    // RETOURNE TOUTES LES PLACES DE LA DATABASE MOBILE
+    public static ArrayList<PlaceBean> getAllPlace() {
+        ArrayList<PlaceBean> placeBeanArrayList = (ArrayList<PlaceBean>) MyApplication.getDaoSession().getPlaceBeanDao().loadAll();
+        return placeBeanArrayList;
+    }
+
 
     /******************** GET ONE ********************/
     public static TournamentBean getTournament(long id) {
@@ -54,6 +70,16 @@ public class WSUtilsMobile {
     public static TeamBean getTeam(long id) {
         TeamBean teamBean = MyApplication.getDaoSession().getTeamBeanDao().load(id);
         return teamBean;
+    }
+
+    public static ContactBean getContact(long id) {
+        ContactBean contactBean = MyApplication.getDaoSession().getContactBeanDao().load(id);
+        return contactBean;
+    }
+
+    public static ClubBean getClub(long id) {
+        ClubBean clubBean = MyApplication.getDaoSession().getClubBeanDao().load(id);
+        return clubBean;
     }
 
 
