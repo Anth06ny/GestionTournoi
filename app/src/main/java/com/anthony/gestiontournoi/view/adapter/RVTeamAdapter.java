@@ -48,11 +48,8 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
             logo_team = (ImageView) itemView.findViewById(R.id.img_logo_team);
             follow_team = (ImageButton) itemView.findViewById(R.id.img_follow_team);
             CVTeams = (CardView) itemView.findViewById(R.id.CVTeams);
-
-
         }
     }
-
 
     @Override
     public RVTeamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -66,7 +63,10 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
         final TeamBean teamBean = teamBeanArrayList.get(position);
         holder.name_team.setText(teamBean.getName());
         if (teamBean.getClub() != null) {
-            holder.place_team.setText(teamBean.getClub().getPlace().getName());
+            if (teamBean.getClub().getPlace() != null) {
+                holder.place_team.setText(teamBean.getClub().getPlace().getName());
+            }
+
         } else {
             holder.place_team.setText(defautPlace);
         }

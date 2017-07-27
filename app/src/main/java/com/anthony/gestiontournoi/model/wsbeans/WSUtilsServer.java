@@ -10,16 +10,19 @@ import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
+import com.anthony.gestiontournoi.model.beans.TournamentPlaceBean;
+import com.anthony.gestiontournoi.model.beans.TournamentTeamBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class WSUtilsServer {
     private static final Gson GSON = new Gson();
 
-//    private static final String URL = "http://192.168.1.14:8000/"; // NICO MAISON
+    //    private static final String URL = "http://192.168.1.14:8000/"; // NICO MAISON
 //   private static final String URL = "http://192.168.42.31:8000/"; // NICO
     private static final String URL = "http://192.168.60.137:8000/"; // MALO
 
@@ -45,6 +48,23 @@ public class WSUtilsServer {
         for (int i = 0; i < listTournaments.size(); i++) {
             TournamentBean tournamentBean = listTournaments.get(i);
             Log.w("tag", "ID : " + tournamentBean.getId() + " delete : " + tournamentBean.isDelete());
+
+            List<Long> placesId = tournamentBean.getPlaceId();
+            for (int j = 0; j < placesId.size(); j++) {
+                Log.w("tag", "TournamentPlaceBean : " + j + "PlaceId : " + placesId.get(j));
+                TournamentPlaceBean tournamentPlaceBean = new TournamentPlaceBean();
+                tournamentPlaceBean.setTournamentId(tournamentBean.getId());
+                tournamentPlaceBean.setPlaceId(placesId.get(j));
+                MyApplication.getDaoSession().getTournamentPlaceBeanDao().insert(tournamentPlaceBean);
+            }
+            List<Long> teamId = tournamentBean.getTeamId();
+            for (int k = 0; k < teamId.size(); k++) {
+                Log.w("tag", "TournamentTeamBean : " + k + "TeamId : " + teamId.get(k));
+                TournamentTeamBean tournamentTeamBean = new TournamentTeamBean();
+                tournamentTeamBean.setTournamentId(tournamentBean.getId());
+                tournamentTeamBean.setTeamId(placesId.get(k));
+                MyApplication.getDaoSession().getTournamentTeamBeanDao().insert(tournamentTeamBean);
+            }
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
             Log.w("tag", "timestamp bean tournament " + tournamentBean.getId() + " : " + tournamentBean.getTimeStamp());
@@ -263,7 +283,6 @@ public class WSUtilsServer {
         timestampBean.setTournamentTimestamp(maxTimestamp);
         MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
     }
-
 
 
 }

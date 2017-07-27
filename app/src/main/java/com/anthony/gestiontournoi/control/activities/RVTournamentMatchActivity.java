@@ -36,14 +36,8 @@ public class RVTournamentMatchActivity extends AppCompatActivity {
 
         tournament_id = getIntent().getExtras().getLong("id");
         TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournament_id);
-        List<Long> matchsId = tournamentBean.getMatchsId();
-        Log.w("TAG", matchsId.size() + " taille matchsId");
-
-        for (int i = 0; i < matchsId.size(); i++) {
-
-            MatchBean matchBean = WSUtilsMobile.getMatch(matchsId.get(i));
-            matchBeanList.add(matchBean);
-        }
+        matchBeanList = tournamentBean.getMatchList();
+        Log.w("TAG", matchBeanList.size() + "");
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

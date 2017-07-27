@@ -109,7 +109,6 @@ private transient DaoSession daoSession;
 /** Used for active entity operations. */
 @Generated(hash = 741298605)
 private transient TournamentBeanDao myDao;
-
 @Generated(hash = 2139473026)
 public TournamentBean(Long id, String name, Long startDate, Long endDate,
         String duration, String halfTime, String cap, String picture,
@@ -132,150 +131,107 @@ public TournamentBean(Long id, String name, Long startDate, Long endDate,
     this.timeStamp = timeStamp;
     this.clubId = clubId;
 }
-
 @Generated(hash = 882910022)
 public TournamentBean() {
 }
-
-@Generated(hash = 585466602)
-private transient Long clubBean__resolvedKey;
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
 public Long getId() {
     return this.id;
 }
-
 public void setId(Long id) {
     this.id = id;
 }
-
 public String getName() {
     return this.name;
 }
-
 public void setName(String name) {
     this.name = name;
 }
-
 public Long getStartDate() {
     return this.startDate;
 }
-
 public void setStartDate(Long startDate) {
     this.startDate = startDate;
 }
-
 public Long getEndDate() {
     return this.endDate;
 }
-
 public void setEndDate(Long endDate) {
     this.endDate = endDate;
 }
-
 public String getDuration() {
     return this.duration;
 }
-
 public void setDuration(String duration) {
     this.duration = duration;
 }
-
 public String getHalfTime() {
     return this.halfTime;
 }
-
 public void setHalfTime(String halfTime) {
     this.halfTime = halfTime;
 }
-
 public String getCap() {
     return this.cap;
 }
-
 public void setCap(String cap) {
     this.cap = cap;
 }
-
 public String getPicture() {
     return this.picture;
 }
-
 public void setPicture(String picture) {
     this.picture = picture;
 }
-
 public Long getPlayerFee() {
     return this.playerFee;
 }
-
 public void setPlayerFee(Long playerFee) {
     this.playerFee = playerFee;
 }
-
 public Long getTeamFee() {
     return this.teamFee;
 }
-
 public void setTeamFee(Long teamFee) {
     this.teamFee = teamFee;
 }
-
 public String getFieldType() {
     return this.fieldType;
 }
-
 public void setFieldType(String fieldType) {
     this.fieldType = fieldType;
 }
-
 public int getNumberOfPlayer() {
     return this.numberOfPlayer;
 }
-
 public void setNumberOfPlayer(int numberOfPlayer) {
     this.numberOfPlayer = numberOfPlayer;
 }
-
 public String getGender() {
     return this.gender;
 }
-
 public void setGender(String gender) {
     this.gender = gender;
 }
-
 public String getSiteWeb() {
     return this.siteWeb;
 }
-
 public void setSiteWeb(String siteWeb) {
     this.siteWeb = siteWeb;
 }
-
 public long getTimeStamp() {
     return this.timeStamp;
 }
-
 public void setTimeStamp(long timeStamp) {
     this.timeStamp = timeStamp;
 }
-
 public Long getClubId() {
     return this.clubId;
 }
-
 public void setClubId(Long clubId) {
     this.clubId = clubId;
 }
-
+@Generated(hash = 585466602)
+private transient Long clubBean__resolvedKey;
 /** To-one relationship, resolved on first access. */
 @Generated(hash = 2123103705)
 public ClubBean getClubBean() {
@@ -294,7 +250,6 @@ public ClubBean getClubBean() {
     }
     return clubBean;
 }
-
 /** called by internal mechanisms, do not call yourself. */
 @Generated(hash = 994758370)
 public void setClubBean(ClubBean clubBean) {
@@ -304,7 +259,6 @@ public void setClubBean(ClubBean clubBean) {
         clubBean__resolvedKey = clubId;
     }
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -327,13 +281,11 @@ public List<MatchBean> getMatchList() {
     }
     return matchList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1442721827)
 public synchronized void resetMatchList() {
     matchList = null;
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -356,13 +308,11 @@ public List<TeamBean> getTeamList() {
     }
     return teamList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 924184687)
 public synchronized void resetTeamList() {
     teamList = null;
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -385,13 +335,11 @@ public List<PlaceBean> getPlaceList() {
     }
     return placeList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1423199708)
 public synchronized void resetPlaceList() {
     placeList = null;
 }
-
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -414,13 +362,11 @@ public List<ContactBean> getContactList() {
     }
     return contactList;
 }
-
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1466168391)
 public synchronized void resetContactList() {
     contactList = null;
 }
-
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
  * Entity must attached to an entity context.
@@ -432,7 +378,6 @@ public void delete() {
     }
     myDao.delete(this);
 }
-
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
  * Entity must attached to an entity context.
@@ -444,7 +389,6 @@ public void refresh() {
     }
     myDao.refresh(this);
 }
-
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
  * Entity must attached to an entity context.
@@ -456,11 +400,45 @@ public void update() {
     }
     myDao.update(this);
 }
+public List<Long> getPlaceId() {
+        return placeId;
+    }
 
-public List<Long> getMatchsId() {
+    public void setPlaceId(List<Long> placeId) {
+        this.placeId = placeId;
+    }
+
+    public List<Long> getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(List<Long> teamId) {
+        this.teamId = teamId;
+    }
+
+    public List<Long> getMatchsId() {
         return matchsId;
     }
 
+    public void setMatchsId(List<Long> matchsId) {
+        this.matchsId = matchsId;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    public List<Long> getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(List<Long> contactId) {
+        this.contactId = contactId;
+    }
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 644297522)
     public void __setDaoSession(DaoSession daoSession) {

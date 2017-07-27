@@ -2,6 +2,7 @@ package com.anthony.gestiontournoi.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
         MatchBean matchBean = matchBeanList.get(position);
         TeamBean teamBean1 = matchBean.getTeam1();
         TeamBean teamBean2 = matchBean.getTeam2();
+        Log.w("TAGTEAM", teamBean1.getName() + " " + teamBean2.getName());
 
         holder.tvNameTeam1.setText(teamBean1.getName());
         holder.tvNameTeam2.setText(teamBean2.getName());

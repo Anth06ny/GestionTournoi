@@ -9,9 +9,6 @@ import android.util.Log;
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
 
-/**
- * Created by Nicolas Th on 12/07/2017.
- */
 
 public class ServiceTournament extends Service {
 
@@ -23,6 +20,7 @@ public class ServiceTournament extends Service {
         LOAD_TEAM,
         LOAD_CLUB,
         LOAD_PLACE,
+        LOAD_SEQUENCE,
     }
 
     @Override
@@ -32,6 +30,24 @@ public class ServiceTournament extends Service {
         if (action != null) {
 
             switch (action) {
+                case LOAD_SEQUENCE:
+                    long timestampPlaceSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getPlaceTimestamp();
+                    UpdateBeanAT updateBeanPlaceATSQ = new UpdateBeanAT(BeanType.PLACE, timestampPlaceSQ);
+                    updateBeanPlaceATSQ.execute();
+
+                    long timestampTeamSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTeamTimestamp();
+                    UpdateBeanAT updateBeanTeamATSQ = new UpdateBeanAT(BeanType.TEAM, timestampTeamSQ);
+                    updateBeanTeamATSQ.execute();
+
+                    long timestampTournamentSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
+                    UpdateBeanAT updateBeanTournamentATSQ = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournamentSQ);
+                    updateBeanTournamentATSQ.execute();
+
+                    long timestampMatchSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
+                    UpdateBeanAT updateBeanMatchATSQ = new UpdateBeanAT(BeanType.MATCHS, timestampMatchSQ);
+                    updateBeanMatchATSQ.execute();
+
+                    break;
                 case LOAD_TOURNAMENT:
                     long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
                     UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);
