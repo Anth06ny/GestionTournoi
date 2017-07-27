@@ -23,6 +23,7 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
     private Context context;
 
     public RVTournamentMatchAdapter(List<MatchBean> matchBeanList) {
+        Log.w("TAGONCREATE", matchBeanList.size() + "matchBeanList Adapter");
         this.matchBeanList = matchBeanList;
     }
 
@@ -43,8 +44,6 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
             imgLogoTeam1 = (ImageView) itemView.findViewById(R.id.imgLogoTeam1);
             imgLogoTeam2 = (ImageView) itemView.findViewById(R.id.imgLogoTeam2);
             imgField = (ImageButton) itemView.findViewById(R.id.imgField);
-
-
         }
     }
 
@@ -60,26 +59,29 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
 
 
         MatchBean matchBean = matchBeanList.get(position);
-        TeamBean teamBean1 = matchBean.getTeam1();
-        TeamBean teamBean2 = matchBean.getTeam2();
-        Log.w("TAGTEAM", teamBean1.getName() + " " + teamBean2.getName());
+        if (matchBean.getTeam1() != null || matchBean.getTeam2() != null) {
 
-        holder.tvNameTeam1.setText(teamBean1.getName());
-        holder.tvNameTeam2.setText(teamBean2.getName());
-        holder.tvTime.setText((int) matchBean.getDate());
-        holder.tvField.setText(matchBean.getField().getName());
 
-        if (!matchBean.getTeam1().getPicture().isEmpty()) {
-            Glide.with(context).load(matchBean.getTeam1().getPicture()).into(holder.imgLogoTeam1);
-        } else {
-            holder.imgLogoTeam1.setImageResource(R.drawable.ic_menu_gallery);
+            TeamBean teamBean1 = matchBean.getTeam1();
+            TeamBean teamBean2 = matchBean.getTeam2();
+
+
+            holder.tvNameTeam1.setText(teamBean1.getName());
+            holder.tvNameTeam2.setText(teamBean2.getName());
+            // holder.tvTime.setText( matchBean.getDate()+" ");
+//        holder.tvField.setText(matchBean.getField().getName());
+//
+//        if (!matchBean.getTeam1().getPicture().isEmpty()) {
+//            Glide.with(context).load(matchBean.getTeam1().getPicture()).into(holder.imgLogoTeam1);
+//        } else {
+//            holder.imgLogoTeam1.setImageResource(R.drawable.ic_menu_gallery);
+//        }
+//        if (!matchBean.getTeam2().getPicture().isEmpty()) {
+//            Glide.with(context).load(matchBean.getTeam2().getPicture()).into(holder.imgLogoTeam2);
+//        } else {
+//            holder.imgLogoTeam2.setImageResource(R.drawable.ic_menu_gallery);
+//        }
         }
-        if (!matchBean.getTeam2().getPicture().isEmpty()) {
-            Glide.with(context).load(matchBean.getTeam2().getPicture()).into(holder.imgLogoTeam2);
-        } else {
-            holder.imgLogoTeam2.setImageResource(R.drawable.ic_menu_gallery);
-        }
-
 
         Glide.with(context).load(R.drawable.ic_place_black_48dp).into(holder.imgField);
 

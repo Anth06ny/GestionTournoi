@@ -8,6 +8,8 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Transient;
 
+import java.util.List;
+
 @Entity(
 
         active = true,
@@ -58,6 +60,9 @@ public class MatchBean {
     private TournamentBean tournament;
     @NotNull
     private long tournamentId;
+
+    @Transient
+    private List<Long> teamsId;
      /* ---------------------------------
     // Generate
     // -------------------------------- */
@@ -476,11 +481,14 @@ public class MatchBean {
         myDao.update(this);
     }
 
+    public List<Long> getTeamsId() {
+        return teamsId;
+    }
+
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1894975208)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getMatchBeanDao() : null;
     }
-
 }

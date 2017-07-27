@@ -1,6 +1,5 @@
 package com.anthony.gestiontournoi.control.activities;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -37,13 +36,10 @@ public class RVTournamentMatchActivity extends AppCompatActivity {
         tournament_id = getIntent().getExtras().getLong("id");
         TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournament_id);
         matchBeanList = tournamentBean.getMatchList();
-        Log.w("TAG", matchBeanList.size() + "");
+        Log.w("TAG", matchBeanList.size() + " matchBeanList size");
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            rvTournamentMatchAdapter = new RVTournamentMatchAdapter(matchBeanList);
-        }
-
+        rvTournamentMatchAdapter = new RVTournamentMatchAdapter(matchBeanList);
         rv_tournament_match.setAdapter(rvTournamentMatchAdapter);
 
         rv_tournament_match.setLayoutManager(new LinearLayoutManager(this));

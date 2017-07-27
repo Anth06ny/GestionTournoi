@@ -112,7 +112,17 @@ public class WSUtilsServer {
 
         for (int i = 0; i < listMatchs.size(); i++) {
             MatchBean matchBean = listMatchs.get(i);
-            Log.w("tag", "ID : " + matchBean.getId() + " delete : " + matchBean.isDelete());
+            Log.w("tag", "ID MATCH: " + matchBean.getId() + " delete : " + matchBean.isDelete());
+
+            if (matchBean.getTeamsId() == null){
+                Log.w("TAGGETTEAM", "team id : null");
+            }
+            Log.w("TAGGETTEAM", matchBean.getTeamsId().size()+"");
+            TeamBean team1 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(0));
+            TeamBean team2 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(1));
+            Log.w("TAGTEAMS", team1.getName() + " t2" + team2.getName());
+            matchBean.setTeam1(team1);
+            matchBean.setTeam2(team2);
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
             Log.w("tag", "timestamp bean match " + matchBean.getId() + " : " + matchBean.getTimeStamp());
