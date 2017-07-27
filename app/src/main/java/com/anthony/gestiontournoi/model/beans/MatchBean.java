@@ -1,12 +1,12 @@
 package com.anthony.gestiontournoi.model.beans;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Transient;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 
 @Entity(
 
@@ -62,18 +62,22 @@ public class MatchBean {
     // Generate
     // -------------------------------- */
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1422076968)
     private transient MatchBeanDao myDao;
 
     @Generated(hash = 508441475)
     public MatchBean(Long id, long date, String duration, int scoreTeam1,
-            int scoreTeam2, long timeStamp, long team1Id, long team2Id,
-            long teamTableId, Long fieldId, long matchstatusId, long tournamentId) {
+                     int scoreTeam2, long timeStamp, long team1Id, long team2Id,
+                     long teamTableId, Long fieldId, long matchstatusId, long tournamentId) {
         this.id = id;
         this.date = date;
         this.duration = duration;
@@ -214,7 +218,9 @@ public class MatchBean {
         this.tournamentId = tournamentId;
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 626926737)
     public TeamBean getTeam1() {
         long __key = this.team1Id;
@@ -233,7 +239,9 @@ public class MatchBean {
         return team1;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 473417715)
     public void setTeam1(@NotNull TeamBean team1) {
         if (team1 == null) {
@@ -247,7 +255,9 @@ public class MatchBean {
         }
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 1302287948)
     public TeamBean getTeam2() {
         long __key = this.team2Id;
@@ -266,7 +276,9 @@ public class MatchBean {
         return team2;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1449644733)
     public void setTeam2(@NotNull TeamBean team2) {
         if (team2 == null) {
@@ -280,7 +292,9 @@ public class MatchBean {
         }
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 1098223717)
     public TeamBean getTeamTable() {
         long __key = this.teamTableId;
@@ -300,7 +314,9 @@ public class MatchBean {
         return teamTable;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1162390919)
     public void setTeamTable(@NotNull TeamBean teamTable) {
         if (teamTable == null) {
@@ -314,7 +330,9 @@ public class MatchBean {
         }
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 1018392834)
     public FieldBean getField() {
         Long __key = this.fieldId;
@@ -333,7 +351,9 @@ public class MatchBean {
         return field;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 863827323)
     public void setField(FieldBean field) {
         synchronized (this) {
@@ -343,7 +363,9 @@ public class MatchBean {
         }
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 534671586)
     public MatchStatusEnumBean getMatchStatus() {
         long __key = this.matchstatusId;
@@ -364,7 +386,9 @@ public class MatchBean {
         return matchStatus;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1858488143)
     public void setMatchStatus(@NotNull MatchStatusEnumBean matchStatus) {
         if (matchStatus == null) {
@@ -378,7 +402,9 @@ public class MatchBean {
         }
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 1893104069)
     public TournamentBean getTournament() {
         long __key = this.tournamentId;
@@ -398,7 +424,9 @@ public class MatchBean {
         return tournament;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1626021110)
     public void setTournament(@NotNull TournamentBean tournament) {
         if (tournament == null) {
@@ -454,4 +482,5 @@ public class MatchBean {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getMatchBeanDao() : null;
     }
+
 }

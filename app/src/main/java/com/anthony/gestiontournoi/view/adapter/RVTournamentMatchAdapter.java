@@ -11,20 +11,18 @@ import android.widget.TextView;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
+import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Nicolas Th on 25/07/2017.
- */
 
-public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentMatchAdapter.ViewHolder>{
-    private ArrayList<MatchBean> matchBeanArrayList;
+public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentMatchAdapter.ViewHolder> {
+    private List<MatchBean> matchBeanList;
     private Context context;
 
-    public RVTournamentMatchAdapter(ArrayList<MatchBean> matchBeanArrayList) {
-        this.matchBeanArrayList = matchBeanArrayList;
+    public RVTournamentMatchAdapter(List<MatchBean> matchBeanList) {
+        this.matchBeanList = matchBeanList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,10 +58,12 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
         context = holder.imgField.getContext();
 
 
-        MatchBean matchBean = matchBeanArrayList.get(position);
+        MatchBean matchBean = matchBeanList.get(position);
+        TeamBean teamBean1 = matchBean.getTeam1();
+        TeamBean teamBean2 = matchBean.getTeam2();
 
-        holder.tvNameTeam1.setText(matchBean.getTeam1().getName());
-        holder.tvNameTeam2.setText(matchBean.getTeam2().getName());
+        holder.tvNameTeam1.setText(teamBean1.getName());
+        holder.tvNameTeam2.setText(teamBean2.getName());
         holder.tvTime.setText((int) matchBean.getDate());
         holder.tvField.setText(matchBean.getField().getName());
 
@@ -86,6 +86,6 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
 
     @Override
     public int getItemCount() {
-        return matchBeanArrayList.size();
+        return matchBeanList.size();
     }
 }

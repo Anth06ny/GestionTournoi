@@ -29,8 +29,6 @@ public class MyApplication extends Application {
     }
 
 
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,14 +53,14 @@ public class MyApplication extends Application {
         startService(intentClub);
 
         // START SERVICE UPDATE_PLACE
-        Intent intenPlace = new Intent(this, ServiceTournament.class);
-        intenPlace.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_PLACE);
-        startService(intenPlace);
-//
-//        // START SERVICE UPDATE_MATCH
-//        Intent intentMatch = new Intent(this, ServiceTournament.class);
-//        intentMatch.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_MATCH);
-//        startService(intentMatch);
+        Intent intentPlace = new Intent(this, ServiceTournament.class);
+        intentPlace.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_PLACE);
+        startService(intentPlace);
+
+        // START SERVICE UPDATE_MATCH
+        Intent intentMatch = new Intent(this, ServiceTournament.class);
+        intentMatch.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_MATCH);
+        startService(intentMatch);
     }
 
 

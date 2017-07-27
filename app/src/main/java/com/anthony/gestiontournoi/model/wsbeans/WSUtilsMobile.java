@@ -82,6 +82,11 @@ public class WSUtilsMobile {
         return clubBean;
     }
 
+    public static MatchBean getMatch(long id) {
+        MatchBean matchBean = MyApplication.getDaoSession().getMatchBeanDao().load(id);
+        return matchBean;
+    }
+
 
     public static void deleteTournamentById(ArrayList<Long> arrayListId) {
 

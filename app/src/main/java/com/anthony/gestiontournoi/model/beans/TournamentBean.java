@@ -457,11 +457,14 @@ public void update() {
     myDao.update(this);
 }
 
-/** called by internal mechanisms, do not call yourself. */
-@Generated(hash = 644297522)
-public void __setDaoSession(DaoSession daoSession) {
-    this.daoSession = daoSession;
-    myDao = daoSession != null ? daoSession.getTournamentBeanDao() : null;
-}
+public List<Long> getMatchsId() {
+        return matchsId;
+    }
 
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 644297522)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getTournamentBeanDao() : null;
+    }
 }
