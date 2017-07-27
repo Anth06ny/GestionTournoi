@@ -22,6 +22,7 @@ public class ServiceTournament extends Service {
         LOAD_TEAM,
         LOAD_CLUB,
         LOAD_PLACE,
+        LOAD_SEQUENCE,
     }
 
     @Override
@@ -31,6 +32,14 @@ public class ServiceTournament extends Service {
         if (action != null) {
 
             switch (action){
+                case LOAD_SEQUENCE:
+                    long timestampPlaceSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getPlaceTimestamp();
+                    UpdateBeanAT updateBeanPlaceATSQ = new UpdateBeanAT(BeanType.PLACE, timestampPlaceSQ);
+                    updateBeanPlaceATSQ.execute();
+                    long timestampTournamentSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
+                    UpdateBeanAT updateBeanTournamentATSQ = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournamentSQ);
+                    updateBeanTournamentATSQ.execute();
+                    break;
                 case LOAD_TOURNAMENT:
                     long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
                     UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);

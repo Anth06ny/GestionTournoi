@@ -47,12 +47,9 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.ViewHolder
             number_team = (TextView) itemView.findViewById(R.id.TV_number_team);
             logo_team = (ImageView) itemView.findViewById(R.id.img_logo_team);
             follow_team = (ImageButton) itemView.findViewById(R.id.img_follow_team);
-            //CVTeams = (CardView) itemView.findViewById(R.id.CVTeams);
-
-
+            CVTeams = (CardView) itemView.findViewById(R.id.CVTeams);
         }
     }
-
 
     @Override
     public RVTeamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
