@@ -2,6 +2,7 @@ package com.anthony.gestiontournoi.model;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Pair;
 
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
@@ -81,27 +82,27 @@ public class UpdateBeanAT extends AsyncTask {
             case TOURNAMENT:
                 ArrayList<TournamentBean> tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
                 Log.w("tag", "Size Tournaments BDD Mobile : " + tournamentBeanArrayList.size());
-                MyApplication.getBus().post(tournamentBeanArrayList);
+                MyApplication.getBus().post(new Pair<>(tournamentBeanArrayList, BeanType.TOURNAMENT));
                 break;
             case TEAM:
                 ArrayList<TeamBean> teamBeanArrayList = WSUtilsMobile.getAllTeam();
                 Log.w("tag", "Size Teams BDD Mobile : " + teamBeanArrayList.size());
-                MyApplication.getBus().post(teamBeanArrayList);
+                MyApplication.getBus().post(new Pair<>(teamBeanArrayList, BeanType.TEAM));
                 break;
             case MATCHS:
                 ArrayList<MatchBean> matchBeanArrayList = WSUtilsMobile.getAllMatch();
                 Log.w("tag", "Size Matchs BDD Mobile : " + matchBeanArrayList.size());
-                MyApplication.getBus().post(matchBeanArrayList);
+                MyApplication.getBus().post(new Pair<>(matchBeanArrayList, BeanType.MATCHS));
                 break;
             case CLUB:
                 ArrayList<ClubBean> clubBeanArrayList = WSUtilsMobile.getAllClub();
                 Log.w("tag", "Size Club BDD Mobile : " + clubBeanArrayList.size());
-                MyApplication.getBus().post(clubBeanArrayList);
+                MyApplication.getBus().post(new Pair<>(clubBeanArrayList, BeanType.CLUB));
                 break;
             case PLACE:
                 ArrayList<PlaceBean> placeBeanArrayList = WSUtilsMobile.getAllPlace();
                 Log.w("tag", "Size Place BDD Mobile : " + placeBeanArrayList.size());
-                MyApplication.getBus().post(placeBeanArrayList);
+                MyApplication.getBus().post(new Pair<>(placeBeanArrayList, BeanType.PLACE));
                 break;
         }
 

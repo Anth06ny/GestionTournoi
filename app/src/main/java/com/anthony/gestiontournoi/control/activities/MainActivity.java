@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.control.MyApplication;
+import com.anthony.gestiontournoi.model.BeanType;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
@@ -305,31 +307,50 @@ public class MainActivity extends AppCompatActivity
     //---------------------------
     //     SUBSCRIBE
     //---------------------------
+//    @Subscribe
+//    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
+//        this.tournamentBeanArrayList.clear();
+//        this.tournamentBeanArrayList.addAll(tournamentBeanArrayList);
+//
+//        sizeTournaments = this.tournamentBeanArrayList.size();
+//
+//        Log.w("tag", "tournaments size bus transmit : " + sizeTournaments);
+//        Log.w("tag", "tournaments size after bus receive : " + tournamentBeanArrayList.size());
+//        if (tournamentItem != null) {
+//            tournamentItem.setTitle("Tournament : " + sizeTournaments);
+//        }
+//    }
+
     @Subscribe
-    public void refreshNbTournamentMenu(ArrayList<TournamentBean> tournamentBeanArrayList) {
-        this.tournamentBeanArrayList.clear();
-        this.tournamentBeanArrayList.addAll(tournamentBeanArrayList);
+    public void refreshMenu(Pair<ArrayList, BeanType> pair) {
+        switch (pair.second) {
+            case TOURNAMENT:
+                this.tournamentBeanArrayList.clear();
+                this.tournamentBeanArrayList.addAll(pair.first);
 
-        sizeTournaments = this.tournamentBeanArrayList.size();
+                sizeTournaments = this.tournamentBeanArrayList.size();
 
-        Log.w("tag", "tournaments size bus transmit : " + sizeTournaments);
-        Log.w("tag", "tournaments size after bus receive : " + tournamentBeanArrayList.size());
-        if (tournamentItem != null) {
-            tournamentItem.setTitle("Tournament : " + sizeTournaments);
+                Log.w("tag", "tournaments size bus transmit : " + sizeTournaments);
+                Log.w("tag", "tournaments size after bus receive : " + tournamentBeanArrayList.size());
+                if (tournamentItem != null) {
+                    tournamentItem.setTitle("Tournament : " + sizeTournaments);
+                }
+                break;
+
+            case TEAM:
+                this.teamBeanArrayList.clear();
+                this.teamBeanArrayList.addAll(pair.first);
+
+                sizeTeams = this.teamBeanArrayList.size();
+
+                Log.w("tag", "teams size bus transmit : " + sizeTeams);
+                Log.w("tag", "teams size after bus receive : " + teamBeanArrayList.size());
+                if (teamItem != null) {
+                    teamItem.setTitle("Team : " + sizeTeams);
+                }
+                break;
         }
-    }
 
-    @Subscribe
-    public void refreshNbTeamMenu(ArrayList<TeamBean> teamBeanArrayList) {
-        this.teamBeanArrayList.clear();
-        this.teamBeanArrayList.addAll(teamBeanArrayList);
-        sizeTeams = this.teamBeanArrayList.size();
-
-        Log.w("tag", "teams size bus transmit : " + sizeTeams);
-        Log.w("tag", "teams size after bus receive : " + teamBeanArrayList.size());
-        if (teamItem != null) {
-            teamItem.setTitle("Team : " + sizeTeams);
-        }
     }
 
 }
