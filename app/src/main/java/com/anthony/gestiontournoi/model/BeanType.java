@@ -10,4 +10,6 @@ public enum BeanType {
     TEAM,
     CLUB,
     PLACE,
+    CONTACT,
+    FIELD,
 }

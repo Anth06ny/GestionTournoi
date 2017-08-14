@@ -15,7 +15,6 @@ import com.anthony.gestiontournoi.model.wsbeans.WSUtilsServer;
 import java.util.ArrayList;
 
 
-
 public class UpdateBeanAT extends AsyncTask {
     private BeanType beanType;
     private long timestamp;
@@ -70,6 +69,22 @@ public class UpdateBeanAT extends AsyncTask {
                     e.printStackTrace();
                 }
                 break;
+            case FIELD:
+                Log.w("tag", "AT field start");
+                try {
+                    WSUtilsServer.updateBeanField(timestamp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case CONTACT:
+                Log.w("tag", "AT contact start");
+                try {
+                    WSUtilsServer.updateBeanContact(timestamp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
         }
         return null;
     }
@@ -77,7 +92,7 @@ public class UpdateBeanAT extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        switch (beanType){
+        switch (beanType) {
             case TOURNAMENT:
                 ArrayList<TournamentBean> tournamentBeanArrayList = WSUtilsMobile.getAllTournament();
                 Log.w("tag", "Size Tournaments BDD Mobile : " + tournamentBeanArrayList.size());

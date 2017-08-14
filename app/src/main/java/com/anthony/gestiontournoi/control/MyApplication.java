@@ -43,12 +43,6 @@ public class MyApplication extends Application {
         startService(intentTournament);
 
 
-
-//        // START SERVICE UPDATE_TOURNAMENT
-//        Intent intentTournament = new Intent(this, ServiceTournament.class);
-//        intentTournament.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
-//        startService(intentTournament);
-//
 //        // START SERVICE UPDATE_TEAM
 //        Intent intentTeam = new Intent(this, ServiceTournament.class);
 //        intentTeam.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TEAM);

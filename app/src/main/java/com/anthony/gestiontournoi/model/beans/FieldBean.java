@@ -1,11 +1,11 @@
 package com.anthony.gestiontournoi.model.beans;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Transient;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 
 @Entity(
 
@@ -27,25 +27,32 @@ public class FieldBean {
     private PlaceBean place;
     private Long placeId;
 
+    private long timeStamp;
+
     @Transient
     private boolean isDelete;
      /* ---------------------------------
     // Generate
     // -------------------------------- */
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1528920307)
     private transient FieldBeanDao myDao;
 
-    @Generated(hash = 1359334510)
-    public FieldBean(Long id, String name, Long placeId) {
+    @Generated(hash = 87958267)
+    public FieldBean(Long id, String name, Long placeId, long timeStamp) {
         this.id = id;
         this.name = name;
         this.placeId = placeId;
+        this.timeStamp = timeStamp;
     }
 
     @Generated(hash = 295781528)
@@ -87,7 +94,9 @@ public class FieldBean {
         this.placeId = placeId;
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 695328629)
     public PlaceBean getPlace() {
         Long __key = this.placeId;
@@ -106,7 +115,9 @@ public class FieldBean {
         return place;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 711419009)
     public void setPlace(PlaceBean place) {
         synchronized (this) {
@@ -150,6 +161,14 @@ public class FieldBean {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     /** called by internal mechanisms, do not call yourself. */

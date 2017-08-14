@@ -155,9 +155,6 @@ public class TournamentContactBean {
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
-    }
 
     public void setTournamentId(long tournamentId) {
         this.tournamentId = tournamentId;
