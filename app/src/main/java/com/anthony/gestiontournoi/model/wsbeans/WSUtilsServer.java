@@ -54,30 +54,39 @@ public class WSUtilsServer {
             TournamentBean tournamentBean = listTournaments.get(i);
             Log.w("tag", "ID : " + tournamentBean.getId() + " delete : " + tournamentBean.isDelete());
 
+            // CHECK SI TOURNAMENT_PLACE NE CONTIENT PAS DEJA LE tOURNAMENTpLACEbEAN
             List<Long> placesId = tournamentBean.getPlaceId();
+            List<TournamentPlaceBean> tournamentPlaceBeanList = WSUtilsMobile.getPlaceByTournament(tournamentBean.getId());
             for (int j = 0; j < placesId.size(); j++) {
                 Log.w("tag", "TournamentPlaceBean : " + j + "PlaceId : " + placesId.get(j));
                 TournamentPlaceBean tournamentPlaceBean = new TournamentPlaceBean();
                 tournamentPlaceBean.setTournamentId(tournamentBean.getId());
                 tournamentPlaceBean.setPlaceId(placesId.get(j));
                 MyApplication.getDaoSession().getTournamentPlaceBeanDao().insert(tournamentPlaceBean);
+
             }
+
             List<Long> teamId = tournamentBean.getTeamId();
+            List<TournamentTeamBean> tournamentTeamBeanList = WSUtilsMobile.getTeamByTournament(tournamentBean.getId());
             for (int k = 0; k < teamId.size(); k++) {
                 Log.w("tag", "TournamentTeamBean : " + k + "TeamId : " + teamId.get(k));
                 TournamentTeamBean tournamentTeamBean = new TournamentTeamBean();
                 tournamentTeamBean.setTournamentId(tournamentBean.getId());
-                tournamentTeamBean.setTeamId(placesId.get(k));
+                tournamentTeamBean.setTeamId(teamId.get(k));
                 MyApplication.getDaoSession().getTournamentTeamBeanDao().insert(tournamentTeamBean);
+
+
             }
 
             List<Long> contactId = tournamentBean.getContactId();
+            List<TournamentContactBean> tournamentContactBeanArrayList = WSUtilsMobile.getContactByTournament(tournamentBean.getId());
             for (int k = 0; k < contactId.size(); k++) {
                 Log.w("tag", "TournamentContactBean : " + k + "contactId : " + contactId.get(k));
                 TournamentContactBean tournamentContactBean = new TournamentContactBean();
                 tournamentContactBean.setTournamentId(tournamentBean.getId());
                 tournamentContactBean.setContactId(contactId.get(k));
                 MyApplication.getDaoSession().getTournamentContactBeanDao().insert(tournamentContactBean);
+
             }
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
@@ -128,15 +137,17 @@ public class WSUtilsServer {
             MatchBean matchBean = listMatchs.get(i);
             Log.w("tag", "ID MATCH: " + matchBean.getId() + " delete : " + matchBean.isDelete());
 
-            if (matchBean.getTeamsId() == null) {
+            if (matchBean.getTeamsId().isEmpty()) {
                 Log.w("TAGGETTEAM", "team id : null");
+            } else {
+                Log.w("TAGGETTEAM", matchBean.getTeamsId().size() + "");
+                TeamBean team1 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(0));
+                TeamBean team2 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(1));
+                Log.w("TAGTEAMS", team1.getName() + " t2" + team2.getName());
+                matchBean.setTeam1(team1);
+                matchBean.setTeam2(team2);
             }
-            Log.w("TAGGETTEAM", matchBean.getTeamsId().size() + "");
-            TeamBean team1 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(0));
-            TeamBean team2 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(1));
-            Log.w("TAGTEAMS", team1.getName() + " t2" + team2.getName());
-            matchBean.setTeam1(team1);
-            matchBean.setTeam2(team2);
+
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
             Log.w("tag", "timestamp bean match " + matchBean.getId() + " : " + matchBean.getTimeStamp());
@@ -343,7 +354,7 @@ public class WSUtilsServer {
             updateMobileTimeStamp(maxTimestamp);
         }
     }
-//
+
 //    // ON UPDATE LES TOURNAMENT_CONTACTS
 //    public static void updateTournamentContact() {
 //        Log.w("tag_tournament_contact", "tag_tournament_contact");

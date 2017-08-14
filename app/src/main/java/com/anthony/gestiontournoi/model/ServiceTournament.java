@@ -38,6 +38,12 @@ public class ServiceTournament extends Service {
                     UpdateBeanAT updateBeanTeamATSQ = new UpdateBeanAT(BeanType.TEAM, timestampTeamSQ);
                     updateBeanTeamATSQ.execute();
 
+
+
+                    long timestampMatchSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
+                    UpdateBeanAT updateBeanMatchATSQ = new UpdateBeanAT(BeanType.MATCHS, timestampMatchSQ);
+                    updateBeanMatchATSQ.execute();
+
                     long timestampContactSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getContactTimestamp();
                     UpdateBeanAT updateBeanContactATSQ = new UpdateBeanAT(BeanType.CONTACT, timestampContactSQ);
                     updateBeanContactATSQ.execute();
@@ -45,10 +51,6 @@ public class ServiceTournament extends Service {
                     long timestampTournamentSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
                     UpdateBeanAT updateBeanTournamentATSQ = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournamentSQ);
                     updateBeanTournamentATSQ.execute();
-
-                    long timestampMatchSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
-                    UpdateBeanAT updateBeanMatchATSQ = new UpdateBeanAT(BeanType.MATCHS, timestampMatchSQ);
-                    updateBeanMatchATSQ.execute();
 
 
                     long timestampFieldSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getFieldTimestamp();

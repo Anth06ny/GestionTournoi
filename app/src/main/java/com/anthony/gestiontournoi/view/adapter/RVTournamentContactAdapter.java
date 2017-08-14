@@ -11,9 +11,7 @@ import com.anthony.gestiontournoi.model.beans.ContactBean;
 
 import java.util.List;
 
-/**
- * Created by Malorie on 14/08/2017.
- */
+
 
 public class RVTournamentContactAdapter extends RecyclerView.Adapter<RVTournamentContactAdapter.ViewHolder> {
     private List<ContactBean> contactBeanArrayList;

@@ -9,8 +9,12 @@ import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBeanDao;
+import com.anthony.gestiontournoi.model.beans.TournamentContactBean;
+import com.anthony.gestiontournoi.model.beans.TournamentPlaceBean;
+import com.anthony.gestiontournoi.model.beans.TournamentTeamBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class WSUtilsMobile {
@@ -62,6 +66,7 @@ public class WSUtilsMobile {
     }
 
 
+
     /******************** GET ONE ********************/
     public static TournamentBean getTournament(long id) {
         TournamentBean tournamentBean = MyApplication.getDaoSession().getTournamentBeanDao().load(id);
@@ -95,6 +100,41 @@ public class WSUtilsMobile {
     }
 
 
+    public static List<TournamentContactBean> getContactByTournament(long id) {
+        List<TournamentContactBean> tournamentContactBeanArrayList = MyApplication.getDaoSession().getTournamentContactBeanDao().loadAll();
+        List<TournamentContactBean> oneTournamentManyContacts = null;
+        for (int i = 0; i < tournamentContactBeanArrayList.size(); i++) {
+            if (tournamentContactBeanArrayList.get(i).getTournamentId() == id) {
+                oneTournamentManyContacts.add(tournamentContactBeanArrayList.get(i));
+            }
+        }
+
+        return oneTournamentManyContacts;
+    }
+
+    public static List<TournamentPlaceBean> getPlaceByTournament(long id) {
+        List<TournamentPlaceBean> tournamentPlaceBeanArrayList = MyApplication.getDaoSession().getTournamentPlaceBeanDao().loadAll();
+        List<TournamentPlaceBean> oneTournamentManyPlace = null;
+        for (int i = 0; i < tournamentPlaceBeanArrayList.size(); i++) {
+            if (tournamentPlaceBeanArrayList.get(i).getTournamentId() == id) {
+                oneTournamentManyPlace.add(tournamentPlaceBeanArrayList.get(i));
+            }
+        }
+
+        return oneTournamentManyPlace;
+    }
+
+    public static List<TournamentTeamBean> getTeamByTournament(long id) {
+        List<TournamentTeamBean> tournamentTeamBeanArrayList = MyApplication.getDaoSession().getTournamentTeamBeanDao().loadAll();
+        List<TournamentTeamBean> oneTournamentManyTeam = null;
+        for (int i = 0; i < tournamentTeamBeanArrayList.size(); i++) {
+            if (tournamentTeamBeanArrayList.get(i).getTournamentId() == id) {
+                oneTournamentManyTeam.add(tournamentTeamBeanArrayList.get(i));
+            }
+        }
+
+        return oneTournamentManyTeam;
+    }
 
 
     public static void deleteTournamentById(ArrayList<Long> arrayListId) {
