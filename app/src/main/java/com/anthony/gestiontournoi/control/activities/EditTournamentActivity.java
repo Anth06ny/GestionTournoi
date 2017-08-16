@@ -1,6 +1,7 @@
 package com.anthony.gestiontournoi.control.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.model.ServiceTournament;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
@@ -526,6 +529,14 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
             // tout remodifier
 
             // FAIRE UN UPDATE SUR LE SERV
+            // START SERVICE UPDATE_TOURNAMENT
+            Log.w("TagavantWSUM", "avant WSMobile");
+            WSUtilsMobile.editTournament(tournamentBean);
+            Log.w("TagapresWSUM", "apres WSMobile");
+
+            Intent intentTournament = new Intent(this, ServiceTournament.class);
+            intentTournament.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
+            startService(intentTournament);
         }
 
     }

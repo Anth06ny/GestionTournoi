@@ -37,6 +37,7 @@ public class WSUtilsServer {
     private static final String URL_UPDATE_BEAN_PLACE = URL + "updateBeanPlace/";
     private static final String URL_UPDATE_BEAN_CONTACT = URL + "updateBeanContact/";
     private static final String URL_UPDATE_BEAN_FIELD = URL + "updateBeanField/";
+    private static final String URL_EDIT_BEAN_TOURNAMENT = URL + "editTournament/";
 
 
     public static void updateBeanTournament(long timestamp) throws Exception {
@@ -407,6 +408,33 @@ public class WSUtilsServer {
         TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
         timestampBean.setTournamentTimestamp(maxTimestamp);
         MyApplication.getDaoSession().getTimestampBeanDao().update(timestampBean);
+    }
+
+    public static void editTournament(TournamentBean tournamentBean) {
+        // on passe en json
+        // on envoie au serv
+        String json = GSON.toJson(tournamentBean);
+
+
+        try {
+            Log.w("TAG_TOURNAMENT_EDIT", json);
+            Log.w("TAG_TOURNAMENT_EDIT_URL", URL_EDIT_BEAN_TOURNAMENT + tournamentBean.getId());
+
+            /*
+            LE JSON DONNE CA :
+            {"cap":"55","clubId":8,"contactList":[{"email":"ezdg","facebookPage":"zesdfgh","firstName":"Bob","id":1,"isDelete":false,"lastName":"Bobibob","phoneNumber":"0606060606","timeStamp":125555555,"website":"zertf"},{"email":"azs","facebookPage":"jhfgd","firstName":"Bobyy","id":3,"isDelete":false,"lastName":"Bobaa","phoneNumber":"0707070707","timeStamp":25555555,"website":"sdfgh"}],"duration":"45","endDate":15102017,"fieldType":"","gender":"female","halfTime":"20","id":4,"isDelete":false,"name":"Tournament Lyon 2","numberOfPlayer":0,"picture":"https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcSds_qFiOi0k3FK3ku7PJmU4N0yd0yWY_YLQYCc6ywE9uu53J1Glw","placeList":[{"id":1,"isDelete":false,"latitude":541.0,"longitude":4512.0,"name":"Tlse","timeStamp":555555}],"playerFee":115,"siteWeb":"","startDate":8102017,"teamFee":250,"timeStamp":1}
+            LE JSON DOIT DONNER CA :
+            {"cap":"55","club":8,"contact":[1],"place":[1], "team":[3],"userUltimate":[],"matchs":[3],"duration":"45","endDate":15102017,"fieldType":"","gender":"female","halfTime":"20","id":4,"isDelete":false,"name":"Tournament Lyon 2","numberOfPlayer":0,"picture":"https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcSds_qFiOi0k3FK3ku7PJmU4N0yd0yWY_YLQYCc6ywE9uu53J1Glw","playerFee":115,"siteWeb":"","startDate":8102017,"teamFee":250,"timeStamp":1}             */
+
+            // DECODER LE JSON DANS L'EDIT TOURNAMENT DU PHP
+            OkHttpUtils.sendPostOkHttpRequest(URL_EDIT_BEAN_TOURNAMENT + tournamentBean.getId(), json);
+
+            // JSON A RETRAVAILLER
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 

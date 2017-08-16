@@ -66,7 +66,6 @@ public class WSUtilsMobile {
     }
 
 
-
     /******************** GET ONE ********************/
     public static TournamentBean getTournament(long id) {
         TournamentBean tournamentBean = MyApplication.getDaoSession().getTournamentBeanDao().load(id);
@@ -118,6 +117,7 @@ public class WSUtilsMobile {
         for (int i = 0; i < tournamentPlaceBeanArrayList.size(); i++) {
             if (tournamentPlaceBeanArrayList.get(i).getTournamentId() == id) {
                 oneTournamentManyPlace.add(tournamentPlaceBeanArrayList.get(i));
+
             }
         }
 
@@ -146,5 +146,9 @@ public class WSUtilsMobile {
             tournamentBeanDao.load(arrayListId.get(i)).delete();
         }
 
+    }
+
+    public static void editTournament(TournamentBean tournamentBean) {
+        WSUtilsServer.editTournament(tournamentBean);
     }
 }

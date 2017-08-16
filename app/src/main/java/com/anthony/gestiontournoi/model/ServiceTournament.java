@@ -20,6 +20,7 @@ public class ServiceTournament extends Service {
         LOAD_CLUB,
         LOAD_PLACE,
         LOAD_SEQUENCE,
+        EDIT_TOURNAMENT,
     }
 
     @Override
@@ -37,8 +38,6 @@ public class ServiceTournament extends Service {
                     long timestampTeamSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTeamTimestamp();
                     UpdateBeanAT updateBeanTeamATSQ = new UpdateBeanAT(BeanType.TEAM, timestampTeamSQ);
                     updateBeanTeamATSQ.execute();
-
-
 
                     long timestampMatchSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
                     UpdateBeanAT updateBeanMatchATSQ = new UpdateBeanAT(BeanType.MATCHS, timestampMatchSQ);
@@ -65,6 +64,7 @@ public class ServiceTournament extends Service {
                     updateBeanTournamentAT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                     break;
+
 
 //                case LOAD_MATCH:
 //                    Log.w("tag", "load_match");
