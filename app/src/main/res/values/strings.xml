@@ -8,4 +8,6 @@
 
 
     <string name="permission_get_account_message">La permission permet de s\'identifier avec Google</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_edit_tournament">EditTournamentActivity</string>
 </resources>

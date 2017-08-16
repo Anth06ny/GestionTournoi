@@ -27,7 +27,8 @@ public class WSUtilsServer {
 
     //    private static final String URL = "http://192.168.1.14:8000/"; // NICO MAISON
 //   private static final String URL = "http://192.168.42.31:8000/"; // NICO
-    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+//    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+    private static final String URL = "http://192.168.40.115:8000/"; // MALO SALLE ANTHONY
 
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
     private static final String URL_UPDATE_BEAN_MATCHS = URL + "updateBeanMatch/";
@@ -355,21 +356,6 @@ public class WSUtilsServer {
         }
     }
 
-//    // ON UPDATE LES TOURNAMENT_CONTACTS
-//    public static void updateTournamentContact() {
-//        Log.w("tag_tournament_contact", "tag_tournament_contact");
-//        List<TournamentBean> tournamentBeanList = WSUtilsMobile.getAllTournament();
-//        for (int j = 0; j < tournamentBeanList.size(); j++) {
-//            List<ContactBean> contactBeanList = tournamentBeanList.get(j).getContactList();
-//            for (int i = 0; i < contactBeanList.size(); i++) {
-//                TournamentContactBean tournamentContactBean = new TournamentContactBean();
-//                tournamentContactBean.setContact(contactBeanList.get(i));
-//                tournamentContactBean.setTournament(tournamentBeanList.get(j));
-//                MyApplication.getDaoSession().getTournamentContactBeanDao().insert(tournamentContactBean);
-//            }
-//        }
-//
-//    }
 
     // ON UPDATE LES FIELDS D'UN TOURNOI
     public static void updateBeanField(long timestamp) throws Exception {

@@ -49,7 +49,15 @@
         <activity android:name=".control.activities.RVTournamentMatchActivity" />
         <activity android:name=".control.activities.RVTournamentPlaceActivity" />
         <activity android:name=".control.activities.RVTournamentTeamActivity" />
-        <activity android:name=".control.activities.DetailTeamActivity"/>
+        <activity android:name=".control.activities.DetailTeamActivity" />
+        <activity
+            android:name=".control.activities.TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".control.activities.EditTournamentActivity"
+            android:label="@string/title_activity_edit_tournament"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

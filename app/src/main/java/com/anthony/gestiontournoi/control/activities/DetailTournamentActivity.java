@@ -3,6 +3,7 @@ package com.anthony.gestiontournoi.control.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -53,6 +54,7 @@ public class DetailTournamentActivity extends AppCompatActivity implements View.
     private RecyclerView RVContacts;
     private List<ContactBean> contactBeanList;
     private RVTournamentContactAdapter rvTournamentContactAdapter;
+    private FloatingActionButton fab;
     private long tournament_id;
 
     /**
@@ -88,10 +90,12 @@ public class DetailTournamentActivity extends AppCompatActivity implements View.
         CVMatch = (CardView) findViewById(R.id.CVMatch);
         CVPlace = (CardView) findViewById(R.id.CVPlace);
         RVContacts = (RecyclerView) findViewById(R.id.RVContacts);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         CVTeam.setOnClickListener(this);
         CVMatch.setOnClickListener(this);
         CVPlace.setOnClickListener(this);
+        fab.setOnClickListener(this);
 
     }
 
@@ -153,6 +157,10 @@ public class DetailTournamentActivity extends AppCompatActivity implements View.
             startActivity(intent);
         } else if (view == CVPlace) {
             Intent intent = new Intent(this, RVTournamentPlaceActivity.class);
+            intent.putExtra("id", tournament_id);
+            startActivity(intent);
+        } else if (view == fab) {
+            Intent intent = new Intent(this, EditTournamentActivity.class);
             intent.putExtra("id", tournament_id);
             startActivity(intent);
         }

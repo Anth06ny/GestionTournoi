@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity
     private Button bt_login;
 
     //private static final String URL = "http://192.168.56.1:8000/"; // NICO
-    private static final String URL = "http://192.168.60.137:8000/"; // MALO
+    //private static final String URL = "http://192.168.60.137:8000/"; // MALO
+    private static final String URL = "http://192.168.40.115:8000/"; // MALO SALLE ANTHONY
 
     private int sizeTournaments;
     private int sizeTeams;
