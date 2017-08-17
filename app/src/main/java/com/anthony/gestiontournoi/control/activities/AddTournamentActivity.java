@@ -144,8 +144,9 @@ public class AddTournamentActivity extends AppCompatActivity implements View.OnC
             tournamentBean.setPlayerFee(playerFee);
             tournamentBean.setTeamFee(teamFee);
             tournamentBean.setFieldType(etFieldType.getText().toString());
-            tournamentBean.setNumberOfPlayer(nbPlayer);
-            tournamentBean.setGender(etGender.getText().toString());
+            //tournamentBean.setNumberOfPlayer(nbPlayer);
+            //tournamentBean.setGender(etGender.getText().toString());
+
             tournamentBean.setSiteWeb(etWebsite.getText().toString());
             tournamentBean.setTimeStamp(calendarTimestamp.getTimeInMillis());
 

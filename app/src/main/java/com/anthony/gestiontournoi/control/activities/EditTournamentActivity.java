@@ -20,11 +20,19 @@ import android.widget.Toast;
 
 import com.anthony.gestiontournoi.R;
 import com.anthony.gestiontournoi.model.ServiceTournament;
+import com.anthony.gestiontournoi.model.beans.ContactBean;
+import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
+import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditTournamentActivity extends AppCompatActivity implements View.OnClickListener {
@@ -88,6 +96,8 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
     private String m_Halftime = "";
     private String m_Title = "";
     private String m_Date = "";
+
+    private static final Gson GSON = new Gson();
 
     /**
      * Find the Views in the layout<br />
@@ -175,7 +185,7 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
         if (!placeBeanList.isEmpty()) {
             editTvPlace.setText(placeBeanList.get(0).getName());
         }
-        editTvFormat.setText(tournamentBean.getGender());
+        //editTvFormat.setText(tournamentBean.getGender());
 
         editTvField.setText(tournamentBean.getFieldType());
         editTvFee.setText(tournamentBean.getTeamFee() + " / " + tournamentBean.getPlayerFee());
@@ -528,15 +538,91 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
             tournamentBean.setTimeStamp(MainActivity.ID_TIMESTAMP);
             // tout remodifier
 
-            // FAIRE UN UPDATE SUR LE SERV
-            // START SERVICE UPDATE_TOURNAMENT
-            Log.w("TagavantWSUM", "avant WSMobile");
-            WSUtilsMobile.editTournament(tournamentBean);
-            Log.w("TagapresWSUM", "apres WSMobile");
 
-            Intent intentTournament = new Intent(this, ServiceTournament.class);
-            intentTournament.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
-            startService(intentTournament);
+            //////////// ON VA CREER ET PARSER LE JSON
+
+            // on stocke dans contactBeanIds la liste des id des contacts
+            List<ContactBean> contactBeanList = tournamentBean.getContactList();
+            Log.w("TAG_TEST_CONTACTS", contactBeanList.size() + "");
+            List<Long> contactBeanIds = new ArrayList<>();
+            if (!contactBeanList.isEmpty()) {
+                for (int i = 0; i < contactBeanList.size(); i++) {
+                    Long contact = contactBeanList.get(i).getId();
+                    Log.w("TAG_CONTACT", contact + "");
+                    contactBeanIds.add(contact);
+                }
+                Log.w("TAG_TEST_LIST", contactBeanIds.size() + "");
+            }
+
+
+            // on stocke dans placeBeanIds la liste des id des places
+            List<PlaceBean> placeBeanList = tournamentBean.getPlaceList();
+            List<Long> placeBeanIds = new ArrayList<>();
+            if (!placeBeanList.isEmpty()) {
+                for (int i = 0; i < placeBeanList.size(); i++) {
+                    Long place = placeBeanList.get(i).getId();
+                    placeBeanIds.add(place);
+                }
+            }
+
+            // on stocke dans teamBeanIds la liste des id des teams
+            List<TeamBean> teamBeanList = tournamentBean.getTeamList();
+            List<Long> teamBeanIds = new ArrayList<>();
+            if (!teamBeanList.isEmpty()) {
+                for (int i = 0; i < teamBeanList.size(); i++) {
+                    Long team = teamBeanList.get(i).getId();
+                    teamBeanIds.add(team);
+                }
+            }
+
+            // on stocke dans matchsBeanIds la liste des id des matchs
+            List<MatchBean> matchsBeanList = tournamentBean.getMatchList();
+            List<Long> matchsBeanIds = new ArrayList<>();
+            if (!matchsBeanList.isEmpty()) {
+                for (int i = 0; i < matchsBeanList.size(); i++) {
+                    Long matchs = matchsBeanList.get(i).getId();
+                    matchsBeanIds.add(matchs);
+                }
+            }
+
+
+            // on passe a null les contactsList, placeList, et teamList
+
+            tournamentBean.resetContactList();
+            tournamentBean.resetPlaceList();
+            tournamentBean.resetTeamList();
+            tournamentBean.resetMatchList();
+
+
+            String json = GSON.toJson(tournamentBean);
+            Log.w("TAG_JSON_1", json);
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(json);
+                jsonObject.put("club", tournamentBean.getClubId());
+                jsonObject.put("contact", contactBeanIds);
+                jsonObject.put("place", placeBeanIds);
+                jsonObject.put("team", teamBeanIds);
+                jsonObject.put("userUltimate", "[]");
+                jsonObject.put("matchs", matchsBeanIds);
+
+                Log.w("TAG_TOURNAMENT_EDIT", jsonObject + "");
+                String jsonn = jsonObject.toString();
+
+
+                Intent intentTournament = new Intent(this, ServiceTournament.class);
+                intentTournament.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
+                intentTournament.putExtra("json", jsonn);
+                intentTournament.putExtra("tournament_id", tournamentBean.getId());
+                startService(intentTournament);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            finish();
+
         }
 
     }

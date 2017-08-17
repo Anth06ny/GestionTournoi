@@ -24,6 +24,7 @@ public class TimestampBean {
     private long teamTimestamp = 1;
     private long tournamentTimestamp = 1;
     private long userTimestamp = 1;
+    private long formatTimestamp = 1;
     //---------------------------
     // GENERATE
     //---------------------------
@@ -40,10 +41,10 @@ public class TimestampBean {
     @Generated(hash = 706834386)
     private transient TimestampBeanDao myDao;
 
-    @Generated(hash = 312428427)
+    @Generated(hash = 1839404203)
     public TimestampBean(Long id, long clubTimestamp, long contactTimestamp,
-                         long fieldTimestamp, long matchTimestamp, long placeTimestamp,
-                         long teamTimestamp, long tournamentTimestamp, long userTimestamp) {
+            long fieldTimestamp, long matchTimestamp, long placeTimestamp, long teamTimestamp,
+            long tournamentTimestamp, long userTimestamp, long formatTimestamp) {
         this.id = id;
         this.clubTimestamp = clubTimestamp;
         this.contactTimestamp = contactTimestamp;
@@ -53,6 +54,7 @@ public class TimestampBean {
         this.teamTimestamp = teamTimestamp;
         this.tournamentTimestamp = tournamentTimestamp;
         this.userTimestamp = userTimestamp;
+        this.formatTimestamp = formatTimestamp;
     }
 
     @Generated(hash = 25085395)
@@ -165,6 +167,14 @@ public class TimestampBean {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public long getFormatTimestamp() {
+        return this.formatTimestamp;
+    }
+
+    public void setFormatTimestamp(long formatTimestamp) {
+        this.formatTimestamp = formatTimestamp;
     }
 
     /** called by internal mechanisms, do not call yourself. */

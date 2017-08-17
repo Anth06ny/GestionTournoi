@@ -6,6 +6,7 @@ package com.anthony.gestiontournoi.model;
 
 public enum BeanType {
     TOURNAMENT,
+    EDIT_TOURNAMENT,
     MATCHS,
     TEAM,
     CLUB,

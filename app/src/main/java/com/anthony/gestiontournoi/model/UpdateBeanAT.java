@@ -18,10 +18,19 @@ import java.util.ArrayList;
 public class UpdateBeanAT extends AsyncTask {
     private BeanType beanType;
     private long timestamp;
+    private String json;
+    private long tournament_id;
 
     public UpdateBeanAT(BeanType beanType, long timestamp) {
         this.beanType = beanType;
         this.timestamp = timestamp;
+    }
+
+    public UpdateBeanAT(BeanType beanType, long timestamp, String json, long tournament_id) {
+        this.beanType = beanType;
+        this.timestamp = timestamp;
+        this.json = json;
+        this.tournament_id = tournament_id;
     }
 
 
@@ -85,6 +94,16 @@ public class UpdateBeanAT extends AsyncTask {
                     e.printStackTrace();
                 }
                 break;
+            case EDIT_TOURNAMENT:
+                Log.w("tag", "AT editTournament start");
+                try {
+                    WSUtilsServer.editTournament(json, tournament_id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
         }
         return null;
     }
@@ -117,6 +136,8 @@ public class UpdateBeanAT extends AsyncTask {
                 ArrayList<PlaceBean> placeBeanArrayList = WSUtilsMobile.getAllPlace();
                 Log.w("tag", "Size Place BDD Mobile : " + placeBeanArrayList.size());
                 MyApplication.getBus().post(placeBeanArrayList);
+                break;
+            case EDIT_TOURNAMENT:
                 break;
         }
 

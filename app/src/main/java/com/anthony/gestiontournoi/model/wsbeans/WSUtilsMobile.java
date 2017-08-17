@@ -101,7 +101,7 @@ public class WSUtilsMobile {
 
     public static List<TournamentContactBean> getContactByTournament(long id) {
         List<TournamentContactBean> tournamentContactBeanArrayList = MyApplication.getDaoSession().getTournamentContactBeanDao().loadAll();
-        List<TournamentContactBean> oneTournamentManyContacts = null;
+        List<TournamentContactBean> oneTournamentManyContacts = new ArrayList<>();
         for (int i = 0; i < tournamentContactBeanArrayList.size(); i++) {
             if (tournamentContactBeanArrayList.get(i).getTournamentId() == id) {
                 oneTournamentManyContacts.add(tournamentContactBeanArrayList.get(i));
@@ -113,7 +113,7 @@ public class WSUtilsMobile {
 
     public static List<TournamentPlaceBean> getPlaceByTournament(long id) {
         List<TournamentPlaceBean> tournamentPlaceBeanArrayList = MyApplication.getDaoSession().getTournamentPlaceBeanDao().loadAll();
-        List<TournamentPlaceBean> oneTournamentManyPlace = null;
+        List<TournamentPlaceBean> oneTournamentManyPlace = new ArrayList<>();
         for (int i = 0; i < tournamentPlaceBeanArrayList.size(); i++) {
             if (tournamentPlaceBeanArrayList.get(i).getTournamentId() == id) {
                 oneTournamentManyPlace.add(tournamentPlaceBeanArrayList.get(i));
@@ -126,7 +126,7 @@ public class WSUtilsMobile {
 
     public static List<TournamentTeamBean> getTeamByTournament(long id) {
         List<TournamentTeamBean> tournamentTeamBeanArrayList = MyApplication.getDaoSession().getTournamentTeamBeanDao().loadAll();
-        List<TournamentTeamBean> oneTournamentManyTeam = null;
+        List<TournamentTeamBean> oneTournamentManyTeam = new ArrayList<>();
         for (int i = 0; i < tournamentTeamBeanArrayList.size(); i++) {
             if (tournamentTeamBeanArrayList.get(i).getTournamentId() == id) {
                 oneTournamentManyTeam.add(tournamentTeamBeanArrayList.get(i));
@@ -148,7 +148,5 @@ public class WSUtilsMobile {
 
     }
 
-    public static void editTournament(TournamentBean tournamentBean) {
-        WSUtilsServer.editTournament(tournamentBean);
-    }
+
 }

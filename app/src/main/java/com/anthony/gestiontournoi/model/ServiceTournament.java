@@ -8,19 +8,19 @@ import android.os.IBinder;
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
 
+import static com.anthony.gestiontournoi.model.BeanType.EDIT_TOURNAMENT;
+
 
 public class ServiceTournament extends Service {
 
     public static final String SERVICE_TYPE = "ServiceType";
+    public static String JSON = "json";
+    public static String TOURNAMENT_ID = "tournament_id";
 
     public enum ServiceAction {
         LOAD_TOURNAMENT,
-        LOAD_MATCH,
-        LOAD_TEAM,
-        LOAD_CLUB,
-        LOAD_PLACE,
-        LOAD_SEQUENCE,
         EDIT_TOURNAMENT,
+        LOAD_SEQUENCE,
     }
 
     @Override
@@ -47,6 +47,10 @@ public class ServiceTournament extends Service {
                     UpdateBeanAT updateBeanContactATSQ = new UpdateBeanAT(BeanType.CONTACT, timestampContactSQ);
                     updateBeanContactATSQ.execute();
 
+                    long timestampClubSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getClubTimestamp();
+                    UpdateBeanAT updateBeanClubATSQ = new UpdateBeanAT(BeanType.CLUB, timestampClubSQ);
+                    updateBeanClubATSQ.execute();
+
                     long timestampTournamentSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
                     UpdateBeanAT updateBeanTournamentATSQ = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournamentSQ);
                     updateBeanTournamentATSQ.execute();
@@ -58,10 +62,17 @@ public class ServiceTournament extends Service {
                     break;
 
 
-                case LOAD_TOURNAMENT:
+                case EDIT_TOURNAMENT:
+                    String json = (String) intent.getExtras().get(JSON);
+                    long tournament_id = (long) intent.getExtras().get(TOURNAMENT_ID);
+
+                    UpdateBeanAT updateBeanEditTournamentAT = new UpdateBeanAT(EDIT_TOURNAMENT, MainActivity.ID_TIMESTAMP, json, tournament_id);
+                    updateBeanEditTournamentAT.execute();
+
+
                     long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
                     UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);
-                    updateBeanTournamentAT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    updateBeanTournamentAT.execute(AsyncTask.THREAD_POOL_EXECUTOR);
 
                     break;
 

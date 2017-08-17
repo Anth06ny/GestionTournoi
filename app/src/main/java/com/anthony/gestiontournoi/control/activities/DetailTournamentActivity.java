@@ -116,7 +116,7 @@ public class DetailTournamentActivity extends AppCompatActivity implements View.
         if (!placeBeanList.isEmpty()) {
             tvPlace.setText(placeBeanList.get(0).getName());
         }
-        tvFormat.setText(tournamentBean.getGender());
+        //tvFormat.setText(tournamentBean.getGender() + " / " + tournamentBean.getNumberOfPlayer());
 
         tvField.setText(tournamentBean.getFieldType());
         tvFee.setText(tournamentBean.getTeamFee() + " / " + tournamentBean.getPlayerFee());
