@@ -353,7 +353,7 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
             alertDialogBuilder.setView(input);
 
             //titre
-            alertDialogBuilder.setTitle("Modifier le field");
+            alertDialogBuilder.setTitle("Modifier le website");
 
             //bouton ok
             alertDialogBuilder.setPositiveButton("ok",
