@@ -3,7 +3,6 @@ package com.anthony.gestiontournoi.model.wsbeans;
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.ContactBean;
-import com.anthony.gestiontournoi.model.beans.FieldBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
@@ -88,10 +87,7 @@ public class WSUtilsMobile {
         return matchBean;
     }
 
-    public static FieldBean getField(long id) {
-        FieldBean fieldBean = MyApplication.getDaoSession().getFieldBeanDao().load(id);
-        return fieldBean;
-    }
+
 
     public static ContactBean getContact(long id) {
         ContactBean contactBean = MyApplication.getDaoSession().getContactBeanDao().load(id);

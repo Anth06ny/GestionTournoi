@@ -565,15 +565,15 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
                 }
             }
 
-            // on stocke dans teamBeanIds la liste des id des teams
-            List<TeamBean> teamBeanList = tournamentBean.getTeamList();
-            List<Long> teamBeanIds = new ArrayList<>();
-            if (!teamBeanList.isEmpty()) {
-                for (int i = 0; i < teamBeanList.size(); i++) {
-                    Long team = teamBeanList.get(i).getId();
-                    teamBeanIds.add(team);
-                }
-            }
+//            // on stocke dans teamBeanIds la liste des id des teams
+//            List<TeamBean> teamBeanList = tournamentBean.getTeamList();
+//            List<Long> teamBeanIds = new ArrayList<>();
+//            if (!teamBeanList.isEmpty()) {
+//                for (int i = 0; i < teamBeanList.size(); i++) {
+//                    Long team = teamBeanList.get(i).getId();
+//                    teamBeanIds.add(team);
+//                }
+//            }
 
             // on stocke dans matchsBeanIds la liste des id des matchs
             List<MatchBean> matchsBeanList = tournamentBean.getMatchList();
@@ -590,7 +590,7 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
 
             tournamentBean.resetContactList();
             tournamentBean.resetPlaceList();
-            tournamentBean.resetTeamList();
+//            tournamentBean.resetTeamList();
             tournamentBean.resetMatchList();
 
 
@@ -602,7 +602,7 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
                 jsonObject.put("club", tournamentBean.getClubId());
                 jsonObject.put("contact", contactBeanIds);
                 jsonObject.put("place", placeBeanIds);
-                jsonObject.put("team", teamBeanIds);
+  //              jsonObject.put("team", teamBeanIds);
                 jsonObject.put("userUltimate", "[]");
                 jsonObject.put("matchs", matchsBeanIds);
 

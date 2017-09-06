@@ -2,9 +2,13 @@ package com.anthony.gestiontournoi.model.beans;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.OrderBy;
+import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.Transient;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+
+import java.util.List;
 
 @Entity(
         active = true,
@@ -24,22 +28,31 @@ public class PlaceBean {
     private long timeStamp;
     @Transient
     private boolean isDelete;
+
+    //Relationelle Inverse
+    @ToMany(referencedJoinProperty = "placeId")
+    @OrderBy("id ASC")
+    private List<ClubBean> clubList;
      /* ---------------------------------
     // Generate
     // -------------------------------- */
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1183025549)
     private transient PlaceBeanDao myDao;
 
 
     @Generated(hash = 16433847)
     public PlaceBean(Long id, String name, String address, double latitude, double longitude,
-            long timeStamp) {
+                     long timeStamp) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -143,6 +156,34 @@ public class PlaceBean {
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 1683132693)
+    public List<ClubBean> getClubList() {
+        if (clubList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            ClubBeanDao targetDao = daoSession.getClubBeanDao();
+            List<ClubBean> clubListNew = targetDao._queryPlaceBean_ClubList(id);
+            synchronized (this) {
+                if (clubList == null) {
+                    clubList = clubListNew;
+                }
+            }
+        }
+        return clubList;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    @Generated(hash = 1363018792)
+    public synchronized void resetClubList() {
+        clubList = null;
     }
 
     /** called by internal mechanisms, do not call yourself. */

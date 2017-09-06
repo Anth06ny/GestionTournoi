@@ -27,6 +27,9 @@ public class ContactBean {
     private long timeStamp;
     @Transient
     private boolean isDelete;
+
+    
+
      /* ---------------------------------
     // Generate
     // -------------------------------- */

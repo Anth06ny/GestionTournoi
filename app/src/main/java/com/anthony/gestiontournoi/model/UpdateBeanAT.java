@@ -78,14 +78,6 @@ public class UpdateBeanAT extends AsyncTask {
                     e.printStackTrace();
                 }
                 break;
-            case FIELD:
-                Log.w("tag", "AT field start");
-                try {
-                    WSUtilsServer.updateBeanField(timestamp);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
             case CONTACT:
                 Log.w("tag", "AT contact start");
                 try {

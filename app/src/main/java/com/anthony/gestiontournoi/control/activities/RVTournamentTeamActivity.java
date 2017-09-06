@@ -37,7 +37,7 @@ public class RVTournamentTeamActivity extends AppCompatActivity {
         // On récupère le tournoi en question
         TournamentBean tournament = WSUtilsMobile.getTournament(tournament_id);
         // On récupère les teams du tournoi
-        teamBeanArrayList = tournament.getTeamList();
+   //     teamBeanArrayList = tournament.getTeamList();
         Log.w("TAG", teamBeanArrayList.size() + "");
 
 

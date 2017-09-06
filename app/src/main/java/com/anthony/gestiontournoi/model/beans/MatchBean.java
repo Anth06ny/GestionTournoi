@@ -27,6 +27,8 @@ public class MatchBean {
     private int scoreTeam1;
     private int scoreTeam2;
     private long timeStamp;
+    private String result;
+    private String state;
     @Transient
     private boolean isDelete;
 
@@ -47,14 +49,14 @@ public class MatchBean {
     @NotNull
     private long teamTableId;
 
-    @ToOne(joinProperty = "fieldId")
-    private FieldBean field;
-    private Long fieldId;
-
-    @ToOne(joinProperty = "matchstatusId")
-    private MatchStatusEnumBean matchStatus;
-    @NotNull
-    private long matchstatusId;
+//    @ToOne(joinProperty = "fieldId")
+//    private FieldBean field;
+//    private Long fieldId;
+//
+//    @ToOne(joinProperty = "matchstatusId")
+//    private MatchStatusEnumBean matchStatus;
+//    @NotNull
+//    private long matchstatusId;
 
     @ToOne(joinProperty = "tournamentId")
     private TournamentBean tournament;
@@ -79,21 +81,20 @@ public class MatchBean {
     @Generated(hash = 1422076968)
     private transient MatchBeanDao myDao;
 
-    @Generated(hash = 508441475)
-    public MatchBean(Long id, long date, String duration, int scoreTeam1,
-                     int scoreTeam2, long timeStamp, long team1Id, long team2Id,
-                     long teamTableId, Long fieldId, long matchstatusId, long tournamentId) {
+    @Generated(hash = 1946880500)
+    public MatchBean(Long id, long date, String duration, int scoreTeam1, int scoreTeam2, long timeStamp,
+            String result, String state, long team1Id, long team2Id, long teamTableId, long tournamentId) {
         this.id = id;
         this.date = date;
         this.duration = duration;
         this.scoreTeam1 = scoreTeam1;
         this.scoreTeam2 = scoreTeam2;
         this.timeStamp = timeStamp;
+        this.result = result;
+        this.state = state;
         this.team1Id = team1Id;
         this.team2Id = team2Id;
         this.teamTableId = teamTableId;
-        this.fieldId = fieldId;
-        this.matchstatusId = matchstatusId;
         this.tournamentId = tournamentId;
     }
 
@@ -109,12 +110,6 @@ public class MatchBean {
 
     @Generated(hash = 815252257)
     private transient Long teamTable__resolvedKey;
-
-    @Generated(hash = 338712148)
-    private transient Long field__resolvedKey;
-
-    @Generated(hash = 1689452998)
-    private transient Long matchStatus__resolvedKey;
 
     @Generated(hash = 235429544)
     private transient Long tournament__resolvedKey;
@@ -199,21 +194,21 @@ public class MatchBean {
         this.teamTableId = teamTableId;
     }
 
-    public Long getFieldId() {
-        return this.fieldId;
-    }
-
-    public void setFieldId(Long fieldId) {
-        this.fieldId = fieldId;
-    }
-
-    public long getMatchstatusId() {
-        return this.matchstatusId;
-    }
-
-    public void setMatchstatusId(long matchstatusId) {
-        this.matchstatusId = matchstatusId;
-    }
+//    public Long getFieldId() {
+//        return this.fieldId;
+//    }
+//
+//    public void setFieldId(Long fieldId) {
+//        this.fieldId = fieldId;
+//    }
+//
+//    public long getMatchstatusId() {
+//        return this.matchstatusId;
+//    }
+//
+//    public void setMatchstatusId(long matchstatusId) {
+//        this.matchstatusId = matchstatusId;
+//    }
 
     public long getTournamentId() {
         return this.tournamentId;
@@ -335,77 +330,77 @@ public class MatchBean {
         }
     }
 
-    /**
-     * To-one relationship, resolved on first access.
-     */
-    @Generated(hash = 1018392834)
-    public FieldBean getField() {
-        Long __key = this.fieldId;
-        if (field__resolvedKey == null || !field__resolvedKey.equals(__key)) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            FieldBeanDao targetDao = daoSession.getFieldBeanDao();
-            FieldBean fieldNew = targetDao.load(__key);
-            synchronized (this) {
-                field = fieldNew;
-                field__resolvedKey = __key;
-            }
-        }
-        return field;
-    }
-
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
-    @Generated(hash = 863827323)
-    public void setField(FieldBean field) {
-        synchronized (this) {
-            this.field = field;
-            fieldId = field == null ? null : field.getId();
-            field__resolvedKey = fieldId;
-        }
-    }
-
-    /**
-     * To-one relationship, resolved on first access.
-     */
-    @Generated(hash = 534671586)
-    public MatchStatusEnumBean getMatchStatus() {
-        long __key = this.matchstatusId;
-        if (matchStatus__resolvedKey == null
-                || !matchStatus__resolvedKey.equals(__key)) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            MatchStatusEnumBeanDao targetDao = daoSession
-                    .getMatchStatusEnumBeanDao();
-            MatchStatusEnumBean matchStatusNew = targetDao.load(__key);
-            synchronized (this) {
-                matchStatus = matchStatusNew;
-                matchStatus__resolvedKey = __key;
-            }
-        }
-        return matchStatus;
-    }
-
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
-    @Generated(hash = 1858488143)
-    public void setMatchStatus(@NotNull MatchStatusEnumBean matchStatus) {
-        if (matchStatus == null) {
-            throw new DaoException(
-                    "To-one property 'matchstatusId' has not-null constraint; cannot set to-one to null");
-        }
-        synchronized (this) {
-            this.matchStatus = matchStatus;
-            matchstatusId = matchStatus.getId();
-            matchStatus__resolvedKey = matchstatusId;
-        }
-    }
+//    /**
+//     * To-one relationship, resolved on first access.
+//     */
+//    @Generated(hash = 1018392834)
+//    public FieldBean getField() {
+//        Long __key = this.fieldId;
+//        if (field__resolvedKey == null || !field__resolvedKey.equals(__key)) {
+//            final DaoSession daoSession = this.daoSession;
+//            if (daoSession == null) {
+//                throw new DaoException("Entity is detached from DAO context");
+//            }
+//            FieldBeanDao targetDao = daoSession.getFieldBeanDao();
+//            FieldBean fieldNew = targetDao.load(__key);
+//            synchronized (this) {
+//                field = fieldNew;
+//                field__resolvedKey = __key;
+//            }
+//        }
+//        return field;
+//    }
+//
+//    /**
+//     * called by internal mechanisms, do not call yourself.
+//     */
+//    @Generated(hash = 863827323)
+//    public void setField(FieldBean field) {
+//        synchronized (this) {
+//            this.field = field;
+//            fieldId = field == null ? null : field.getId();
+//            field__resolvedKey = fieldId;
+//        }
+//    }
+//
+//    /**
+//     * To-one relationship, resolved on first access.
+//     */
+//    @Generated(hash = 534671586)
+//    public MatchStatusEnumBean getMatchStatus() {
+//        long __key = this.matchstatusId;
+//        if (matchStatus__resolvedKey == null
+//                || !matchStatus__resolvedKey.equals(__key)) {
+//            final DaoSession daoSession = this.daoSession;
+//            if (daoSession == null) {
+//                throw new DaoException("Entity is detached from DAO context");
+//            }
+//            MatchStatusEnumBeanDao targetDao = daoSession
+//                    .getMatchStatusEnumBeanDao();
+//            MatchStatusEnumBean matchStatusNew = targetDao.load(__key);
+//            synchronized (this) {
+//                matchStatus = matchStatusNew;
+//                matchStatus__resolvedKey = __key;
+//            }
+//        }
+//        return matchStatus;
+//    }
+//
+//    /**
+//     * called by internal mechanisms, do not call yourself.
+//     */
+//    @Generated(hash = 1858488143)
+//    public void setMatchStatus(@NotNull MatchStatusEnumBean matchStatus) {
+//        if (matchStatus == null) {
+//            throw new DaoException(
+//                    "To-one property 'matchstatusId' has not-null constraint; cannot set to-one to null");
+//        }
+//        synchronized (this) {
+//            this.matchStatus = matchStatus;
+//            matchstatusId = matchStatus.getId();
+//            matchStatus__resolvedKey = matchstatusId;
+//        }
+//    }
 
     /**
      * To-one relationship, resolved on first access.
@@ -483,6 +478,22 @@ public class MatchBean {
 
     public List<Long> getTeamsId() {
         return teamsId;
+    }
+
+    public String getResult() {
+        return this.result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getState() {
+        return this.state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     /** called by internal mechanisms, do not call yourself. */

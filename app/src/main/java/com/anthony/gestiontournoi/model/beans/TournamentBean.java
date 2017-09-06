@@ -35,8 +35,6 @@ public class TournamentBean {
     private Long playerFee;
     private Long teamFee;
     private String fieldType;
-    //    private Long numberOfPlayer;
-//    private String gender;
     private String genderNumberOfPlayer;
     private String siteWeb;
     private long timeStamp;
@@ -57,20 +55,20 @@ public class TournamentBean {
     @Transient
     private List<Long> matchsId;
 
-    //Relationnelle Inverse table intermediaire
-    @ToMany
-    @JoinEntity(
-            //Table intermediaire
-            entity = TournamentTeamBean.class,
-            //Id representant cette table dans la table intermediaire
-            sourceProperty = "tournamentId",
-            //Id representant la table voulu dans la table intermediraire
-            targetProperty = "teamId"
-    )
-    private List<TeamBean> teamList;
-
-    @Transient
-    private List<Long> teamId;
+//    //Relationnelle Inverse table intermediaire
+//    @ToMany
+//    @JoinEntity(
+//            //Table intermediaire
+//            entity = TournamentTeamBean.class,
+//            //Id representant cette table dans la table intermediaire
+//            sourceProperty = "tournamentId",
+//            //Id representant la table voulu dans la table intermediraire
+//            targetProperty = "teamId"
+//    )
+//    private List<TeamBean> teamList;
+//
+//    @Transient
+//    private List<Long> teamId;
 
     @ToMany
     @JoinEntity(
@@ -336,36 +334,36 @@ public class TournamentBean {
         matchList = null;
     }
 
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
-    @Generated(hash = 1893166736)
-    public List<TeamBean> getTeamList() {
-        if (teamList == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            TeamBeanDao targetDao = daoSession.getTeamBeanDao();
-            List<TeamBean> teamListNew = targetDao
-                    ._queryTournamentBean_TeamList(id);
-            synchronized (this) {
-                if (teamList == null) {
-                    teamList = teamListNew;
-                }
-            }
-        }
-        return teamList;
-    }
-
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
-    @Generated(hash = 924184687)
-    public synchronized void resetTeamList() {
-        teamList = null;
-    }
+//    /**
+//     * To-many relationship, resolved on first access (and after reset).
+//     * Changes to to-many relations are not persisted, make changes to the target entity.
+//     */
+//    @Generated(hash = 1893166736)
+//    public List<TeamBean> getTeamList() {
+//        if (teamList == null) {
+//            final DaoSession daoSession = this.daoSession;
+//            if (daoSession == null) {
+//                throw new DaoException("Entity is detached from DAO context");
+//            }
+//            TeamBeanDao targetDao = daoSession.getTeamBeanDao();
+//            List<TeamBean> teamListNew = targetDao
+//                    ._queryTournamentBean_TeamList(id);
+//            synchronized (this) {
+//                if (teamList == null) {
+//                    teamList = teamListNew;
+//                }
+//            }
+//        }
+//        return teamList;
+//    }
+//
+//    /**
+//     * Resets a to-many relationship, making the next get call to query for a fresh result.
+//     */
+//    @Generated(hash = 924184687)
+//    public synchronized void resetTeamList() {
+//        teamList = null;
+//    }
 
     /**
      * To-many relationship, resolved on first access (and after reset).
@@ -473,13 +471,13 @@ public class TournamentBean {
         this.placeId = placeId;
     }
 
-    public List<Long> getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(List<Long> teamId) {
-        this.teamId = teamId;
-    }
+//    public List<Long> getTeamId() {
+//        return teamId;
+//    }
+//
+//    public void setTeamId(List<Long> teamId) {
+//        this.teamId = teamId;
+//    }
 
     public List<Long> getMatchsId() {
         return matchsId;
@@ -513,9 +511,7 @@ public class TournamentBean {
         this.genderNumberOfPlayer = genderNumberOfPlayer;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
+    /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 644297522)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;

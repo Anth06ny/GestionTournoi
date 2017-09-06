@@ -6,7 +6,6 @@ import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
 import com.anthony.gestiontournoi.model.beans.ContactBean;
-import com.anthony.gestiontournoi.model.beans.FieldBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
@@ -14,7 +13,6 @@ import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentContactBean;
 import com.anthony.gestiontournoi.model.beans.TournamentPlaceBean;
-import com.anthony.gestiontournoi.model.beans.TournamentTeamBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -68,17 +66,17 @@ public class WSUtilsServer {
 
             }
 
-            List<Long> teamId = tournamentBean.getTeamId();
-            List<TournamentTeamBean> tournamentTeamBeanList = WSUtilsMobile.getTeamByTournament(tournamentBean.getId());
-            for (int k = 0; k < teamId.size(); k++) {
-                Log.w("tag", "TournamentTeamBean : " + k + "TeamId : " + teamId.get(k));
-                TournamentTeamBean tournamentTeamBean = new TournamentTeamBean();
-                tournamentTeamBean.setTournamentId(tournamentBean.getId());
-                tournamentTeamBean.setTeamId(teamId.get(k));
-                MyApplication.getDaoSession().getTournamentTeamBeanDao().insert(tournamentTeamBean);
-
-
-            }
+//            List<Long> teamId = tournamentBean.getTeamId();
+//            List<TournamentTeamBean> tournamentTeamBeanList = WSUtilsMobile.getTeamByTournament(tournamentBean.getId());
+//            for (int k = 0; k < teamId.size(); k++) {
+//                Log.w("tag", "TournamentTeamBean : " + k + "TeamId : " + teamId.get(k));
+//                TournamentTeamBean tournamentTeamBean = new TournamentTeamBean();
+//                tournamentTeamBean.setTournamentId(tournamentBean.getId());
+//                tournamentTeamBean.setTeamId(teamId.get(k));
+//                MyApplication.getDaoSession().getTournamentTeamBeanDao().insert(tournamentTeamBean);
+//
+//
+//            }
 
             List<Long> contactId = tournamentBean.getContactId();
             List<TournamentContactBean> tournamentContactBeanArrayList = WSUtilsMobile.getContactByTournament(tournamentBean.getId());
@@ -358,51 +356,6 @@ public class WSUtilsServer {
     }
 
 
-    // ON UPDATE LES FIELDS D'UN TOURNOI
-    public static void updateBeanField(long timestamp) throws Exception {
-
-        String json = OkHttpUtils.sendGetOkHttpRequest(URL_UPDATE_BEAN_FIELD + timestamp);
-        Log.w("tag", "Json field : " + json);
-
-        ArrayList<FieldBean> listFields = GSON.fromJson(json, new TypeToken<ArrayList<FieldBean>>() {
-        }.getType());
-        Log.w("tag", "Contacts : " + listFields.size());
-
-        // ON DECLARE LA VARIABLE QUI STOCK LE PLUS GRAND TIMESTAMP
-        long maxTimestamp = 0;
-
-        for (int i = 0; i < listFields.size(); i++) {
-            FieldBean fieldBean = listFields.get(i);
-            Log.w("tag", "ID : " + fieldBean.getId() + " delete : " + fieldBean.isDelete());
-
-            // ON RECUPERE LE PLUS GRAND TIMESTAMP
-            Log.w("tag", "timestamp bean field " + fieldBean.getId() + " : " + fieldBean.getTimeStamp());
-            if (maxTimestamp < fieldBean.getTimeStamp()) {
-                maxTimestamp = fieldBean.getTimeStamp();
-            }
-
-            if (fieldBean.isDelete()) {
-                // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
-                MyApplication.getDaoSession().getFieldBeanDao().delete(fieldBean);
-            } else {
-                // ON CHECK SI IL EXISTE EN BDD MOBILE
-                if (MyApplication.getDaoSession().getFieldBeanDao().load(fieldBean.getId()) == null) {
-                    // ON AJOUT SI EXISTE PAS
-                    MyApplication.getDaoSession().getFieldBeanDao().insert(fieldBean);
-                } else {
-                    // ON MET A JOUR
-                    MyApplication.getDaoSession().getFieldBeanDao().update(fieldBean);
-                }
-            }
-        }
-
-        // ON MET A JOUR LE TIMESTAMP DU MOBILE
-        if (!listFields.isEmpty()) {
-            updateMobileTimeStamp(maxTimestamp);
-        }
-
-
-    }
 
     public static void updateMobileTimeStamp(long maxTimestamp) {
         TimestampBean timestampBean = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP);
