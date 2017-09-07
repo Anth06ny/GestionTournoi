@@ -26,7 +26,8 @@ public class WSUtilsServer {
     //    private static final String URL = "http://192.168.1.14:8000/"; // NICO MAISON
 //   private static final String URL = "http://192.168.42.31:8000/"; // NICO
 //    private static final String URL = "http://192.168.60.137:8000/"; // MALO
-    private static final String URL = "http://192.168.40.115:8000/"; // MALO SALLE ANTHONY
+    //private static final String URL = "http://192.168.40.115:8000/"; // MALO SALLE ANTHONY
+    private static final String URL = "http://192.168.1.27:8000/"; // MALO MAISON
 
     private static final String URL_UPDATE_BEAN_TOURNAMENT = URL + "updateBeanTournament/";
     private static final String URL_UPDATE_BEAN_MATCHS = URL + "updateBeanMatch/";
@@ -34,7 +35,6 @@ public class WSUtilsServer {
     private static final String URL_UPDATE_BEAN_CLUB = URL + "updateBeanClub/";
     private static final String URL_UPDATE_BEAN_PLACE = URL + "updateBeanPlace/";
     private static final String URL_UPDATE_BEAN_CONTACT = URL + "updateBeanContact/";
-    private static final String URL_UPDATE_BEAN_FIELD = URL + "updateBeanField/";
     private static final String URL_EDIT_BEAN_TOURNAMENT = URL + "editTournament/";
 
 
@@ -354,7 +354,6 @@ public class WSUtilsServer {
             updateMobileTimeStamp(maxTimestamp);
         }
     }
-
 
 
     public static void updateMobileTimeStamp(long maxTimestamp) {
