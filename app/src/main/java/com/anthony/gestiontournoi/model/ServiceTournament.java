@@ -39,10 +39,6 @@ public class ServiceTournament extends Service {
                     UpdateBeanAT updateBeanTeamATSQ = new UpdateBeanAT(BeanType.TEAM, timestampTeamSQ);
                     updateBeanTeamATSQ.execute();
 
-                    long timestampMatchSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
-                    UpdateBeanAT updateBeanMatchATSQ = new UpdateBeanAT(BeanType.MATCHS, timestampMatchSQ);
-                    updateBeanMatchATSQ.execute();
-
                     long timestampContactSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getContactTimestamp();
                     UpdateBeanAT updateBeanContactATSQ = new UpdateBeanAT(BeanType.CONTACT, timestampContactSQ);
                     updateBeanContactATSQ.execute();
@@ -55,24 +51,25 @@ public class ServiceTournament extends Service {
                     UpdateBeanAT updateBeanTournamentATSQ = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournamentSQ);
                     updateBeanTournamentATSQ.execute();
 
-
-                    long timestampFieldSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getFieldTimestamp();
-                    UpdateBeanAT updateBeanFieldATSQ = new UpdateBeanAT(BeanType.FIELD, timestampFieldSQ);
-                    updateBeanFieldATSQ.execute();
-                    break;
+                    long timestampMatchSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
+                    UpdateBeanAT updateBeanMatchATSQ = new UpdateBeanAT(BeanType.MATCHS, timestampMatchSQ);
+                    updateBeanMatchATSQ.execute();
 
 
                 case EDIT_TOURNAMENT:
-                    String json = (String) intent.getExtras().get(JSON);
-                    long tournament_id = (long) intent.getExtras().get(TOURNAMENT_ID);
+                    if (intent.getExtras().get(JSON) != null) {
+                        String json = (String) intent.getExtras().get(JSON);
+                        long tournament_id = (long) intent.getExtras().get(TOURNAMENT_ID);
 
-                    UpdateBeanAT updateBeanEditTournamentAT = new UpdateBeanAT(EDIT_TOURNAMENT, MainActivity.ID_TIMESTAMP, json, tournament_id);
-                    updateBeanEditTournamentAT.execute();
+                        UpdateBeanAT updateBeanEditTournamentAT = new UpdateBeanAT(EDIT_TOURNAMENT, MainActivity.ID_TIMESTAMP, json, tournament_id);
+                        updateBeanEditTournamentAT.execute();
 
 
-                    long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
-                    UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);
-                    updateBeanTournamentAT.execute(AsyncTask.THREAD_POOL_EXECUTOR);
+                        long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
+                        UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);
+                        updateBeanTournamentAT.execute(AsyncTask.THREAD_POOL_EXECUTOR);
+                    }
+
 
                     break;
 

@@ -27,10 +27,10 @@ public class TeamBean {
     private String picture;
     private long timeStamp;
 
-    //Relationelle
-    @ToOne(joinProperty = "contactId")
-    private ContactBean contact;
-    private long contactId;
+//    //Relationelle
+//    @ToOne(joinProperty = "contactId")
+//    private ContactBean contact;
+//    private long contactId;
 
     @ToOne(joinProperty = "clubId")
     private ClubBean club;
@@ -59,7 +59,7 @@ public class TeamBean {
     )
     private List<ContactBean> contactList;
     @Transient
-    private List<Long> contactsId;
+    private List<Long> contactId;
 
 //    @ToMany
 //    @JoinEntity(
@@ -87,14 +87,12 @@ public class TeamBean {
     @Generated(hash = 1301191607)
     private transient TeamBeanDao myDao;
 
-    @Generated(hash = 1752905364)
-    public TeamBean(Long id, String name, String picture, long timeStamp,
-                    long contactId, long clubId) {
+    @Generated(hash = 2108490324)
+    public TeamBean(Long id, String name, String picture, long timeStamp, long clubId) {
         this.id = id;
         this.name = name;
         this.picture = picture;
         this.timeStamp = timeStamp;
-        this.contactId = contactId;
         this.clubId = clubId;
     }
 
@@ -134,13 +132,13 @@ public class TeamBean {
         this.timeStamp = timeStamp;
     }
 
-    public long getContactId() {
-        return this.contactId;
-    }
-
-    public void setContactId(long contactId) {
-        this.contactId = contactId;
-    }
+//    public long getContactId() {
+//        return this.contactId;
+//    }
+//
+//    public void setContactId(long contactId) {
+//        this.contactId = contactId;
+//    }
 
     public long getClubId() {
         return this.clubId;
@@ -148,46 +146,6 @@ public class TeamBean {
 
     public void setClubId(long clubId) {
         this.clubId = clubId;
-    }
-
-    @Generated(hash = 321829790)
-    private transient Long contact__resolvedKey;
-
-    /**
-     * To-one relationship, resolved on first access.
-     */
-    @Generated(hash = 231313235)
-    public ContactBean getContact() {
-        long __key = this.contactId;
-        if (contact__resolvedKey == null || !contact__resolvedKey.equals(__key)) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            ContactBeanDao targetDao = daoSession.getContactBeanDao();
-            ContactBean contactNew = targetDao.load(__key);
-            synchronized (this) {
-                contact = contactNew;
-                contact__resolvedKey = __key;
-            }
-        }
-        return contact;
-    }
-
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
-    @Generated(hash = 1968726297)
-    public void setContact(@NotNull ContactBean contact) {
-        if (contact == null) {
-            throw new DaoException(
-                    "To-one property 'contactId' has not-null constraint; cannot set to-one to null");
-        }
-        synchronized (this) {
-            this.contact = contact;
-            contactId = contact.getId();
-            contact__resolvedKey = contactId;
-        }
     }
 
     @Generated(hash = 1772927184)
@@ -327,7 +285,9 @@ public class TeamBean {
         return matchsList;
     }
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
     @Generated(hash = 448563022)
     public synchronized void resetMatchsList() {
         matchsList = null;
@@ -355,11 +315,29 @@ public class TeamBean {
         return contactList;
     }
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
     @Generated(hash = 1466168391)
     public synchronized void resetContactList() {
         contactList = null;
     }
+
+    public List<Long> getMatchsId() {
+        return matchsId;
+    }
+
+    public void setMatchsId(List<Long> matchsId) {
+        this.matchsId = matchsId;
+    }
+
+//    public List<Long> getContactsId() {
+//        return contactsId;
+//    }
+//
+//    public void setContactsId(List<Long> contactsId) {
+//        this.contactsId = contactsId;
+//    }
 
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1877237120)

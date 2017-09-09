@@ -137,13 +137,20 @@ public class WSUtilsServer {
             MatchBean matchBean = listMatchs.get(i);
             Log.w("tag", "ID MATCH: " + matchBean.getId() + " delete : " + matchBean.isDelete());
 
+            // on récup l'id du tournoi
+            long tournamentId = matchBean.getTournamentId();
+            Log.w("TestTournamentId", " tournamentId" + tournamentId);
+            TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournamentId);
+            matchBean.setTournament(tournamentBean);
+
+
             if (matchBean.getTeamsId().isEmpty()) {
                 Log.w("TAGGETTEAM", "team id : null");
             } else {
                 Log.w("TAGGETTEAM", matchBean.getTeamsId().size() + "");
                 TeamBean team1 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(0));
                 TeamBean team2 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(1));
-                Log.w("TAGTEAMS", team1.getName() + " t2" + team2.getName());
+//                Log.w("TAGTEAMS", team1.getName() + " t2" + team2.getName());
                 matchBean.setTeam1(team1);
                 matchBean.setTeam2(team2);
             }
@@ -192,7 +199,9 @@ public class WSUtilsServer {
         // ON DECLARE LA VARIABLE QUI STOCK LE PLUS GRAND TIMESTAMP
         long maxTimestamp = 0;
 
+        // on récup la liste des teams
         for (int i = 0; i < listTeams.size(); i++) {
+            // on crée l'objet team
             TeamBean teamBean = listTeams.get(i);
             Log.w("tag", "ID team : " + teamBean.getId() + " delete : " + teamBean.isDelete());
 
@@ -200,6 +209,7 @@ public class WSUtilsServer {
             if (maxTimestamp < teamBean.getTimeStamp()) {
                 maxTimestamp = teamBean.getTimeStamp();
             }
+
 
             if (teamBean.isDelete()) {
                 // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE
@@ -245,6 +255,7 @@ public class WSUtilsServer {
             if (maxTimestamp < clubBean.getTimeStamp()) {
                 maxTimestamp = clubBean.getTimeStamp();
             }
+
 
             if (clubBean.isDelete()) {
                 // SI DELETE A TRUE ALORS ON DELETE DE LA BDD MOBILE

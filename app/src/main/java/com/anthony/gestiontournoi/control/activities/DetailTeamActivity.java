@@ -60,7 +60,8 @@ public class DetailTeamActivity extends AppCompatActivity {
         }
 
 
-        long contact_id = teamBean.getContactId();
+//        long contact_id = teamBean.getContactId();
+
 /*
         ContactBean contactBean = WSUtilsMobile.getContact(contact_id);
         if (contactBean.getPhoneNumber() != null) {
