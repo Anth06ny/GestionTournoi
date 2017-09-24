@@ -2,7 +2,12 @@ package com.anthony.gestiontournoi.control.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -29,12 +34,14 @@ import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class EditTournamentActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView editTvTitleOnetournament;
     private ImageView editImgLogoOneTournament;
@@ -81,6 +88,10 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
     private TextView editTvMatchesBtn;
     private CardView editCVPlace;
     private TextView editTvPlacesBtn;
+
+    private Calendar calendarStart = new GregorianCalendar();
+    private Calendar calendarEnd = new GregorianCalendar();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     private long tournament_id;
 
@@ -174,18 +185,22 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
 
         findViews();
 
+
         tournament_id = getIntent().getExtras().getLong("id");
 
         TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournament_id);
 
+        calendarStart.setTimeInMillis(tournamentBean.getStartDate());
+        calendarEnd.setTimeInMillis(tournamentBean.getEndDate());
+
         editTvTitleOnetournament.setText(tournamentBean.getName());
-        editTvDateOnetournament.setText("Du " + tournamentBean.getStartDate() + " au " + tournamentBean.getEndDate());
+        editTvDateOnetournament.setText(sdf.format(calendarStart) + " au " + sdf.format(calendarEnd));
 
         List<PlaceBean> placeBeanList = tournamentBean.getPlaceList();
         if (!placeBeanList.isEmpty()) {
             editTvPlace.setText(placeBeanList.get(0).getName());
         }
-        //editTvFormat.setText(tournamentBean.getGender());
+
 
         editTvField.setText(tournamentBean.getFieldType());
         editTvFee.setText(tournamentBean.getTeamFee() + " / " + tournamentBean.getPlayerFee());
@@ -193,6 +208,7 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
         editTvLength.setText(tournamentBean.getDuration());
         editTvCap.setText(tournamentBean.getCap());
         editTvHalftime.setText(tournamentBean.getHalfTime());
+        editTvFormat.setText(tournamentBean.getGenderNumberOfPlayer());
 
 
         if (!tournamentBean.getPicture().isEmpty()) {
@@ -529,7 +545,7 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
             //PLACE
             //FORMAT
             tournamentBean.setFieldType(editTvField.getText() + "");
-            //FEE
+            tournamentBean.setGenderNumberOfPlayer(editTvFormat.getText() + "");
             tournamentBean.setSiteWeb(editTvWebsite.getText() + "");
             tournamentBean.setDuration(editTvLength.getText() + "");
             tournamentBean.setCap(editTvCap.getText() + "");
@@ -565,15 +581,6 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
                 }
             }
 
-//            // on stocke dans teamBeanIds la liste des id des teams
-//            List<TeamBean> teamBeanList = tournamentBean.getTeamList();
-//            List<Long> teamBeanIds = new ArrayList<>();
-//            if (!teamBeanList.isEmpty()) {
-//                for (int i = 0; i < teamBeanList.size(); i++) {
-//                    Long team = teamBeanList.get(i).getId();
-//                    teamBeanIds.add(team);
-//                }
-//            }
 
             // on stocke dans matchsBeanIds la liste des id des matchs
             List<MatchBean> matchsBeanList = tournamentBean.getMatchList();
@@ -585,12 +592,9 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
                 }
             }
 
-
             // on passe a null les contactsList, placeList, et teamList
-
             tournamentBean.resetContactList();
             tournamentBean.resetPlaceList();
-//            tournamentBean.resetTeamList();
             tournamentBean.resetMatchList();
 
 
@@ -600,18 +604,29 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
             try {
                 jsonObject = new JSONObject(json);
                 jsonObject.put("club", tournamentBean.getClubId());
-                jsonObject.put("contact", contactBeanIds);
-                jsonObject.put("place", placeBeanIds);
-  //              jsonObject.put("team", teamBeanIds);
-                jsonObject.put("userUltimate", "[]");
-                jsonObject.put("matchs", matchsBeanIds);
+                if (!contactBeanIds.isEmpty()) {
+                    jsonObject.put("contact", new JSONArray(contactBeanIds));
+                } else {
+                    jsonObject.put("contact", "");
+                }
+                if (!placeBeanIds.isEmpty()) {
+                    jsonObject.put("place", new JSONArray(placeBeanIds));
+                } else {
+                    jsonObject.put("place", "");
+                }
+                jsonObject.put("userUltimate", "");
+                if (!matchsBeanIds.isEmpty()) {
+                    jsonObject.put("matchs", new JSONArray(matchsBeanIds));
+                } else {
+                    jsonObject.put("matchs", "");
+                }
 
                 Log.w("TAG_TOURNAMENT_EDIT", jsonObject + "");
                 String jsonn = jsonObject.toString();
 
 
                 Intent intentTournament = new Intent(this, ServiceTournament.class);
-                intentTournament.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.LOAD_TOURNAMENT);
+                intentTournament.putExtra(ServiceTournament.SERVICE_TYPE, ServiceTournament.ServiceAction.EDIT_TOURNAMENT);
                 intentTournament.putExtra("json", jsonn);
                 intentTournament.putExtra("tournament_id", tournamentBean.getId());
                 startService(intentTournament);

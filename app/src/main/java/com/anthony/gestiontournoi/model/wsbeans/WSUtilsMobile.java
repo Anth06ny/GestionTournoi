@@ -10,7 +10,6 @@ import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBeanDao;
 import com.anthony.gestiontournoi.model.beans.TournamentContactBean;
 import com.anthony.gestiontournoi.model.beans.TournamentPlaceBean;
-import com.anthony.gestiontournoi.model.beans.TournamentTeamBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +87,6 @@ public class WSUtilsMobile {
     }
 
 
-
     public static ContactBean getContact(long id) {
         ContactBean contactBean = MyApplication.getDaoSession().getContactBeanDao().load(id);
         return contactBean;
@@ -120,17 +118,6 @@ public class WSUtilsMobile {
         return oneTournamentManyPlace;
     }
 
-    public static List<TournamentTeamBean> getTeamByTournament(long id) {
-        List<TournamentTeamBean> tournamentTeamBeanArrayList = MyApplication.getDaoSession().getTournamentTeamBeanDao().loadAll();
-        List<TournamentTeamBean> oneTournamentManyTeam = new ArrayList<>();
-        for (int i = 0; i < tournamentTeamBeanArrayList.size(); i++) {
-            if (tournamentTeamBeanArrayList.get(i).getTournamentId() == id) {
-                oneTournamentManyTeam.add(tournamentTeamBeanArrayList.get(i));
-            }
-        }
-
-        return oneTournamentManyTeam;
-    }
 
 
     public static void deleteTournamentById(ArrayList<Long> arrayListId) {

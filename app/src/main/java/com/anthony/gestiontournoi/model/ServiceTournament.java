@@ -9,6 +9,7 @@ import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
 
 import static com.anthony.gestiontournoi.model.BeanType.EDIT_TOURNAMENT;
+import static com.anthony.gestiontournoi.model.ServiceTournament.ServiceAction.ADD_TOURNAMENT;
 
 
 public class ServiceTournament extends Service {
@@ -21,6 +22,7 @@ public class ServiceTournament extends Service {
         LOAD_TOURNAMENT,
         EDIT_TOURNAMENT,
         LOAD_SEQUENCE,
+        ADD_TOURNAMENT,
     }
 
     @Override
@@ -63,6 +65,22 @@ public class ServiceTournament extends Service {
 
                         UpdateBeanAT updateBeanEditTournamentAT = new UpdateBeanAT(EDIT_TOURNAMENT, MainActivity.ID_TIMESTAMP, json, tournament_id);
                         updateBeanEditTournamentAT.execute();
+
+
+                        long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
+                        UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);
+                        updateBeanTournamentAT.execute(AsyncTask.THREAD_POOL_EXECUTOR);
+                    }
+
+
+                    break;
+
+                case ADD_TOURNAMENT:
+                    if (intent.getExtras().get(JSON) != null) {
+                        String json = (String) intent.getExtras().get(JSON);
+
+                        UpdateBeanAT updateBeanAddTournamentAT = new UpdateBeanAT(BeanType.ADD_TOURNAMENT, MainActivity.ID_TIMESTAMP, json);
+                        updateBeanAddTournamentAT.execute();
 
 
                         long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();

@@ -50,17 +50,21 @@ public class TeamBean {
     @Transient
     private List<Long> matchsId;
 
+
+
+    //Relationnelle Inverse table intermediaire
     @ToMany
     @JoinEntity(
+            //Table intermediaire
             entity = TeamContactBean.class,
+            //Id representant cette table dans la table intermediaire
             sourceProperty = "teamId",
+            //Id representant la table voulu dans la table intermediraire
             targetProperty = "contactId"
-
     )
     private List<ContactBean> contactList;
     @Transient
     private List<Long> contactId;
-
 //    @ToMany
 //    @JoinEntity(
 //            //Table intermediaire
@@ -331,13 +335,13 @@ public class TeamBean {
         this.matchsId = matchsId;
     }
 
-//    public List<Long> getContactsId() {
-//        return contactsId;
-//    }
-//
-//    public void setContactsId(List<Long> contactsId) {
-//        this.contactsId = contactsId;
-//    }
+    public List<Long> getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(List<Long> contactId) {
+        this.contactId = contactId;
+    }
 
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1877237120)

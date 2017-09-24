@@ -259,13 +259,6 @@ public class ClubBean {
         tournamentList = null;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1188674187)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getClubBeanDao() : null;
-    }
-
     @Transient
     private boolean isDelete;
 
@@ -285,6 +278,8 @@ public class ClubBean {
             targetProperty = "contactId"
     )
     private List<ContactBean> contactList;
+    @Transient
+    private List<Long> contactId;
     /* ---------------------------------
     // Generate
     // -------------------------------- */
@@ -320,4 +315,18 @@ public class ClubBean {
     private transient Long place__resolvedKey;
 
 
+    public List<Long> getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(List<Long> contactId) {
+        this.contactId = contactId;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1188674187)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getClubBeanDao() : null;
+    }
 }

@@ -2,7 +2,12 @@ package com.anthony.gestiontournoi.control.activities;
 
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -24,6 +29,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class DetailTournamentActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView imgLogoOnetournament;
@@ -56,6 +62,10 @@ public class DetailTournamentActivity extends AppCompatActivity implements View.
     private RVTournamentContactAdapter rvTournamentContactAdapter;
     private FloatingActionButton fab;
     private long tournament_id;
+
+    private Calendar calendarStart = new GregorianCalendar();
+    private Calendar calendarEnd = new GregorianCalendar();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Find the Views in the layout<br />
@@ -109,8 +119,12 @@ public class DetailTournamentActivity extends AppCompatActivity implements View.
         tournament_id = getIntent().getExtras().getLong("id");
 
         TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournament_id);
+
+        calendarStart.setTimeInMillis(tournamentBean.getStartDate());
+        calendarEnd.setTimeInMillis(tournamentBean.getEndDate());
+
         tvTitleOnetournament.setText(tournamentBean.getName());
-        tvDateOnetournament.setText("Du " + tournamentBean.getStartDate() + " au " + tournamentBean.getEndDate());
+        tvDateOnetournament.setText(sdf.format(calendarStart) + " au " + sdf.format(calendarEnd));
 
         List<PlaceBean> placeBeanList = tournamentBean.getPlaceList();
         if (!placeBeanList.isEmpty()) {
@@ -124,6 +138,7 @@ public class DetailTournamentActivity extends AppCompatActivity implements View.
         tvLength.setText(tournamentBean.getDuration());
         tvCap.setText(tournamentBean.getCap());
         tvHalftime.setText(tournamentBean.getHalfTime());
+        tvFormat.setText(tournamentBean.getGenderNumberOfPlayer());
 
 
         if (!tournamentBean.getPicture().isEmpty()) {

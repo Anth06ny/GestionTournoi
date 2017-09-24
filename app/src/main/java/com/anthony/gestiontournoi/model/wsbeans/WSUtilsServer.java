@@ -5,10 +5,13 @@ import android.util.Log;
 import com.anthony.gestiontournoi.control.MyApplication;
 import com.anthony.gestiontournoi.control.activities.MainActivity;
 import com.anthony.gestiontournoi.model.beans.ClubBean;
+import com.anthony.gestiontournoi.model.beans.ClubContactBean;
 import com.anthony.gestiontournoi.model.beans.ContactBean;
 import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
+import com.anthony.gestiontournoi.model.beans.TeamContactBean;
+import com.anthony.gestiontournoi.model.beans.TeamMatchsBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentContactBean;
@@ -36,6 +39,7 @@ public class WSUtilsServer {
     private static final String URL_UPDATE_BEAN_PLACE = URL + "updateBeanPlace/";
     private static final String URL_UPDATE_BEAN_CONTACT = URL + "updateBeanContact/";
     private static final String URL_EDIT_BEAN_TOURNAMENT = URL + "editTournament/";
+    private static final String URL_ADD_BEAN_TOURNAMENT = URL + "addTournament";
 
 
     public static void updateBeanTournament(long timestamp) throws Exception {
@@ -56,38 +60,35 @@ public class WSUtilsServer {
 
             // CHECK SI TOURNAMENT_PLACE NE CONTIENT PAS DEJA LE tOURNAMENTpLACEbEAN
             List<Long> placesId = tournamentBean.getPlaceId();
-            List<TournamentPlaceBean> tournamentPlaceBeanList = WSUtilsMobile.getPlaceByTournament(tournamentBean.getId());
             for (int j = 0; j < placesId.size(); j++) {
                 Log.w("tag", "TournamentPlaceBean : " + j + "PlaceId : " + placesId.get(j));
                 TournamentPlaceBean tournamentPlaceBean = new TournamentPlaceBean();
                 tournamentPlaceBean.setTournamentId(tournamentBean.getId());
                 tournamentPlaceBean.setPlaceId(placesId.get(j));
-                MyApplication.getDaoSession().getTournamentPlaceBeanDao().insert(tournamentPlaceBean);
-
+                // récup all tournamentplacebean
+                List<TournamentPlaceBean> allTournamentPlaceBean = MyApplication.getDaoSession().getTournamentPlaceBeanDao().loadAll();
+                // comparer si il existe pas deja
+                if (!allTournamentPlaceBean.contains(tournamentPlaceBean)) {
+                    // si il existe pas on le persiste
+                    MyApplication.getDaoSession().getTournamentPlaceBeanDao().insert(tournamentPlaceBean);
+                }
             }
 
-//            List<Long> teamId = tournamentBean.getTeamId();
-//            List<TournamentTeamBean> tournamentTeamBeanList = WSUtilsMobile.getTeamByTournament(tournamentBean.getId());
-//            for (int k = 0; k < teamId.size(); k++) {
-//                Log.w("tag", "TournamentTeamBean : " + k + "TeamId : " + teamId.get(k));
-//                TournamentTeamBean tournamentTeamBean = new TournamentTeamBean();
-//                tournamentTeamBean.setTournamentId(tournamentBean.getId());
-//                tournamentTeamBean.setTeamId(teamId.get(k));
-//                MyApplication.getDaoSession().getTournamentTeamBeanDao().insert(tournamentTeamBean);
-//
-//
-//            }
 
             List<Long> contactId = tournamentBean.getContactId();
-            List<TournamentContactBean> tournamentContactBeanArrayList = WSUtilsMobile.getContactByTournament(tournamentBean.getId());
             for (int k = 0; k < contactId.size(); k++) {
                 Log.w("tag", "TournamentContactBean : " + k + "contactId : " + contactId.get(k));
                 TournamentContactBean tournamentContactBean = new TournamentContactBean();
                 tournamentContactBean.setTournamentId(tournamentBean.getId());
                 tournamentContactBean.setContactId(contactId.get(k));
-                MyApplication.getDaoSession().getTournamentContactBeanDao().insert(tournamentContactBean);
-
+                // récup all TournamenContactBean
+                List<TournamentContactBean> allTournamentContactBean = MyApplication.getDaoSession().getTournamentContactBeanDao().loadAll();
+                // comparaison si existe
+                if (!allTournamentContactBean.contains(tournamentContactBean)) {
+                    MyApplication.getDaoSession().getTournamentContactBeanDao().insert(tournamentContactBean);
+                }
             }
+
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
             Log.w("tag", "timestamp bean tournament " + tournamentBean.getId() + " : " + tournamentBean.getTimeStamp());
@@ -201,9 +202,41 @@ public class WSUtilsServer {
 
         // on récup la liste des teams
         for (int i = 0; i < listTeams.size(); i++) {
+
             // on crée l'objet team
             TeamBean teamBean = listTeams.get(i);
             Log.w("tag", "ID team : " + teamBean.getId() + " delete : " + teamBean.isDelete());
+
+            // on stocke dans TeamContactBean
+            List<Long> contactId = teamBean.getContactId();
+            for (int k = 0; k < contactId.size(); k++) {
+                Log.w("tag", "TeamContactBean : " + k + "contactId : " + contactId.get(k));
+                TeamContactBean teamContactBean = new TeamContactBean();
+                teamContactBean.setTeamId(teamBean.getId());
+                teamContactBean.setContactId(contactId.get(k));
+                // on récup tous les teamContactBean
+                List<TeamContactBean> allTeamContactBean = MyApplication.getDaoSession().getTeamContactBeanDao().loadAll();
+                // on compare si ça existe deja
+                if (!allTeamContactBean.contains(teamContactBean)) {
+                    MyApplication.getDaoSession().getTeamContactBeanDao().insert(teamContactBean);
+                }
+            }
+
+            // on stocke dans TeamMatchBean
+            List<Long> matchsId = teamBean.getMatchsId();
+            for (int k = 0; k < matchsId.size(); k++) {
+                Log.w("tag", "TeamMatchBean : " + k + "matchsId : " + matchsId.get(k));
+                TeamMatchsBean teamMatchsBean = new TeamMatchsBean();
+                teamMatchsBean.setTeamId(teamBean.getId());
+                teamMatchsBean.setMatchsId(matchsId.get(k));
+                // on récup tous les teamMatchsbean
+                List<TeamMatchsBean> allTeamMatchsBean = MyApplication.getDaoSession().getTeamMatchsBeanDao().loadAll();
+                // on compare si ça existe deja
+                if (!allTeamMatchsBean.contains(teamMatchsBean)) {
+                    MyApplication.getDaoSession().getTeamMatchsBeanDao().insert(teamMatchsBean);
+                }
+            }
+
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
             if (maxTimestamp < teamBean.getTimeStamp()) {
@@ -249,6 +282,21 @@ public class WSUtilsServer {
         for (int i = 0; i < listClubs.size(); i++) {
             ClubBean clubBean = listClubs.get(i);
             Log.w("tag", "ID : " + clubBean.getId() + " delete : " + clubBean.isDelete());
+
+            // on stocke dans ClubContactBean
+            List<Long> contactId = clubBean.getContactId();
+            for (int k = 0; k < contactId.size(); k++) {
+                Log.w("tag", "ClubContactBean : " + k + "contactId : " + contactId.get(k));
+                ClubContactBean clubContactBean = new ClubContactBean();
+                clubContactBean.setClubId(clubBean.getId());
+                clubContactBean.setContactId(contactId.get(k));
+                //on récup tous les ClubContactBean
+                List<ClubContactBean> allClubContactBean = MyApplication.getDaoSession().getClubContactBeanDao().loadAll();
+                // on compare si ça existe deja
+                if (!allClubContactBean.contains(clubContactBean)) {
+                    MyApplication.getDaoSession().getClubContactBeanDao().insert(clubContactBean);
+                }
+            }
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
             Log.w("tag", "timestamp bean club " + clubBean.getId() + " : " + clubBean.getTimeStamp());
@@ -381,6 +429,21 @@ public class WSUtilsServer {
             OkHttpUtils.sendPostOkHttpRequest(URL_EDIT_BEAN_TOURNAMENT + tournament_id, json);
 
             // JSON A RETRAVAILLER
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void addTournament(String json) {
+
+        try {
+            Log.w("TAG_JSON", json);
+            // ENVOI DU JSON AU SERVEUR
+            OkHttpUtils.sendPostOkHttpRequest(URL_ADD_BEAN_TOURNAMENT, json);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

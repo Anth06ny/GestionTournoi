@@ -14,6 +14,8 @@ import com.anthony.gestiontournoi.model.wsbeans.WSUtilsServer;
 
 import java.util.ArrayList;
 
+import static com.anthony.gestiontournoi.model.ServiceTournament.ServiceAction.ADD_TOURNAMENT;
+
 
 public class UpdateBeanAT extends AsyncTask {
     private BeanType beanType;
@@ -31,6 +33,12 @@ public class UpdateBeanAT extends AsyncTask {
         this.timestamp = timestamp;
         this.json = json;
         this.tournament_id = tournament_id;
+    }
+
+    public UpdateBeanAT(BeanType beanType, long timestamp, String json) {
+        this.beanType = beanType;
+        this.timestamp = timestamp;
+        this.json = json;
     }
 
 
@@ -90,6 +98,15 @@ public class UpdateBeanAT extends AsyncTask {
                 Log.w("tag", "AT editTournament start");
                 try {
                     WSUtilsServer.editTournament(json, tournament_id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            case ADD_TOURNAMENT:
+                Log.w("tag", "AT addTournament start");
+                try {
+                    WSUtilsServer.addTournament(json);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -55,20 +55,7 @@ public class TournamentBean {
     @Transient
     private List<Long> matchsId;
 
-//    //Relationnelle Inverse table intermediaire
-//    @ToMany
-//    @JoinEntity(
-//            //Table intermediaire
-//            entity = TournamentTeamBean.class,
-//            //Id representant cette table dans la table intermediaire
-//            sourceProperty = "tournamentId",
-//            //Id representant la table voulu dans la table intermediraire
-//            targetProperty = "teamId"
-//    )
-//    private List<TeamBean> teamList;
-//
-//    @Transient
-//    private List<Long> teamId;
+
 
     @ToMany
     @JoinEntity(
