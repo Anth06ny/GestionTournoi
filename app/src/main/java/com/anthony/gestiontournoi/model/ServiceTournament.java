@@ -33,26 +33,32 @@ public class ServiceTournament extends Service {
 
             switch (action) {
                 case LOAD_SEQUENCE:
+                    // On récupère les Place
                     long timestampPlaceSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getPlaceTimestamp();
                     UpdateBeanAT updateBeanPlaceATSQ = new UpdateBeanAT(BeanType.PLACE, timestampPlaceSQ);
                     updateBeanPlaceATSQ.execute();
 
+                    // On récupère les Team
                     long timestampTeamSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTeamTimestamp();
                     UpdateBeanAT updateBeanTeamATSQ = new UpdateBeanAT(BeanType.TEAM, timestampTeamSQ);
                     updateBeanTeamATSQ.execute();
 
+                    // On récupère les Contact
                     long timestampContactSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getContactTimestamp();
                     UpdateBeanAT updateBeanContactATSQ = new UpdateBeanAT(BeanType.CONTACT, timestampContactSQ);
                     updateBeanContactATSQ.execute();
 
+                    // On récupère les Club
                     long timestampClubSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getClubTimestamp();
                     UpdateBeanAT updateBeanClubATSQ = new UpdateBeanAT(BeanType.CLUB, timestampClubSQ);
                     updateBeanClubATSQ.execute();
 
+                    // On récupère les Tournament
                     long timestampTournamentSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
                     UpdateBeanAT updateBeanTournamentATSQ = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournamentSQ);
                     updateBeanTournamentATSQ.execute();
 
+                    // On récupère les Match
                     long timestampMatchSQ = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getMatchTimestamp();
                     UpdateBeanAT updateBeanMatchATSQ = new UpdateBeanAT(BeanType.MATCHS, timestampMatchSQ);
                     updateBeanMatchATSQ.execute();

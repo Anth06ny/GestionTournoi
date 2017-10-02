@@ -24,8 +24,8 @@ public class MatchBean {
 
     private long date;
     private String duration;
-    private int scoreTeam1;
-    private int scoreTeam2;
+    private int scoreteam1;
+    private int scoreteam2;
     private long timeStamp;
     private String result;
     private String state;
@@ -63,8 +63,8 @@ public class MatchBean {
     @NotNull
     private long tournamentId;
 
-    @Transient
-    private List<Long> teamsId;
+//    @Transient
+//    private List<Long> teamsId;
      /* ---------------------------------
     // Generate
     // -------------------------------- */
@@ -81,14 +81,14 @@ public class MatchBean {
     @Generated(hash = 1422076968)
     private transient MatchBeanDao myDao;
 
-    @Generated(hash = 1946880500)
-    public MatchBean(Long id, long date, String duration, int scoreTeam1, int scoreTeam2, long timeStamp,
-            String result, String state, long team1Id, long team2Id, long teamTableId, long tournamentId) {
+    @Generated(hash = 1804267724)
+    public MatchBean(Long id, long date, String duration, int scoreteam1, int scoreteam2, long timeStamp, String result,
+            String state, long team1Id, long team2Id, long teamTableId, long tournamentId) {
         this.id = id;
         this.date = date;
         this.duration = duration;
-        this.scoreTeam1 = scoreTeam1;
-        this.scoreTeam2 = scoreTeam2;
+        this.scoreteam1 = scoreteam1;
+        this.scoreteam2 = scoreteam2;
         this.timeStamp = timeStamp;
         this.result = result;
         this.state = state;
@@ -147,19 +147,19 @@ public class MatchBean {
     }
 
     public int getScoreTeam1() {
-        return this.scoreTeam1;
+        return this.scoreteam1;
     }
 
     public void setScoreTeam1(int scoreTeam1) {
-        this.scoreTeam1 = scoreTeam1;
+        this.scoreteam1 = scoreTeam1;
     }
 
     public int getScoreTeam2() {
-        return this.scoreTeam2;
+        return this.scoreteam2;
     }
 
     public void setScoreTeam2(int scoreTeam2) {
-        this.scoreTeam2 = scoreTeam2;
+        this.scoreteam2 = scoreTeam2;
     }
 
     public long getTimeStamp() {
@@ -476,9 +476,9 @@ public class MatchBean {
         myDao.update(this);
     }
 
-    public List<Long> getTeamsId() {
-        return teamsId;
-    }
+//    public List<Long> getTeamsId() {
+//        return teamsId;
+//    }
 
     public String getResult() {
         return this.result;
@@ -494,6 +494,22 @@ public class MatchBean {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public int getScoreteam1() {
+        return this.scoreteam1;
+    }
+
+    public void setScoreteam1(int scoreteam1) {
+        this.scoreteam1 = scoreteam1;
+    }
+
+    public int getScoreteam2() {
+        return this.scoreteam2;
+    }
+
+    public void setScoreteam2(int scoreteam2) {
+        this.scoreteam2 = scoreteam2;
     }
 
     /** called by internal mechanisms, do not call yourself. */

@@ -11,7 +11,6 @@ import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.PlaceBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TeamContactBean;
-import com.anthony.gestiontournoi.model.beans.TeamMatchsBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentContactBean;
@@ -144,17 +143,20 @@ public class WSUtilsServer {
             TournamentBean tournamentBean = WSUtilsMobile.getTournament(tournamentId);
             matchBean.setTournament(tournamentBean);
 
+            long team1Id = matchBean.getTeam1Id();
+            Log.w("TestTeam1Id", "team1Id" + team1Id);
+            TeamBean team1 = WSUtilsMobile.getTeam(team1Id);
+            matchBean.setTeam1(team1);
 
-            if (matchBean.getTeamsId().isEmpty()) {
-                Log.w("TAGGETTEAM", "team id : null");
-            } else {
-                Log.w("TAGGETTEAM", matchBean.getTeamsId().size() + "");
-                TeamBean team1 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(0));
-                TeamBean team2 = WSUtilsMobile.getTeam(matchBean.getTeamsId().get(1));
-//                Log.w("TAGTEAMS", team1.getName() + " t2" + team2.getName());
-                matchBean.setTeam1(team1);
-                matchBean.setTeam2(team2);
-            }
+            long team2Id = matchBean.getTeam2Id();
+            Log.w("TestTeam2Id", "team2Id" + team2Id);
+            TeamBean team2 = WSUtilsMobile.getTeam(team2Id);
+            matchBean.setTeam2(team2);
+
+            long teamTableId = matchBean.getTeamTableId();
+            Log.w("TestTeamTableId", "teamTableId" + teamTableId);
+            TeamBean teamTable = WSUtilsMobile.getTeam(teamTableId);
+            matchBean.setTeamTable(teamTable);
 
 
             // ON RECUPERE LE PLUS GRAND TIMESTAMP
@@ -219,21 +221,6 @@ public class WSUtilsServer {
                 // on compare si ça existe deja
                 if (!allTeamContactBean.contains(teamContactBean)) {
                     MyApplication.getDaoSession().getTeamContactBeanDao().insert(teamContactBean);
-                }
-            }
-
-            // on stocke dans TeamMatchBean
-            List<Long> matchsId = teamBean.getMatchsId();
-            for (int k = 0; k < matchsId.size(); k++) {
-                Log.w("tag", "TeamMatchBean : " + k + "matchsId : " + matchsId.get(k));
-                TeamMatchsBean teamMatchsBean = new TeamMatchsBean();
-                teamMatchsBean.setTeamId(teamBean.getId());
-                teamMatchsBean.setMatchsId(matchsId.get(k));
-                // on récup tous les teamMatchsbean
-                List<TeamMatchsBean> allTeamMatchsBean = MyApplication.getDaoSession().getTeamMatchsBeanDao().loadAll();
-                // on compare si ça existe deja
-                if (!allTeamMatchsBean.contains(teamMatchsBean)) {
-                    MyApplication.getDaoSession().getTeamMatchsBeanDao().insert(teamMatchsBean);
                 }
             }
 

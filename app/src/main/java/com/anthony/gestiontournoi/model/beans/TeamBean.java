@@ -39,16 +39,16 @@ public class TeamBean {
     @Transient
     private boolean isDelete;
 
-    @ToMany
-    @JoinEntity(
-            entity = TeamMatchsBean.class,
-            sourceProperty = "teamId",
-            targetProperty = "matchsId"
-
-    )
-    private List<MatchBean> matchsList;
-    @Transient
-    private List<Long> matchsId;
+//    @ToMany
+//    @JoinEntity(
+//            entity = TeamMatchsBean.class,
+//            sourceProperty = "teamId",
+//            targetProperty = "matchsId"
+//
+//    )
+//    private List<MatchBean> matchsList;
+//    @Transient
+//    private List<Long> matchsId;
 
 
 
@@ -271,36 +271,6 @@ public class TeamBean {
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
      */
-    @Generated(hash = 1166419901)
-    public List<MatchBean> getMatchsList() {
-        if (matchsList == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            MatchBeanDao targetDao = daoSession.getMatchBeanDao();
-            List<MatchBean> matchsListNew = targetDao._queryTeamBean_MatchsList(id);
-            synchronized (this) {
-                if (matchsList == null) {
-                    matchsList = matchsListNew;
-                }
-            }
-        }
-        return matchsList;
-    }
-
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
-    @Generated(hash = 448563022)
-    public synchronized void resetMatchsList() {
-        matchsList = null;
-    }
-
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
     @Generated(hash = 535289041)
     public List<ContactBean> getContactList() {
         if (contactList == null) {
@@ -326,14 +296,14 @@ public class TeamBean {
     public synchronized void resetContactList() {
         contactList = null;
     }
-
-    public List<Long> getMatchsId() {
-        return matchsId;
-    }
-
-    public void setMatchsId(List<Long> matchsId) {
-        this.matchsId = matchsId;
-    }
+//
+//    public List<Long> getMatchsId() {
+//        return matchsId;
+//    }
+//
+//    public void setMatchsId(List<Long> matchsId) {
+//        this.matchsId = matchsId;
+//    }
 
     public List<Long> getContactId() {
         return contactId;
