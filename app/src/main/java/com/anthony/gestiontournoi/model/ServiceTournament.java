@@ -72,6 +72,9 @@ public class ServiceTournament extends Service {
                         UpdateBeanAT updateBeanEditTournamentAT = new UpdateBeanAT(EDIT_TOURNAMENT, MainActivity.ID_TIMESTAMP, json, tournament_id);
                         updateBeanEditTournamentAT.execute();
 
+                        // Je dois supprimer mes dépendances afin de ne pas les rentrer 2 fois
+
+
 
                         long timestampTournament = MyApplication.getDaoSession().getTimestampBeanDao().load(MainActivity.ID_TIMESTAMP).getTournamentTimestamp();
                         UpdateBeanAT updateBeanTournamentAT = new UpdateBeanAT(BeanType.TOURNAMENT, timestampTournament);

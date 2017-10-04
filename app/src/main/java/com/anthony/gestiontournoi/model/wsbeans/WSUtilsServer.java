@@ -14,9 +14,13 @@ import com.anthony.gestiontournoi.model.beans.TeamContactBean;
 import com.anthony.gestiontournoi.model.beans.TimestampBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.beans.TournamentContactBean;
+import com.anthony.gestiontournoi.model.beans.TournamentContactBeanDao;
 import com.anthony.gestiontournoi.model.beans.TournamentPlaceBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.greenrobot.greendao.query.DeleteQuery;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,16 +76,19 @@ public class WSUtilsServer {
                     MyApplication.getDaoSession().getTournamentPlaceBeanDao().insert(tournamentPlaceBean);
                 }
             }
-
-
+            TournamentContactBean tournamentContactBean = new TournamentContactBean();
+            // on récupère les id des contacts
             List<Long> contactId = tournamentBean.getContactId();
             for (int k = 0; k < contactId.size(); k++) {
                 Log.w("tag", "TournamentContactBean : " + k + "contactId : " + contactId.get(k));
-                TournamentContactBean tournamentContactBean = new TournamentContactBean();
+                // on récupère tous les tournamentContactBean
+                List<TournamentContactBean> allTournamentContactBean = MyApplication.getDaoSession().getTournamentContactBeanDao().loadAll();
+                // on rempli un tournamentcontactbean
                 tournamentContactBean.setTournamentId(tournamentBean.getId());
                 tournamentContactBean.setContactId(contactId.get(k));
-                // récup all TournamenContactBean
-                List<TournamentContactBean> allTournamentContactBean = MyApplication.getDaoSession().getTournamentContactBeanDao().loadAll();
+                // récup all TournamentContactBean
+
+
                 // comparaison si existe
                 if (!allTournamentContactBean.contains(tournamentContactBean)) {
                     MyApplication.getDaoSession().getTournamentContactBeanDao().insert(tournamentContactBean);

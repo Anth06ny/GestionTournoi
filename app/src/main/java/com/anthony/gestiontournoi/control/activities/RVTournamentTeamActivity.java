@@ -9,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.anthony.gestiontournoi.R;
+import com.anthony.gestiontournoi.model.beans.MatchBean;
 import com.anthony.gestiontournoi.model.beans.TeamBean;
 import com.anthony.gestiontournoi.model.beans.TournamentBean;
 import com.anthony.gestiontournoi.model.wsbeans.WSUtilsMobile;
 import com.anthony.gestiontournoi.view.adapter.RVTournamentTeamAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RVTournamentTeamActivity extends AppCompatActivity {
@@ -34,10 +36,10 @@ public class RVTournamentTeamActivity extends AppCompatActivity {
         // On récupère l'id du tournoi
         long tournament_id = getIntent().getExtras().getLong("id");
 
-        // On récupère le tournoi en question
-        TournamentBean tournament = WSUtilsMobile.getTournament(tournament_id);
+        teamBeanArrayList = WSUtilsMobile.getAllTeams(tournament_id);
         // On récupère les teams du tournoi
-   //     teamBeanArrayList = tournament.getTeamList();
+        //     teamBeanArrayList = tournament.getTeamList();
+
         Log.w("TAG", teamBeanArrayList.size() + "");
 
 

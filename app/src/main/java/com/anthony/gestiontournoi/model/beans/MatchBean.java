@@ -8,6 +8,7 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Transient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(
@@ -83,7 +84,7 @@ public class MatchBean {
 
     @Generated(hash = 1804267724)
     public MatchBean(Long id, long date, String duration, int scoreteam1, int scoreteam2, long timeStamp, String result,
-            String state, long team1Id, long team2Id, long teamTableId, long tournamentId) {
+                     String state, long team1Id, long team2Id, long teamTableId, long tournamentId) {
         this.id = id;
         this.date = date;
         this.duration = duration;
@@ -194,21 +195,6 @@ public class MatchBean {
         this.teamTableId = teamTableId;
     }
 
-//    public Long getFieldId() {
-//        return this.fieldId;
-//    }
-//
-//    public void setFieldId(Long fieldId) {
-//        this.fieldId = fieldId;
-//    }
-//
-//    public long getMatchstatusId() {
-//        return this.matchstatusId;
-//    }
-//
-//    public void setMatchstatusId(long matchstatusId) {
-//        this.matchstatusId = matchstatusId;
-//    }
 
     public long getTournamentId() {
         return this.tournamentId;
@@ -510,6 +496,14 @@ public class MatchBean {
 
     public void setScoreteam2(int scoreteam2) {
         this.scoreteam2 = scoreteam2;
+    }
+
+    public List<TeamBean> getTeamList() {
+        List<TeamBean> teamBeanList = new ArrayList<>();
+        teamBeanList.add(team1);
+        teamBeanList.add(team2);
+        teamBeanList.add(teamTable);
+        return teamBeanList;
     }
 
     /** called by internal mechanisms, do not call yourself. */

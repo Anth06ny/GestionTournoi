@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class RVTournamentTeamAdapter extends RecyclerView.Adapter<RVTournamentTeamAdapter.ViewHolder>{
+public class RVTournamentTeamAdapter extends RecyclerView.Adapter<RVTournamentTeamAdapter.ViewHolder> {
     private List<TeamBean> teamBeanArrayList;
     private Context context;
 
@@ -52,17 +52,17 @@ public class RVTournamentTeamAdapter extends RecyclerView.Adapter<RVTournamentTe
     public void onBindViewHolder(RVTournamentTeamAdapter.ViewHolder holder, int position) {
         context = holder.imgLogoteam.getContext();
 
-        TeamBean teamBean = teamBeanArrayList.get(position);
+        final TeamBean teamBean = teamBeanArrayList.get(position);
 
         holder.tvNameTeam.setText(teamBean.getName());
         if (teamBean.getClub() != null) {
-            holder.tvNameClub.setText((CharSequence) teamBean.getClub());
+            holder.tvNameClub.setText(teamBean.getClub().getName());
 
         } else {
             holder.tvNameClub.setText("");
         }
-        holder.tvNbWin.setText("0");
-        holder.tvNbLoose.setText("0");
+        holder.tvNbWin.setText("Win : 0");
+        holder.tvNbLoose.setText("Loose : 0");
 
         if (!teamBean.getPicture().isEmpty()) {
             Glide.with(context).load(teamBean.getPicture()).into(holder.imgLogoteam);

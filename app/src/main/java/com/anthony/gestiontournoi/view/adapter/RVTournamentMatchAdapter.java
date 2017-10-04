@@ -34,8 +34,8 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvScoreTeam1 = (TextView) itemView.findViewById(R.id.tvScoreTeam1);
-            tvScoreTeam2 = (TextView) itemView.findViewById(R.id.tvScoreTeam2);
+            tvScoreTeam1 = (TextView) itemView.findViewById(R.id.tvScoreTeamOne);
+            tvScoreTeam2 = (TextView) itemView.findViewById(R.id.tvScoreTeamTwo);
             tvNameTeam1 = (TextView) itemView.findViewById(R.id.tvNameTeam1);
             tvNameTeam2 = (TextView) itemView.findViewById(R.id.tvNameTeam2);
             tvTable = (TextView) itemView.findViewById(R.id.tvTable);
@@ -44,6 +44,7 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
             imgLogoTeam1 = (ImageView) itemView.findViewById(R.id.imgLogoTeam1);
             imgLogoTeam2 = (ImageView) itemView.findViewById(R.id.imgLogoTeam2);
             imgField = (ImageButton) itemView.findViewById(R.id.imgField);
+            tvStatus = (TextView) itemView.findViewById(R.id.tvStatus);
         }
     }
 
@@ -58,29 +59,31 @@ public class RVTournamentMatchAdapter extends RecyclerView.Adapter<RVTournamentM
         context = holder.imgField.getContext();
 
 
-        MatchBean matchBean = matchBeanList.get(position);
+        final MatchBean matchBean = matchBeanList.get(position);
         if (matchBean.getTeam1() != null || matchBean.getTeam2() != null) {
 
+            holder.tvNameTeam1.setText(matchBean.getTeam1().getName());
+            holder.tvNameTeam2.setText(matchBean.getTeam2().getName());
+            holder.tvScoreTeam1.setText("" + matchBean.getScoreTeam1());
+            holder.tvScoreTeam2.setText("" + matchBean.getScoreTeam2());
 
-            TeamBean teamBean1 = matchBean.getTeam1();
-            TeamBean teamBean2 = matchBean.getTeam2();
+
+            holder.tvTable.setText(matchBean.getTeamTable().getName());
+            holder.tvTime.setText("");
+            holder.tvField.setText(matchBean.getTournament().getFieldType());
+            holder.tvStatus.setText(matchBean.getState());
 
 
-            holder.tvNameTeam1.setText(teamBean1.getName());
-            holder.tvNameTeam2.setText(teamBean2.getName());
-            // holder.tvTime.setText( matchBean.getDate()+" ");
-//        holder.tvField.setText(matchBean.getField().getName());
-//
-//        if (!matchBean.getTeam1().getPicture().isEmpty()) {
-//            Glide.with(context).load(matchBean.getTeam1().getPicture()).into(holder.imgLogoTeam1);
-//        } else {
-//            holder.imgLogoTeam1.setImageResource(R.drawable.ic_menu_gallery);
-//        }
-//        if (!matchBean.getTeam2().getPicture().isEmpty()) {
-//            Glide.with(context).load(matchBean.getTeam2().getPicture()).into(holder.imgLogoTeam2);
-//        } else {
-//            holder.imgLogoTeam2.setImageResource(R.drawable.ic_menu_gallery);
-//        }
+            if (!matchBean.getTeam1().getPicture().isEmpty()) {
+                Glide.with(context).load(matchBean.getTeam1().getPicture()).into(holder.imgLogoTeam1);
+            } else {
+                holder.imgLogoTeam1.setImageResource(R.drawable.ic_menu_gallery);
+            }
+            if (!matchBean.getTeam2().getPicture().isEmpty()) {
+                Glide.with(context).load(matchBean.getTeam2().getPicture()).into(holder.imgLogoTeam2);
+            } else {
+                holder.imgLogoTeam2.setImageResource(R.drawable.ic_menu_gallery);
+            }
         }
 
         Glide.with(context).load(R.drawable.ic_place_black_48dp).into(holder.imgField);

@@ -119,7 +119,6 @@ public class WSUtilsMobile {
     }
 
 
-
     public static void deleteTournamentById(ArrayList<Long> arrayListId) {
 
         TournamentBeanDao tournamentBeanDao = MyApplication.getDaoSession().getTournamentBeanDao();
@@ -131,5 +130,34 @@ public class WSUtilsMobile {
 
     }
 
+    public static List<TeamBean> getAllTeams(long id) {
+
+        // On récupère le tournoi en question
+        TournamentBean tournament = getTournament(id);
+        // récup liste des matchs du tournoi, et récupérer tous les id des teams.
+        List<MatchBean> matchBeanList = tournament.getMatchList();
+        List<TeamBean> teamBeanList = new ArrayList<>();
+        for (int i = 0; i < matchBeanList.size(); i++) {
+            if (teamBeanList.size() == 0) {
+                teamBeanList.add(matchBeanList.get(i).getTeam1());
+            }
+            if (!teamBeanList.contains(matchBeanList.get(i).getTeam1())) {
+                teamBeanList.add(matchBeanList.get(i).getTeam1());
+            }
+            if (!teamBeanList.contains(matchBeanList.get(i).getTeam2())) {
+                teamBeanList.add(matchBeanList.get(i).getTeam2());
+            }
+            if (!teamBeanList.contains(matchBeanList.get(i).getTeam2())) {
+                teamBeanList.add(matchBeanList.get(i).getTeamTable());
+            }
+        }
+        return teamBeanList;
+    }
+
+    public static void tournamentDeleteDependencies(long id) {
+        TournamentBean tournamentBean = getTournament(id);
+
+        // TournamentContactBean tournamentContactBean = MyApplication.getDaoSession().getTournamentContactBeanDao().
+    }
 
 }
