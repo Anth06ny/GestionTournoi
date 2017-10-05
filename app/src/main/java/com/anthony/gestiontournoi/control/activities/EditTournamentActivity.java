@@ -597,7 +597,6 @@ public class EditTournamentActivity extends AppCompatActivity implements View.On
             tournamentBean.resetPlaceList();
             tournamentBean.resetMatchList();
 
-
             String json = GSON.toJson(tournamentBean);
             Log.w("TAG_JSON_1", json);
             JSONObject jsonObject = null;

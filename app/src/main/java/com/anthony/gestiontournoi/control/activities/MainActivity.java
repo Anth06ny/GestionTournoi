@@ -44,7 +44,6 @@ import static com.anthony.gestiontournoi.R.menu.main;
 
 // googleId : 113207748106039394539
 // facebookId : 10210685228421137
-// malo : 192.168.60.137:8000
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SmartCustomLoginListener, View.OnClickListener {
@@ -53,9 +52,6 @@ public class MainActivity extends AppCompatActivity
     public static final Long ID_TIMESTAMP = 1L;
     private Button bt_login;
 
-    //private static final String URL = "http://192.168.56.1:8000/"; // NICO
-    //private static final String URL = "http://192.168.60.137:8000/"; // MALO
-    //private static final String URL = "http://192.168.40.115:8000/"; // MALO SALLE ANTHONY
     private static final String URL = "http://192.168.1.27:8000/"; // MALO MAISON
 
     private int sizeTournaments;
@@ -63,7 +59,6 @@ public class MainActivity extends AppCompatActivity
     private MenuItem tournamentItem;
     private MenuItem teamItem;
 
-    private ImageView image;
 
     private ArrayList<TournamentBean> tournamentBeanArrayList;
     private ArrayList<TeamBean> teamBeanArrayList;
@@ -111,14 +106,12 @@ public class MainActivity extends AppCompatActivity
         bt_login.setOnClickListener(this);
         tournamentItem = navigationView.getMenu().findItem(R.id.tournaments);
         teamItem = navigationView.getMenu().findItem(R.id.teams);
-        image = (ImageView) findViewById(R.id.iv);
 
         // INIT DES LISTES
         teamBeanArrayList = new ArrayList<>();
         tournamentBeanArrayList = new ArrayList<>();
 
-        // PETIT CHAT
-        Glide.with(this).load(URL + "chat.jpg").into(image);
+
 
     }
 
